@@ -1,0 +1,59 @@
+city,period,slope,r2,p,n
+ajax,pre_2018,0.02,0.0,0.9684,6
+ajax,post_2018,-0.29,0.075,0.5987,6
+barrie,pre_2018,0.575,0.062,0.59,7
+barrie,post_2018,-0.272,0.05,0.6306,7
+brampton,pre_2018,0.122,0.011,0.8254,7
+brampton,post_2018,-1.174,0.742,0.0127,7
+brantford,pre_2018,-0.419,0.136,0.5413,5
+brantford,post_2018,-2.024,0.098,0.5462,6
+burlington,pre_2018,0.49,0.019,0.7654,7
+burlington,post_2018,0.648,0.014,0.7985,7
+chatham-kent,pre_2018,-0.343,0.301,0.2021,7
+chatham-kent,post_2018,1.348,0.795,0.1084,4
+clarington,pre_2018,1.398,0.142,0.4052,7
+greater sudbury,pre_2018,-0.525,0.087,0.5698,6
+greater sudbury,post_2018,1.139,0.086,0.632,5
+guelph,pre_2018,-0.739,0.036,0.6842,7
+guelph,post_2018,-1.012,0.104,0.4816,7
+hamilton,pre_2018,0.185,0.007,0.854,7
+hamilton,post_2018,-2.088,0.184,0.3375,7
+kawartha lakes,pre_2018,-0.155,0.017,0.8082,6
+kingston,pre_2018,0.051,0.005,0.8745,7
+kingston,post_2018,-0.992,0.173,0.354,7
+kitchener,pre_2018,0.722,0.196,0.3199,7
+kitchener,post_2018,-0.969,0.393,0.1317,7
+london,pre_2018,-0.504,0.212,0.2986,7
+london,post_2018,0.585,0.132,0.4228,7
+markham,pre_2018,0.733,0.034,0.6926,7
+markham,post_2018,0.182,0.001,0.9623,5
+milton,pre_2018,-2.326,0.443,0.1029,7
+milton,post_2018,-0.05,0.023,0.847,4
+mississauga,pre_2018,-0.539,0.148,0.3942,7
+mississauga,post_2018,-1.379,0.367,0.1496,7
+newmarket,pre_2018,0.987,0.568,0.0834,6
+newmarket,post_2018,-0.276,0.02,0.8577,4
+niagara falls,pre_2018,-0.377,0.102,0.4844,7
+niagara falls,post_2018,0.287,0.006,0.8834,6
+oakville,pre_2018,-0.74,0.089,0.517,7
+oakville,post_2018,0.356,0.027,0.7257,7
+oshawa,pre_2018,0.639,0.006,0.8644,7
+oshawa,post_2018,-1.923,0.115,0.5114,6
+ottawa,pre_2018,-0.119,0.016,0.7897,7
+ottawa,post_2018,-1.431,0.354,0.1585,7
+peterborough,pre_2018,-0.077,0.032,0.7029,7
+peterborough,post_2018,0.373,0.106,0.5932,5
+richmond hill,pre_2018,1.031,0.068,0.6166,6
+richmond hill,post_2018,-2.147,0.787,0.1128,4
+sault ste. marie,pre_2018,-0.21,0.111,0.4661,7
+sault ste. marie,post_2018,-1.984,0.81,0.0058,7
+thunder bay,pre_2018,-0.729,0.664,0.0255,7
+thunder bay,post_2018,-2.059,0.35,0.1615,7
+toronto,pre_2018,-2.01,0.276,0.226,7
+toronto,post_2018,-1.816,0.634,0.0322,7
+waterloo,pre_2018,0.773,0.446,0.1013,7
+waterloo,post_2018,0.366,0.022,0.8525,4
+whitby,pre_2018,0.334,0.037,0.6777,7
+whitby,post_2018,-0.376,0.009,0.8614,6
+windsor,pre_2018,-0.328,0.771,0.0093,7
+windsor,post_2018,1.185,0.222,0.3456,6
