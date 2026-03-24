@@ -34,17 +34,17 @@
 
 	.toggle-button {
 		width: 100%;
-		padding: 4px 2px;
+		padding: 6px 12px;
 		margin-right: 10px;
 		border: 1px solid var(--brandGray);
 		border-radius: 5px;
 		cursor: pointer;
-		font-size: 14px;
 		opacity: 0.5;
 		background-color: var(--brandWhite);
 		color: var(--brandDarkGray);
 		user-select: none;
-		font-family: OpenSansBold;
+		font-family: TradeGothicBold, sans-serif;
+		font-size: 16px;
 		font-weight: normal;
 	}
 
@@ -66,8 +66,8 @@
 
 	#destext p {
 		margin-bottom: -5px;
-		font-family: OpenSans;
-		font-size: 15px;
+		font-family: SourceSerif;
+		font-size: 16px;
 		line-height: 22px;
 		font-weight: normal;
 		color: var(--brandGray90);
