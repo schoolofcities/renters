@@ -1,6 +1,7 @@
 # Data
 data/headlines
 data/cmhc-rental-raw
+data/geo
 
 # SvelteKit
 .svelte-kit/
