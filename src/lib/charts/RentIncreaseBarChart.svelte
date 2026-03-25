@@ -1,6 +1,7 @@
 <script>
     import ButtonGroup from '$lib/chart-addons/ButtonGroup.svelte';
     import HorizontalBarChart from './HorizontalBarChart.svelte';
+    import LegendGraduatedBreakpoints from '$lib/chart-addons/LegendGraduatedBreakpoints.svelte';
     import {
         PERIOD_OPTIONS,
         MODE_OPTIONS,
@@ -56,14 +57,19 @@
         />
     </div>
 
+    <LegendGraduatedBreakpoints
+        colors={COLORS}
+        breakpoints={PCT_BREAKPOINTS[configKey]}
+        title={BAR_LEGEND_TITLES[configKey]}
+        percent={true}
+    />
+
     <HorizontalBarChart
         data={chartData}
         colors={COLORS}
         breakpoints={PCT_BREAKPOINTS[configKey]}
         maxValue={MAX_VALUES[configKey]}
         unit="$"
-        legendTitle={BAR_LEGEND_TITLES[configKey]}
-        legendPercent={true}
     />
 
     <p class="source-note">

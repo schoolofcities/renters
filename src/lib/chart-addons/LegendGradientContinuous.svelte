@@ -39,7 +39,7 @@
     </div>
 
     <div class="legend" bind:offsetWidth={legendWidth}>
-        <svg width="100%" height="25">
+        <svg width="100%" height="32">
             {#if legendWidth > 0 && colors.length > 0}
                 <defs>
                     <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
@@ -80,6 +80,7 @@
 <style>
     .legend-section {
         margin: 0;
+        margin-bottom: 12px;
         padding-top: 5px;
     }
 

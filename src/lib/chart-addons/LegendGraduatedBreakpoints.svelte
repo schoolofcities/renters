@@ -58,7 +58,7 @@
     </div>
     
     <div class="legend" bind:offsetWidth={legendWidth}>
-        <svg width='100%' height='25'>
+        <svg width='100%' height='32'>
             {#if legendWidth && breakpoints.length > 0}
                 <!-- Main color bars -->
                 {#each colors as color, i}
@@ -131,6 +131,7 @@
 <style>
     .legend-section {
         margin: 0;
+        margin-bottom: 12px;
         padding-top: 5px;
     }
 

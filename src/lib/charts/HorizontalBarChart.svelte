@@ -1,6 +1,5 @@
 <script>
     import { scaleLinear } from 'd3-scale';
-    import LegendGraduatedBreakpoints from '$lib/chart-addons/LegendGraduatedBreakpoints.svelte';
 
     /**
      * Generic reusable horizontal bar chart.
@@ -13,8 +12,6 @@
      * @prop {number[]} breakpoints   - Pct thresholds for color classification (length n-1)
      * @prop {number}   maxValue      - x-axis upper bound (falls back to data max)
      * @prop {string}   unit          - Prefix for value axis labels (e.g. '$')
-     * @prop {string}   legendTitle   - Title shown above the color legend
-     * @prop {boolean}  legendPercent - Append '%' to legend labels
      */
     let {
         data          = [],
@@ -22,8 +19,6 @@
         breakpoints   = [],
         maxValue      = null,
         unit          = '$',
-        legendTitle   = '',
-        legendPercent = false,
     } = $props();
 
     let chartWidth = $state(0);
@@ -82,17 +77,6 @@
 </script>
 
 <div class="chart-outer">
-    {#if colors.length > 0 && breakpoints.length > 0}
-        <div class="legend-section">
-            <LegendGraduatedBreakpoints
-                {colors}
-                {breakpoints}
-                title={legendTitle}
-                percent={legendPercent}
-            />
-        </div>
-    {/if}
-
     <div class="chart-wrapper" bind:offsetWidth={chartWidth}>
         {#if chartWidth > 0 && data.length > 0}
             <svg width={chartWidth} height={svgHeight} id="chart">
@@ -148,11 +132,6 @@
 <style>
     .chart-outer {
         width: 100%;
-    }
-
-    .legend-section {
-        margin: 10px 0;
-        padding-top: 5px;
     }
 
     .chart-wrapper {
