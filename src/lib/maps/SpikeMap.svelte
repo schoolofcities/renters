@@ -25,8 +25,12 @@
 
     // Gap in px between the tallest possible spike tip and the top edge of the SVG
     const SPIKE_TIP_GAP = 8;
+    const FALLBACK_WIDTH     = 700; // px — used before containerWidth is first measured
+    const MIN_HIT_HALF_WIDTH = 8;  // px — minimum touch-target half-width for the hit rect
+    const MIN_HIT_HEIGHT     = 16; // px — minimum touch-target height for the hit rect
 
-    // Compute width/height aspect ratio from the bounding box of a GeoJSON object
+    // Compute width/height aspect ratio from the bounding box of a GeoJSON object.
+    // Accepts either a GeoJSON Feature or FeatureCollection via `src.features ?? [src]`.
     function bboxAspect(src) {
         if (!src) return 1.5;
         let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
@@ -44,7 +48,7 @@
 
     let containerWidth = $state(null);
     let aspect = $derived(bboxAspect(fitTarget ?? outline));
-    let width  = $derived(containerWidth ?? 700);
+    let width  = $derived(containerWidth ?? FALLBACK_WIDTH);
     let mapH   = $derived((width - 20) / aspect);
     let height = $derived(mapH + spikeHeadroom);
 
@@ -102,6 +106,8 @@
             {/each}
             {#each spikes as spike}
                 {@const { x, y, spikeH, value } = spike}
+                {@const hitHalfW = Math.max(spikeWidth * 3, MIN_HIT_HALF_WIDTH)}
+                {@const hitH     = Math.max(spikeH, MIN_HIT_HEIGHT)}
                 <!-- Visible spike -->
                 <polygon
                     points="{x - spikeWidth},{y} {x + spikeWidth},{y} {x},{y - spikeH}"
@@ -110,10 +116,10 @@
                 />
                 <!-- Invisible hit area: wider + minimum height for easy hover/tap -->
                 <rect
-                    x={x - Math.max(spikeWidth * 3, 8)}
-                    y={y - Math.max(spikeH, 16)}
-                    width={Math.max(spikeWidth * 3, 8) * 2}
-                    height={Math.max(spikeH, 16)}
+                    x={x - hitHalfW}
+                    y={y - hitH}
+                    width={hitHalfW * 2}
+                    height={hitH}
                     fill="transparent"
                     style="cursor: pointer"
                     role="button"

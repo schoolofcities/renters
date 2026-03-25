@@ -25,7 +25,8 @@
         'greater sudbury / grand sudbury': '3553005',
     };
 
-    // These 3 cities are in the north GeoJSON — all others go to the south map
+    // These 3 cities are in the north GeoJSON — all others go to the south map.
+    // Uses pre-correction names (matching raw data input), not the GeoJSON CSDNAME spellings.
     const NORTH_CITIES = new Set(['greater sudbury', 'sault ste. marie', 'thunder bay']);
 
     // Fixed view for the north inset, derived from actual city centroids + padding (EPSG:3857):
