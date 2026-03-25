@@ -26,6 +26,13 @@
             .map(d => ({ city: d.city, value: d[period] }))
             .filter(d => d.value !== null && d.value !== undefined);
     });
+
+    // Tooltip descriptor: shown as small text below the value, e.g. "2018 – 2025 · total increase"
+    let descriptor = $derived.by(() => {
+        const periodLabel = SPIKE_PERIOD_OPTIONS.find(o => o.value === period)?.label ?? period;
+        const modeLabel   = MODE_OPTIONS.find(o => o.value === mode)?.label.toLowerCase() ?? mode;
+        return `${periodLabel} · ${modeLabel}`;
+    });
 </script>
 
 <div class="rent-spike-map">
@@ -53,7 +60,7 @@
         nTicks={5}
     />
 
-    <OntarioSpikeMap data={mapData} {colorScale} />
+    <OntarioSpikeMap data={mapData} {colorScale} {descriptor} />
 
     <p class="source-note">
         Source: CMHC Rental Market Survey. Average rent for all bedroom types, October surveys.

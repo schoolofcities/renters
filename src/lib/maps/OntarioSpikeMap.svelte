@@ -8,7 +8,7 @@
     import northCentroids from '$data/rental-increases/ontario_north_csd_centroids.geo.json';
     import northCsds      from '$data/rental-increases/ontario_north_csd.geo.json';
 
-    let { data = [], colorScale = null } = $props();
+    let { data = [], colorScale = null, descriptor = '' } = $props();
 
     // ── Ontario-specific corrections ──────────────────────────────────────────
 
@@ -93,6 +93,7 @@
         csdFeatures={southCsdFeatures}
         {colorScale}
         {globalMax}
+        {descriptor}
     />
 
     <!-- Northern Ontario inset: Greater Sudbury, Sault Ste. Marie, Thunder Bay -->
@@ -104,6 +105,7 @@
             csdFeatures={northCsdFeatures}
             {colorScale}
             {globalMax}
+            {descriptor}
             spikeHeadroom={80}
             spikeWidth={3}
             fitTarget={NORTH_FIT}

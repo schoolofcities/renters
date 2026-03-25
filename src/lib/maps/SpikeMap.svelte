@@ -1,5 +1,6 @@
 <script>
     import { geoIdentity, geoPath, scaleLinear } from 'd3';
+    import MapTooltip from '$lib/maps/MapTooltip.svelte';
 
     let {
         data = [],          // [{ city, value }] — city must already match centroid CSDNAME (lowercase)
@@ -11,6 +12,7 @@
         spikeWidth = 3,     // px half-width of spike base
         globalMax = null,   // override local max so north/south spikes share one scale
         fitTarget = null,   // GeoJSON to fit projection to; defaults to outline
+        descriptor = '',    // shown in tooltip, e.g. "2018 – 2025 · total increase"
     } = $props();
 
     // centroid lookup: lowercase CSDNAME → EPSG:3857 [x, y]
@@ -70,9 +72,26 @@
         }
         return result;
     });
+
+    // ── Tooltip ───────────────────────────────────────────────────────────────
+
+    let tooltip = $state(null); // { clientX, clientY, city, value } or null
+
+    function showTooltip(e, spike) {
+        tooltip = { clientX: e.clientX, clientY: e.clientY, city: spike.city, value: spike.value };
+    }
+
+    // Title-case a lowercase city name for display (e.g. "st. catharines" → "St. Catharines")
+    function titleCase(str) {
+        return str.replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    function formatValue(v) {
+        return (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
+    }
 </script>
 
-<div class="spike-map" bind:offsetWidth={containerWidth}>
+<div class="spike-map" bind:offsetWidth={containerWidth} onclick={() => (tooltip = null)} role="presentation">
     {#if outline && width > 0}
         <svg {width} {height}>
             {#each outline.features as f}
@@ -81,18 +100,52 @@
             {#each csdFeatures as f}
                 <path d={pathGen(f)} fill="#d2d2d2" stroke="white" stroke-width="0.5" />
             {/each}
-            {#each spikes as { x, y, spikeH, value }}
+            {#each spikes as spike}
+                {@const { x, y, spikeH, value } = spike}
+                <!-- Visible spike -->
                 <polygon
                     points="{x - spikeWidth},{y} {x + spikeWidth},{y} {x},{y - spikeH}"
                     fill={colorScale ? colorScale(value ?? 0) : '#d73256'}
                     opacity="0.85"
                 />
+                <!-- Invisible hit area: wider + minimum height for easy hover/tap -->
+                <rect
+                    x={x - Math.max(spikeWidth * 3, 8)}
+                    y={y - Math.max(spikeH, 16)}
+                    width={Math.max(spikeWidth * 3, 8) * 2}
+                    height={Math.max(spikeH, 16)}
+                    fill="transparent"
+                    style="cursor: pointer"
+                    role="button"
+                    tabindex="0"
+                    aria-label="{titleCase(spike.city)}: {formatValue(spike.value)}"
+                    onmouseenter={(e) => showTooltip(e, spike)}
+                    onmouseleave={() => (tooltip = null)}
+                    onclick={(e) => { e.stopPropagation(); showTooltip(e, spike); }}
+                    onkeydown={(e) => {
+                        if (e.key === 'Enter') {
+                            const r = e.currentTarget.getBoundingClientRect();
+                            showTooltip({ clientX: r.left + r.width / 2, clientY: r.top }, spike);
+                        }
+                    }}
+                />
             {/each}
         </svg>
+
+        {#if tooltip}
+            <MapTooltip
+                x={tooltip.clientX}
+                y={tooltip.clientY}
+                title={titleCase(tooltip.city)}
+                value={formatValue(tooltip.value)}
+                {descriptor}
+                ondismiss={() => (tooltip = null)}
+            />
+        {/if}
     {/if}
 </div>
 
 <style>
-    .spike-map { width: 100%; min-width: 250px; }
+    .spike-map { width: 100%; min-width: 250px; position: relative; }
     svg { display: block; }
 </style>

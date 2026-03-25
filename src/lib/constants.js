@@ -1,15 +1,15 @@
 // Period selector options for bar chart (cumulative periods)
 export const PERIOD_OPTIONS = [
-    { label: '2018 – 2025', value: '2018_2025' },
-    { label: '2011 – 2025', value: '2011_2025' },
     { label: '2004 – 2025', value: '2004_2025' },
+    { label: '2011 – 2025', value: '2011_2025' },
+    { label: '2018 – 2025', value: '2018_2025' },
 ];
 
 // Period selector options for spike map (individual 7-year periods)
 export const SPIKE_PERIOD_OPTIONS = [
-    { label: '2018 – 2025', value: '2018_2025' },
-    { label: '2011 – 2018', value: '2011_2018' },
     { label: '2004 – 2011', value: '2004_2011' },
+    { label: '2011 – 2018', value: '2011_2018' },
+    { label: '2018 – 2025', value: '2018_2025' },
 ];
 
 // Mode selector options
