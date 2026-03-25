@@ -60,7 +60,7 @@
         nTicks={5}
     />
 
-    <OntarioSpikeMap data={mapData} {colorScale} {descriptor} />
+    <OntarioSpikeMap data={mapData} {colorScale} {descriptor} globalMax={COLOR_MAX} />
 
     <p class="source-note">
         Source: CMHC Rental Market Survey. Average rent for all bedroom types, October surveys.

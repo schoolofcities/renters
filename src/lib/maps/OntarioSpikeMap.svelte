@@ -8,7 +8,7 @@
     import northCentroids from '$data/rental-increases/ontario_north_csd_centroids.geo.json';
     import northCsds      from '$data/rental-increases/ontario_north_csd.geo.json';
 
-    let { data = [], colorScale = null, descriptor = '' } = $props();
+    let { data = [], colorScale = null, descriptor = '', globalMax = null } = $props();
 
     // ── Ontario-specific corrections ──────────────────────────────────────────
 
@@ -75,9 +75,6 @@
             .filter(d => NORTH_CITIES.has(d.city.toLowerCase()))
             .map(d => ({ ...d, city: correctName(d.city) }))
     );
-
-    // Shared spike scale — same % value = same spike height in both maps
-    let globalMax = $derived(Math.max(...data.map(d => d.value ?? 0), 1));
 
     // Pre-filter CSD outlines to only the cities present in the active dataset
     let southCsdFeatures = $derived(filterCsdFeatures(southCsds, southData));
