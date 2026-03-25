@@ -23,16 +23,17 @@
 
     let chartWidth = $state(0);
 
-    const PCT_BOX_W  = 50;   // colored classifier box width (far left)
-    const X_START    = 60;   // x-offset where bars begin
-    const BAR_GAP    = 24;   // vertical row height (px)
-    const BAR_TOP    = 52;   // y-centre of first bar
-    const BAR_H      = 16;   // bar stroke-width
-    const END_GAP    = 60;   // right-side padding after longest bar
-    const X_AXIS_TOP = 34;   // y where vertical grid lines start
+    const PCT_BOX_W      = 50;  // colored classifier box width (far left)
+    const X_START        = 60;  // x-offset where bars begin
+    const BAR_GAP        = 24;  // vertical row height (px)
+    const BAR_H          = 16;  // bar stroke-width
+    const END_GAP        = 60;  // right-side padding after longest bar
+    const X_AXIS_TOP     = 34;  // y where vertical grid lines (and axis labels) start
+    const BAR_TOP        = X_AXIS_TOP + 18; // y-centre of first bar — 18px below axis label row
+    const BAR_BOTTOM_PAD = 40;  // extra px below last bar
 
     let barAreaW = $derived(Math.max(0, chartWidth - X_START - END_GAP));
-    let svgHeight = $derived(BAR_GAP * data.length + 40);
+    let svgHeight = $derived(BAR_GAP * data.length + BAR_BOTTOM_PAD);
     let dataMax  = $derived(maxValue ?? Math.max(...data.map(d => d.value), 1));
 
     // Smallest clean step where step*4 >= dataMax, guaranteeing exactly 4 grid lines.
@@ -66,7 +67,11 @@
 
     function fmtAxis(v) {
         const n = Math.round(v);
-        return unit + (n >= 1000 ? (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1) + 'K' : n.toString());
+        if (n >= 1000) {
+            const decimals = n % 1000 === 0 ? 0 : 1; // e.g. $1K vs $1.2K
+            return unit + (n / 1000).toFixed(decimals) + 'K';
+        }
+        return unit + n;
     }
 
     function capitalize(s) {
@@ -136,7 +141,7 @@
 
     .chart-wrapper {
         margin: 0;
-        margin-top: -20px;
+        margin-top: -20px; /* pulls chart up to absorb the SVG's built-in X_AXIS_TOP headroom */
         min-width: 250px;
         max-width: 100%;
         width: 100%;
