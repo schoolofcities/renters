@@ -36,7 +36,7 @@
 
 
 <svelte:head>
-	<title>Ontario Rent Control | School of Cities</title>
+	<title>If Ontario's Rent Was Under Control | School of Cities</title>
 	<meta name="description" content="Examining rental rate changes across Ontario cities before and after the 2018 deregulation of rent control." />
 	<meta name="author" content="School of Cities" />
 </svelte:head>
@@ -47,7 +47,7 @@
 	<Logo logoType="Blue" backgroundColor="var(--brandWhite)" />
 
 	<TitleStandard
-		title="Ontario Rent Control & Rising Rents"
+		title="If Ontario's Rent Was Under Control"
 		subtitle="Tracking rental increases across Ontario cities before and after the 2018 deregulation"
 	/>
 
