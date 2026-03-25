@@ -3,7 +3,7 @@
     import ButtonGroup from '$lib/chart-addons/ButtonGroup.svelte';
     import OntarioSpikeMap from '$lib/maps/OntarioSpikeMap.svelte';
     import LegendGradientContinuous from '$lib/chart-addons/LegendGradientContinuous.svelte';
-    import { MODE_OPTIONS, SPIKE_PERIOD_OPTIONS, COLORS } from '$lib/constants.js';
+    import { MODE_OPTIONS, SPIKE_PERIOD_OPTIONS, COLORS, SPIKE_LEGEND_TITLES } from '$lib/constants.js';
 
     let { rawPctData = [], excessPctData = [] } = $props();
 
@@ -26,6 +26,8 @@
             .map(d => ({ city: d.city, value: d[period] }))
             .filter(d => d.value !== null && d.value !== undefined);
     });
+
+    let legendTitle = $derived(SPIKE_LEGEND_TITLES[`${mode}_${period}`] ?? 'Rent increase (%)');
 
     // Tooltip descriptor: shown as small text below the value, e.g. "2018 – 2025 · total increase"
     let descriptor = $derived.by(() => {
@@ -55,7 +57,7 @@
         colors={COLORS}
         min={0}
         max={COLOR_MAX}
-        title="Rent increase (%)"
+        title={legendTitle}
         percent={true}
         nTicks={5}
     />
@@ -65,7 +67,8 @@
     <p class="source-note">
         Source: CMHC Rental Market Survey. Average rent for all bedroom types, October surveys.
         Spike heights are proportional to the percentage increase over the selected period.
-        {mapData.length} cities shown.
+        {mapData.length} cities shown. Rental increase values are using raw numbers from CMHC, 
+        which do not account for inflation.
     </p>
 </div>
 
@@ -80,9 +83,10 @@
         padding-top: 5px;
     }
     .source-note {
-        font-family: OpenSans, sans-serif;
         font-size: 12px;
+        font-family: OpenSans;
         color: var(--brandGray70);
-        margin-top: 0.5rem;
+        margin-top: 0.75rem;
+        line-height: 1.5;
     }
 </style>

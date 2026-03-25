@@ -8,7 +8,7 @@
         COLORS,
         PCT_BREAKPOINTS,
         MAX_VALUES,
-        LEGEND_TITLES,
+        BAR_LEGEND_TITLES,
     } from '$lib/constants.js';
 
     /**
@@ -62,14 +62,15 @@
         breakpoints={PCT_BREAKPOINTS[configKey]}
         maxValue={MAX_VALUES[configKey]}
         unit="$"
-        legendTitle={LEGEND_TITLES[configKey]}
+        legendTitle={BAR_LEGEND_TITLES[configKey]}
         legendPercent={true}
     />
 
     <p class="source-note">
         Source: CMHC Rental Market Survey. Average rent for all bedroom types, October surveys.
         Cities with incomplete data for the selected period are excluded.
-        {chartData.length} of {rawData.length} cities shown.
+        {chartData.length} cities shown. Rental increase values are using raw numbers from CMHC, 
+        which do not account for inflation.
     </p>
 </div>
 

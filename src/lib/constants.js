@@ -48,11 +48,21 @@ export const MAX_VALUES = {
     excess_2004_2025: 900,
 };
 
-export const LEGEND_TITLES = {
-    raw_2018_2025:    'Extra monthly rent ($) vs. 2018',
-    raw_2011_2025:    'Extra monthly rent ($) vs. 2011',
-    raw_2004_2025:    'Extra monthly rent ($) vs. 2004',
-    excess_2018_2025: 'Monthly excess above rent control ($), 2018–2025',
-    excess_2011_2025: 'Monthly excess above rent control ($), 2011–2025',
-    excess_2004_2025: 'Monthly excess above rent control ($), 2004–2025',
+export const BAR_LEGEND_TITLES = {
+    raw_2018_2025:    'Raw increase in monthly rent ($), 2025 vs. 2018, excluding inflation',
+    raw_2011_2025:    'Raw increase in monthly rent ($), 2025 vs. 2011, excluding inflation',
+    raw_2004_2025:    'Raw increase in monthly rent ($), 2025 vs. 2004, excluding inflation',
+    excess_2018_2025: 'Increase in monthly beyond rent control ($), 2025 vs. 2018, excluding inflation',
+    excess_2011_2025: 'Increase in monthly beyond rent control ($), 2025 vs. 2011, excluding inflation',
+    excess_2004_2025: 'Increase in monthly beyond rent control ($), 2025 vs. 2004, excluding inflation',
+};
+
+// Legend titles for the spike map (% increases, individual 7-year periods)
+export const SPIKE_LEGEND_TITLES = {
+    raw_2004_2011:    'Raw % increase in monthly rent, 2011 vs. 2004, excluding inflation',
+    raw_2011_2018:    'Raw % increase in monthly rent, 2018 vs. 2011, excluding inflation',
+    raw_2018_2025:    'Raw % increase in monthly rent, 2025 vs. 2018, excluding inflation',
+    excess_2004_2011: '% increase in monthly rent beyond rent control, 2011 vs. 2004, excluding inflation',
+    excess_2011_2018: '% increase in monthly rent beyond rent control, 2018 vs. 2011, excluding inflation',
+    excess_2018_2025: '% increase in monthly rent beyond rent control, 2025 vs. 2018, excluding inflation',
 };
