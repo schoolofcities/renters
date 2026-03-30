@@ -81,13 +81,13 @@
 		<div class="details">
 			<h2>Data &amp; Methodology</h2>
 			<p>
-				Rental data is drawn from the CMHC Rental Market Survey, which surveys purpose-built rental units each October. Average rents for the "Total" bedroom category are used as the primary measure across {pctRaw.length} Ontario cities with complete data for all periods examined.
+				Rental data comes from the CMHC Rental Market Survey, which surveys purpose-built rental apartment buildings each October. For each city, we use the "Total" average rent, a portfolio average across studio, one-, two-, and three-bedroom-plus units. The raw CMHC data was preprocessed to handle suppressed values (marked <code>**</code> when a sample is too small to publish) and zero-change markers (<code>++</code>). This yields a clean annual rent series for each of the {pctRaw.length} Ontario cities shown.
 			</p>
 			<p>
-				Five periods are examined: 2004–2011, 2011–2018, 2018–2025, 2004–2025, and 2011–2025. For each period, two measures are computed: the raw percentage or dollar increase from the start to the end of the period, and the excess above what Ontario's annual rent control guidelines would have permitted (compounded annually). Cities missing rent data at either endpoint of a period are excluded from that comparison.
+				Five periods are examined: three equal seven-year spans (2004–2011, 2011–2018, 2018–2025) chosen to straddle the November 2018 deregulation, plus two cumulative windows (2004–2025 and 2011–2025) for broader context. For each city and period, two measures are calculated. The raw increase is the actual rent change, expressed as a percentage or in dollars per month. The excess above rent control is the gap between actual rent and a counterfactual amount, computed by applying Ontario's annual guideline percentage forward from the period start. A city is excluded from a specific period only if data is missing at either endpoint; all other periods for that city are retained. All figures are nominal and do not account for inflation.
 			</p>
 			<p>
-				Ontario rent control guidelines are sourced from the Ministry of Municipal Affairs and Housing. The guideline for a given year caps the increase applied in that year relative to the prior year.
+				Ontario rent control guidelines come from the Ministry of Municipal Affairs and Housing. Each year's guideline caps the percentage by which a landlord may raise rent that calendar year relative to the prior year. 
 			</p>
 		</div>
 
