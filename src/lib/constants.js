@@ -20,8 +20,9 @@ export const MODE_OPTIONS = [
 
 // Rank selector options
 export const RANK_OPTIONS = [
-    { label: 'Dollar amount', value: 'value' },
-    { label: 'Percent increase', value: 'pct' },
+    { label: 'Dollar amount (total)',  value: 'value'  },
+    { label: 'Dollar amount (excess)', value: 'excess' },
+    { label: 'Percent increase',       value: 'pct'    },
 ];
 
 // 5-color sequential palette: low → high monthly increase (matches tariff chart)
