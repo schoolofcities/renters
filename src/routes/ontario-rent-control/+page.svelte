@@ -9,6 +9,7 @@
 	import Footnotes from '$lib/footnotes/Footnotes.svelte';
 	import { createFootnoteStore } from '$lib/footnotes/footnoteUtils';
 	import RentIncreaseBarChart from '$lib/charts/RentIncreaseBarChart.svelte';
+	import RentPathChart from '$lib/charts/RentPathChart.svelte';
 	import RentSpikeMapChart from '$lib/maps/RentSpikeMapChart.svelte';
 
 	const footnoteStore = createFootnoteStore();
@@ -71,6 +72,8 @@
         <p>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus eu dolor dapibus sodales. Aenean venenatis metus id eleifend tincidunt. Nulla ut lacus et urna finibus bibendum sit amet et ante.<Footnote id={addFootnote(fns[1])} />
 		</p>
+
+		<RentPathChart />
 
         <RentSpikeMapChart rawPctData={rawPctRaw} excessPctData={rawPctExcess} />
 
