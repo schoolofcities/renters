@@ -9,7 +9,6 @@
         RANK_OPTIONS,
         COLORS,
         PCT_BREAKPOINTS,
-        MAX_VALUES,
         BAR_LEGEND_TITLES,
     } from '$lib/constants.js';
 
@@ -21,14 +20,12 @@
      */
     let { rawData = [], excessData = [], rawPctData = [], excessPctData = [] } = $props();
 
-    let period  = $state('2018_2025');
+    let period  = $state('2004_2011');
     let pctMode = $state('raw');   // controls which % is shown in the left classifier box
     let rank    = $state('value');
 
     // configKey drives pct color breakpoints and legend title for whichever % is selected.
-    // maxKey always uses raw totals for the x-axis range, since the primary bar is always total.
     let configKey = $derived(`${pctMode}_${period}`);
-    let maxKey    = $derived(`raw_${period}`);
 
     let chartData = $derived.by(() => {
         const pctSrc    = pctMode === 'raw' ? rawPctData : excessPctData;
@@ -89,7 +86,7 @@
         data={chartData}
         colors={COLORS}
         breakpoints={PCT_BREAKPOINTS[configKey]}
-        maxValue={MAX_VALUES[maxKey]}
+        maxValue={1000}
         unit="$"
     />
 

@@ -106,7 +106,7 @@
                 {#each data as d, i}
                     {@const by         = barY(i)}
                     {@const bclr       = getColor(d.pct)}
-                    {@const primaryW   = xScale(d.primaryValue ?? 0)}
+                    {@const primaryW   = xScale(Math.max(0, d.primaryValue ?? 0))}
                     {@const secondaryW = xScale(Math.max(0, d.secondaryValue ?? 0))}
 
                     <!-- Primary (total) bar — lighter, always the full-width background bar -->
