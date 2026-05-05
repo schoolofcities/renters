@@ -15,7 +15,7 @@
         { year: 1998, label: 'Vacancy decontrol; post-1992 unit exemption',  row: 0 },
         { year: 2006, label: 'Guideline pegged to inflation (CPI)',           row: 0 },
         { year: 2017, label: 'Date-based exemption ends',                     row: 1 },
-        { year: 2018, label: 'Post-2018 units deregulated',                   row: 0 },
+        { year: 2018, label: 'Post-2018 unit exemption',                   row: 0 },
     ];
 
     // ─── layout ────────────────────────────────────────────────────────────────
@@ -199,10 +199,10 @@
     </div>
 
     <p class="src">
-        Both rent paths start from a hypothetical $500/month rent in 1990. These are the most significant
-        policy changes; for a full history see the
+        Source: CMHC Rental Market Survey. Both rent paths start from a hypothetical $500/month rent in 1990. 
+        The chart shows the most significant policy changes regarding rent control; for a full history see the
         <a href="https://policyalternatives.ca/sites/default/files/uploads/publications/Ontario%20Office/2024/04/rent-control-in-ontario.pdf"
-           target="_blank" rel="noopener">CCPA Ontario Office (2024)</a>.
+           target="_blank" rel="noopener">Tranjan and Vargatoth (2024)</a>. Nominal values do not account for inflation.
     </p>
 
 </div>

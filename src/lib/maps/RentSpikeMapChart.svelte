@@ -67,8 +67,8 @@
     <p class="source-note">
         Source: CMHC Rental Market Survey. Average rent for all bedroom types, October surveys.
         Spike heights are proportional to the percentage increase over the selected period.
-        {mapData.length} cities shown. Rental increase values are using raw numbers from CMHC, 
-        which do not account for inflation.
+        Cities lacking data for the selected period are excluded.
+        {mapData.length} cities shown. Nominal values do not account for inflation.
     </p>
 </div>
 

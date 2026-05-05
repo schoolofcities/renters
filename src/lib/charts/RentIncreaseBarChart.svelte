@@ -20,7 +20,7 @@
      */
     let { rawData = [], excessData = [], rawPctData = [], excessPctData = [] } = $props();
 
-    let period  = $state('2004_2011');
+    let period  = $state('2018_2025');
     let pctMode = $state('raw');   // controls which % is shown in the left classifier box
     let rank    = $state('value');
 
@@ -92,8 +92,8 @@
 
     <p class="source-note">
         Source: CMHC Rental Market Survey. Average rent for all bedroom types, October surveys.
-        Cities with incomplete data for the selected period are excluded.
-        {chartData.length} cities shown. Values are nominal and do not account for inflation.
+        Cities lacking data for the selected period are excluded.
+        {chartData.length} cities shown. Nominal values do not account for inflation.
     </p>
 </div>
 
