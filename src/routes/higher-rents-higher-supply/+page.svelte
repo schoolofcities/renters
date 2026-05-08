@@ -47,8 +47,8 @@
 	<Logo logoType="Blue" backgroundColor="var(--brandWhite)" />
 
 	<TitleStandard
-		title="If Ontario's Rent Was Under Control"
-		subtitle="Tracking rental increases across Ontario cities before and after the 2018 deregulation"
+		title="Rising Rents and Rising Supply in Ontario's Cities"
+		subtitle="Exploring rental housing affordability over time"
 	/>
 
 	<div class="text">

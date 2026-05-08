@@ -15,6 +15,9 @@ const config = {
 		}),
 		paths: {
 		    base: dev ? "" : "/renters",
+		},
+		prerender: {
+			handleHttpError: 'warn'
 		}
 	}
 };
