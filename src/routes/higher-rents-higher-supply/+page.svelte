@@ -36,8 +36,8 @@
 
 
 <svelte:head>
-	<title>If Ontario's Rent Was Under Control | School of Cities</title>
-	<meta name="description" content="Examining rental rate changes across Ontario cities before and after the 2018 deregulation of rent control." />
+	<title>Rising Rents and Rising Supply in Ontario's Cities | School of Cities</title>
+	<meta name="description" content="Exploring rental housing affordability over time, examining how rents have changed across Ontario cities before and after the 2018 deregulation of rent control." />
 	<meta name="author" content="School of Cities" />
 </svelte:head>
 
