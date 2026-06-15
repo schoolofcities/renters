@@ -1,0 +1,80 @@
+source,tier,total_stories,years_active,cv,rec_start,rec_end,n_usable_years,sparse_years,zero_years
+thestar.com,consistent,872804,11,0.472,2015.0,2025.0,11,[],[]
+ctvnews.ca,consistent,805437,11,0.554,2015.0,2025.0,11,[],[]
+globalnews.ca,consistent,568552,11,0.296,2015.0,2025.0,11,[],[]
+brandonsun.com,consistent,278566,11,0.417,2015.0,2025.0,11,[],[]
+theconversation.com,consistent,129459,11,0.298,2015.0,2025.0,11,[],[]
+winnipegfreepress.com,mostly_consistent,648170,11,0.673,2017.0,2025.0,9,"[2015, 2016]",[]
+cbc.ca,mostly_consistent,616446,11,1.01,2015.0,2020.0,6,"[2021, 2022]",[]
+sportsnet.ca,mostly_consistent,372690,11,0.455,2016.0,2025.0,10,[2015],[]
+theglobeandmail.com,mostly_consistent,263983,11,0.983,2015.0,2021.0,7,"[2022, 2023]",[]
+timescolonist.com,mostly_consistent,235791,11,0.988,2017.0,2021.0,5,"[2015, 2016, 2022, 2023]",[]
+lethbridgeherald.com,mostly_consistent,227652,9,1.043,2017.0,2022.0,6,[2016],"[2015, 2023]"
+medicinehatnews.com,mostly_consistent,188116,9,1.164,2017.0,2022.0,6,[2016],"[2015, 2023]"
+pentictonherald.ca,mostly_consistent,179902,10,0.464,2016.0,2025.0,10,[],[2015]
+kelownadailycourier.ca,mostly_consistent,149889,11,0.577,2017.0,2025.0,9,"[2015, 2016]",[]
+nationalnewswatch.com,mostly_consistent,138090,9,0.709,2016.0,2023.0,8,[2015],"[2024, 2025]"
+reddeeradvocate.com,mostly_consistent,95656,10,0.703,2017.0,2025.0,9,[2016],[2015]
+cbj.ca,mostly_consistent,89495,11,0.739,2016.0,2024.0,9,"[2015, 2025]",[]
+montrealgazette.com,mostly_consistent,76532,9,0.621,2015.0,2023.0,9,[],"[2024, 2025]"
+abbynews.com,mostly_consistent,75238,10,0.641,2017.0,2025.0,9,[2016],[2015]
+trailtimes.ca,mostly_consistent,69390,9,0.64,2018.0,2025.0,8,[2017],"[2015, 2016]"
+canadastandard.com,mostly_consistent,62373,11,0.906,2017.0,2025.0,9,"[2015, 2016]",[]
+vancouversun.com,mostly_consistent,61589,9,0.763,2016.0,2023.0,8,[2015],"[2024, 2025]"
+canadanews.net,mostly_consistent,54021,10,0.743,2016.0,2025.0,10,[],[2015]
+intelligencer.ca,mostly_consistent,40184,11,0.741,2015.0,2023.0,9,"[2024, 2025]",[]
+edmontonjournal.com,mostly_consistent,37176,9,0.929,2017.0,2023.0,7,"[2015, 2016]","[2024, 2025]"
+brantfordexpositor.ca,mostly_consistent,36742,9,0.799,2015.0,2022.0,8,[2023],"[2024, 2025]"
+lfpress.com,mostly_consistent,34867,9,0.92,2017.0,2023.0,7,"[2015, 2016]","[2024, 2025]"
+thewhig.com,mostly_consistent,33146,9,1.042,2017.0,2023.0,7,"[2015, 2016]","[2024, 2025]"
+winnipegsun.com,mostly_consistent,30465,9,0.981,2017.0,2023.0,7,"[2015, 2016]","[2024, 2025]"
+nugget.ca,mostly_consistent,26976,9,0.702,2015.0,2022.0,8,[2023],"[2024, 2025]"
+thestarphoenix.com,mostly_consistent,26421,9,0.931,2017.0,2023.0,7,"[2015, 2016]","[2024, 2025]"
+windsorstar.com,mostly_consistent,24719,9,0.922,2017.0,2023.0,7,"[2015, 2016]","[2024, 2025]"
+nationalobserver.com,mostly_consistent,22954,11,0.702,2018.0,2025.0,8,"[2015, 2016, 2017]",[]
+leaderpost.com,mostly_consistent,22927,9,0.921,2017.0,2022.0,6,"[2015, 2016, 2023]","[2024, 2025]"
+paherald.sk.ca,mostly_consistent,20683,9,0.661,2017.0,2025.0,9,[],"[2015, 2016]"
+theprovince.com,mostly_consistent,20122,9,0.815,2016.0,2022.0,7,"[2015, 2023]","[2024, 2025]"
+dailyheraldtribune.com,mostly_consistent,13584,9,0.85,2015.0,2021.0,7,"[2022, 2023]","[2024, 2025]"
+hilltimes.com,mostly_consistent,12338,9,1.165,2018.0,2022.0,5,"[2015, 2016, 2017, 2024]","[2023, 2025]"
+troymedia.com,mostly_consistent,11679,11,0.808,2018.0,2024.0,7,"[2015, 2016, 2017, 2025]",[]
+aptnnews.ca,mostly_consistent,7627,11,0.829,2019.0,2025.0,7,"[2015, 2016, 2017, 2018]",[]
+rabble.ca,mostly_consistent,7159,11,0.508,2017.0,2020.0,4,"[2015, 2016, 2021]",[]
+sherbrookerecord.com,mostly_consistent,6773,9,0.779,2018.0,2023.0,6,"[2017, 2024, 2025]","[2015, 2016]"
+moneysense.ca,mostly_consistent,4392,11,0.525,2017.0,2017.0,1,"[2015, 2016, 2018, 2019, 2020, 2021, 2022, 2023, 2025]",[]
+canadiandimension.com,mostly_consistent,2974,11,0.475,,,0,"[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]",[]
+windspeaker.com,mostly_consistent,2651,9,0.874,2021.0,2022.0,2,"[2017, 2018, 2019, 2020, 2023, 2024, 2025]","[2015, 2016]"
+thewalrus.ca,mostly_consistent,2576,11,0.658,2025.0,2025.0,1,"[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]",[]
+anglicanjournal.com,mostly_consistent,2028,11,0.546,,,0,"[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]",[]
+broadview.org,mostly_consistent,1784,10,0.857,,,0,"[2015, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]",[2016]
+christianweek.org,mostly_consistent,1412,11,0.967,,,0,"[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]",[]
+opencanada.org,mostly_consistent,917,11,0.657,,,0,"[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]",[]
+thespec.com,partial,288931,11,2.04,2018.0,2025.0,8,"[2015, 2016, 2017]",[]
+therecord.com,partial,281396,11,2.054,2018.0,2025.0,8,"[2015, 2016, 2017]",[]
+wellandtribune.ca,partial,279554,10,2.13,2021.0,2025.0,5,"[2016, 2019, 2020]",[2015]
+niagarafallsreview.ca,partial,279400,10,2.131,2021.0,2025.0,5,"[2016, 2019, 2020]",[2015]
+bclocalnews.com,partial,193816,7,1.343,2017.0,2021.0,5,"[2015, 2016]","[2022, 2023, 2024, 2025]"
+kimberleybulletin.com,partial,62667,8,0.669,2018.0,2025.0,8,[],"[2015, 2016, 2017]"
+edmontonsun.com,partial,26796,9,1.795,2017.0,2022.0,6,"[2015, 2016, 2023]","[2024, 2025]"
+calgarysun.com,partial,25032,9,1.243,2017.0,2022.0,6,"[2015, 2016, 2023]","[2024, 2025]"
+standard-freeholder.com,partial,24842,8,0.909,2015.0,2022.0,8,[],"[2023, 2024, 2025]"
+thepostmillennial.com,partial,22402,9,1.248,2019.0,2025.0,7,"[2017, 2018]","[2015, 2016]"
+ipolitics.ca,partial,17029,9,1.237,2017.0,2022.0,6,"[2015, 2016, 2025]","[2023, 2024]"
+canadianbusiness.com,partial,13766,10,1.338,2016.0,2020.0,5,"[2015, 2021, 2022, 2023, 2024]",[2025]
+rebelnews.com,partial,9981,8,2.02,2024.0,2025.0,2,"[2015, 2019, 2021, 2022, 2023]","[2016, 2017, 2018]"
+woodstocksentinelreview.com,partial,9511,8,1.124,2017.0,2022.0,6,"[2016, 2023]","[2015, 2024, 2025]"
+northernminer.com,partial,6323,9,1.205,2017.0,2021.0,5,"[2016, 2022, 2023, 2025]","[2015, 2024]"
+cjnews.com,partial,5997,7,1.381,2017.0,2020.0,4,"[2015, 2016, 2021]","[2022, 2023, 2024, 2025]"
+morningstar.ca,partial,3892,8,1.007,2021.0,2024.0,4,"[2015, 2019, 2020, 2025]","[2016, 2017, 2018]"
+bnnbloomberg.ca,partial,2987,10,1.668,2019.0,2021.0,3,"[2016, 2017, 2018, 2022, 2023, 2024, 2025]",[2015]
+thescore.com,partial,2081,11,1.869,2017.0,2017.0,1,"[2015, 2016, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]",[]
+tsn.ca,partial,1728,10,1.435,2019.0,2020.0,2,"[2015, 2016, 2017, 2018, 2021, 2022, 2023, 2025]",[2024]
+firstnationsdrum.com,partial,1459,7,1.237,,,0,"[2016, 2017, 2018, 2019, 2020, 2021, 2022]","[2015, 2023, 2024, 2025]"
+theguardian.pe.ca,partial,834,7,1.876,,,0,"[2015, 2016, 2017, 2018, 2019, 2020, 2021]","[2022, 2023, 2024, 2025]"
+thetelegram.com,partial,351,7,1.765,,,0,"[2015, 2016, 2017, 2018, 2019, 2020, 2021]","[2022, 2023, 2024, 2025]"
+capebretonpost.com,partial,304,7,1.801,,,0,"[2015, 2016, 2017, 2018, 2019, 2020, 2021]","[2022, 2023, 2024, 2025]"
+agoracosmopolitan.com,partial,208,8,2.058,,,0,"[2016, 2017, 2020, 2021, 2022, 2023, 2024, 2025]","[2015, 2018, 2019]"
+canadafreepress.com,partial,128,11,1.31,,,0,"[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]",[]
+kenoraminerandnews.com,sparse_or_late,1133,4,1.652,,,0,"[2020, 2021, 2022, 2023]","[2015, 2016, 2017, 2018, 2019, 2024, 2025]"
+whitehorsestar.com,sparse_or_late,44,6,1.825,,,0,"[2016, 2017, 2019, 2020, 2021, 2022]","[2015, 2018, 2023, 2024, 2025]"
+themarknews.com,sparse_or_late,25,4,1.957,,,0,"[2015, 2016, 2017, 2018]","[2019, 2020, 2021, 2022, 2023, 2024, 2025]"
