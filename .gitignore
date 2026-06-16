@@ -2,6 +2,7 @@
 data/headlines
 data/cmhc-rental-raw
 data/geo
+data/statscan-quarterly-rental-raw
 
 # SvelteKit
 .svelte-kit/
