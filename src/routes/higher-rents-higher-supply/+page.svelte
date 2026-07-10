@@ -19,6 +19,8 @@
 		'Ontario Ministry of Municipal Affairs and Housing. <em>Rent Increase Guideline</em>. Various years.',
 	];
 
+	import vis2Data from '$data/rising-rents/vis2_city_rent_vs_guideline.json';
+
 	// Filter out rows where any period value is null
 	import rawPctRaw from '$data/rental-increases/pct_increase_raw.json';
 	import rawPctExcess from '$data/rental-increases/pct_increase_excess.json';
@@ -72,7 +74,7 @@
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus eu dolor dapibus sodales. Aenean venenatis metus id eleifend tincidunt. Nulla ut lacus et urna finibus bibendum sit amet et ante.<Footnote id={addFootnote(fns[1])} />
 		</p>
 
-        <RentIncreaseBarChart rawData={rawTotalRaw} excessData={rawTotalExcess} rawPctData={rawPctRaw} excessPctData={rawPctExcess} />
+        <RentIncreaseBarChart data={vis2Data} />
 
 		<p>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus eu dolor dapibus sodales. Aenean venenatis metus id eleifend tincidunt.

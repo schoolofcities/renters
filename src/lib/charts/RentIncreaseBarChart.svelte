@@ -2,10 +2,7 @@
     import ButtonGroup from '$lib/chart-addons/ButtonGroup.svelte';
     import DualBarChart from './DualBarChart.svelte';
     import LegendGraduatedBreakpoints from '$lib/chart-addons/LegendGraduatedBreakpoints.svelte';
-    import LegendDualBar from '$lib/chart-addons/LegendDualBar.svelte';
     import {
-        PERIOD_OPTIONS,
-        MODE_OPTIONS,
         RANK_OPTIONS,
         COLORS,
         PCT_BREAKPOINTS,
@@ -13,31 +10,34 @@
     } from '$lib/constants.js';
 
     /**
-     * @prop {Array} rawData      - total_increase_raw JSON   (dollar amounts, all cities)
-     * @prop {Array} excessData   - total_increase_excess JSON (dollar amounts, all cities)
-     * @prop {Array} rawPctData   - pct_increase_raw JSON      (percentages, all cities)
-     * @prop {Array} excessPctData- pct_increase_excess JSON   (percentages, all cities)
+     * @prop {Array} data - vis2_city_rent_vs_guideline JSON (2018–2025 only, all cities)
      */
-    let { rawData = [], excessData = [], rawPctData = [], excessPctData = [] } = $props();
+    let { data = [] } = $props();
 
-    let period  = $state('2018_2025');
-    let pctMode = $state('raw');   // controls which % is shown in the left classifier box
+    // Data only covers the single 2018–2025 period, so there's no period selector.
+    // % mode is likewise fixed to the total/raw increase for now. To bring back the toggle
+    // between total and excess-above-guideline: make pctMode a $state, re-add a ButtonGroup
+    // (bind:selectedValue={pctMode}, import + options={MODE_OPTIONS} from constants.js), and
+    // pctMode already flows straight through to configKey and the pct field below.
+    let pctMode = 'raw';
     let rank    = $state('value');
 
-    // configKey drives pct color breakpoints and legend title for whichever % is selected.
-    let configKey = $derived(`${pctMode}_${period}`);
+    // The separate dual-bar legend was replaced with in-chart annotation (see DualBarChart):
+    // one example city's full bar is outlined + labeled "Total rent increase", and one example
+    // city's excess bar is outlined + labeled "Excess above rent control". Bound to specific
+    // cities (not rank), so the callouts stay put regardless of how `rank` re-sorts the list.
+    const ANNOTATE_TOTAL_CITY  = 'kitchener';    // mid-table bar, plenty of blank space to its right
+    const ANNOTATE_EXCESS_CITY = 'guelph'; // largest excess bar, clearly demonstrates the concept
+
+    let configKey = `${pctMode}_2018_2025`;
 
     let chartData = $derived.by(() => {
-        const pctSrc    = pctMode === 'raw' ? rawPctData : excessPctData;
-        const pctMap    = Object.fromEntries(pctSrc.map(d => [d.city, d[period]]));
-        const excessMap = Object.fromEntries(excessData.map(d => [d.city, d]));
-
-        return rawData
+        return data
             .map(d => ({
                 label:          d.city,
-                primaryValue:   d[period],                           // total dollar increase
-                secondaryValue: excessMap[d.city]?.[period] ?? null, // excess dollar increase
-                pct:            pctMap[d.city] ?? null,
+                primaryValue:   d.actual_rent_increase,
+                secondaryValue: d.actual_rent_increase - d.guideline_rent_increase, // excess $ above guideline
+                pct:            pctMode === 'raw' ? d.actual_pct_increase : d.excess_pct_increase,
             }))
             .filter(d => d.primaryValue !== null && d.primaryValue !== undefined)
             .sort((a, b) => {
@@ -50,18 +50,12 @@
 
 <div class="rent-chart">
     <div class="controls">
-        <ButtonGroup
-            options={PERIOD_OPTIONS}
-            bind:selectedValue={period}
-            onSelect={(v) => (period = v)}
-            label="Time period:"
-        />
-        <ButtonGroup
-            options={MODE_OPTIONS}
-            bind:selectedValue={pctMode}
-            onSelect={(v) => (pctMode = v)}
-            label="Show % as:"
-        />
+        <!-- Period selector removed: this dataset only covers 2018–2025. -->
+        <!-- <ButtonGroup options={PERIOD_OPTIONS} bind:selectedValue={period} onSelect={(v) => (period = v)} label="Time period:" /> -->
+       
+        <!-- "Show % as" toggle disabled for now — pctMode is fixed to 'raw' above. -->
+        <!-- <ButtonGroup options={MODE_OPTIONS} bind:selectedValue={pctMode} onSelect={(v) => (pctMode = v)} label="Show % as:" /> -->
+       
         <ButtonGroup
             options={RANK_OPTIONS}
             bind:selectedValue={rank}
@@ -77,23 +71,20 @@
         percent={true}
     />
 
-    <LegendDualBar
-        primaryLabel="Total rent increase"
-        secondaryLabel="Excess above rent control"
-    />
-
     <DualBarChart
         data={chartData}
         colors={COLORS}
         breakpoints={PCT_BREAKPOINTS[configKey]}
         maxValue={1000}
         unit="$"
+        annotateTotalCity={ANNOTATE_TOTAL_CITY}
+        annotateExcessCity={ANNOTATE_EXCESS_CITY}
     />
 
     <p class="source-note">
-        Source: CMHC Rental Market Survey. Average rent for all bedroom types, October surveys.
-        Cities lacking data for the selected period are excluded.
-        {chartData.length} cities shown. Nominal values do not account for inflation.
+        Source: CMHC Rental Market Survey, Ontario Ministry of Municipal Affairs and Housing. Average rent
+        for all bedroom types, October surveys, 2018–2025. {chartData.length} cities shown. Nominal values
+        do not account for inflation.
     </p>
 </div>
 
