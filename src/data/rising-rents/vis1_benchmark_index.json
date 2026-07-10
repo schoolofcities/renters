@@ -249,6 +249,6 @@
     "rent_index": 3003.47,
     "cpi_index": 2104.19,
     "rent_control_index": 2365.2,
-    "income_index": NaN
+    "income_index": null
   }
 ]
