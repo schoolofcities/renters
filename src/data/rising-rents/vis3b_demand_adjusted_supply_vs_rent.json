@@ -1,0 +1,177 @@
+[
+  {
+    "year": 1991,
+    "delta_units_per_1k": -0.1938,
+    "pct_rent": 5.7292
+  },
+  {
+    "year": 1992,
+    "delta_units_per_1k": -1.0978,
+    "pct_rent": 3.4483
+  },
+  {
+    "year": 1993,
+    "delta_units_per_1k": -0.918,
+    "pct_rent": 2.6984
+  },
+  {
+    "year": 1994,
+    "delta_units_per_1k": -0.5016,
+    "pct_rent": 1.8547
+  },
+  {
+    "year": 1995,
+    "delta_units_per_1k": -0.8901,
+    "pct_rent": 1.9727
+  },
+  {
+    "year": 1996,
+    "delta_units_per_1k": -1.0203,
+    "pct_rent": 1.3393
+  },
+  {
+    "year": 1997,
+    "delta_units_per_1k": -0.4655,
+    "pct_rent": 0.5874
+  },
+  {
+    "year": 1998,
+    "delta_units_per_1k": -0.8763,
+    "pct_rent": 4.8175
+  },
+  {
+    "year": 1999,
+    "delta_units_per_1k": -0.7715,
+    "pct_rent": 3.3426
+  },
+  {
+    "year": 2000,
+    "delta_units_per_1k": -0.8475,
+    "pct_rent": 6.469
+  },
+  {
+    "year": 2001,
+    "delta_units_per_1k": -0.8568,
+    "pct_rent": 3.7975
+  },
+  {
+    "year": 2002,
+    "delta_units_per_1k": -1.0445,
+    "pct_rent": 2.6829
+  },
+  {
+    "year": 2003,
+    "delta_units_per_1k": -0.4776,
+    "pct_rent": 0.0
+  },
+  {
+    "year": 2004,
+    "delta_units_per_1k": -0.0925,
+    "pct_rent": 1.1876
+  },
+  {
+    "year": 2005,
+    "delta_units_per_1k": -0.7191,
+    "pct_rent": 0.7042
+  },
+  {
+    "year": 2006,
+    "delta_units_per_1k": -0.3461,
+    "pct_rent": 1.5152
+  },
+  {
+    "year": 2007,
+    "delta_units_per_1k": -0.5505,
+    "pct_rent": 0.8037
+  },
+  {
+    "year": 2008,
+    "delta_units_per_1k": -0.4569,
+    "pct_rent": 2.6196
+  },
+  {
+    "year": 2009,
+    "delta_units_per_1k": -0.2607,
+    "pct_rent": 0.5549
+  },
+  {
+    "year": 2010,
+    "delta_units_per_1k": -0.602,
+    "pct_rent": 2.649
+  },
+  {
+    "year": 2011,
+    "delta_units_per_1k": -0.3003,
+    "pct_rent": 2.3656
+  },
+  {
+    "year": 2012,
+    "delta_units_per_1k": -0.403,
+    "pct_rent": 3.0462
+  },
+  {
+    "year": 2013,
+    "delta_units_per_1k": -0.485,
+    "pct_rent": 2.6504
+  },
+  {
+    "year": 2014,
+    "delta_units_per_1k": -0.306,
+    "pct_rent": 2.3833
+  },
+  {
+    "year": 2015,
+    "delta_units_per_1k": -0.088,
+    "pct_rent": 3.3948
+  },
+  {
+    "year": 2016,
+    "delta_units_per_1k": -0.0588,
+    "pct_rent": 2.7205
+  },
+  {
+    "year": 2017,
+    "delta_units_per_1k": -0.0436,
+    "pct_rent": 4.6575
+  },
+  {
+    "year": 2018,
+    "delta_units_per_1k": -0.2591,
+    "pct_rent": 4.9738
+  },
+  {
+    "year": 2019,
+    "delta_units_per_1k": -0.5501,
+    "pct_rent": 6.1513
+  },
+  {
+    "year": 2020,
+    "delta_units_per_1k": -0.1647,
+    "pct_rent": 5.4816
+  },
+  {
+    "year": 2021,
+    "delta_units_per_1k": 0.2229,
+    "pct_rent": 3.5635
+  },
+  {
+    "year": 2022,
+    "delta_units_per_1k": 0.4131,
+    "pct_rent": 5.6631
+  },
+  {
+    "year": 2023,
+    "delta_units_per_1k": -1.5613,
+    "pct_rent": 9.1588
+  },
+  {
+    "year": 2024,
+    "delta_units_per_1k": 0.107,
+    "pct_rent": 3.5426
+  },
+  {
+    "year": 2025,
+    "delta_units_per_1k": -0.4409,
+    "pct_rent": 3.8415
+  }
+]

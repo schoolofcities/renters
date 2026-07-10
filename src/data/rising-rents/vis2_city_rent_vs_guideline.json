@@ -1,0 +1,226 @@
+[
+  {
+    "city": "newmarket",
+    "actual_rent_increase": 923.0,
+    "guideline_rent_increase": 161.27,
+    "actual_pct_increase": 76.6,
+    "excess_pct_increase": 63.22
+  },
+  {
+    "city": "cambridge",
+    "actual_rent_increase": 771.0,
+    "guideline_rent_increase": 145.35,
+    "actual_pct_increase": 70.99,
+    "excess_pct_increase": 57.61
+  },
+  {
+    "city": "chatham-kent",
+    "actual_rent_increase": 533.0,
+    "guideline_rent_increase": 101.85,
+    "actual_pct_increase": 70.04,
+    "excess_pct_increase": 56.66
+  },
+  {
+    "city": "niagara falls",
+    "actual_rent_increase": 551.0,
+    "guideline_rent_increase": 128.75,
+    "actual_pct_increase": 57.28,
+    "excess_pct_increase": 43.9
+  },
+  {
+    "city": "guelph",
+    "actual_rent_increase": 626.0,
+    "guideline_rent_increase": 151.64,
+    "actual_pct_increase": 55.25,
+    "excess_pct_increase": 41.87
+  },
+  {
+    "city": "brantford",
+    "actual_rent_increase": 543.0,
+    "guideline_rent_increase": 134.64,
+    "actual_pct_increase": 53.98,
+    "excess_pct_increase": 40.6
+  },
+  {
+    "city": "london",
+    "actual_rent_increase": 537.0,
+    "guideline_rent_increase": 136.11,
+    "actual_pct_increase": 52.8,
+    "excess_pct_increase": 39.42
+  },
+  {
+    "city": "kitchener",
+    "actual_rent_increase": 561.0,
+    "guideline_rent_increase": 143.34,
+    "actual_pct_increase": 52.38,
+    "excess_pct_increase": 39.0
+  },
+  {
+    "city": "windsor",
+    "actual_rent_increase": 420.0,
+    "guideline_rent_increase": 109.88,
+    "actual_pct_increase": 51.16,
+    "excess_pct_increase": 37.78
+  },
+  {
+    "city": "oakville",
+    "actual_rent_increase": 738.0,
+    "guideline_rent_increase": 194.6,
+    "actual_pct_increase": 50.76,
+    "excess_pct_increase": 37.38
+  },
+  {
+    "city": "greater sudbury",
+    "actual_rent_increase": 495.0,
+    "guideline_rent_increase": 132.1,
+    "actual_pct_increase": 50.15,
+    "excess_pct_increase": 36.77
+  },
+  {
+    "city": "brampton",
+    "actual_rent_increase": 641.0,
+    "guideline_rent_increase": 173.19,
+    "actual_pct_increase": 49.54,
+    "excess_pct_increase": 36.16
+  },
+  {
+    "city": "sault ste. marie",
+    "actual_rent_increase": 440.0,
+    "guideline_rent_increase": 119.25,
+    "actual_pct_increase": 49.38,
+    "excess_pct_increase": 36.0
+  },
+  {
+    "city": "st. catherines",
+    "actual_rent_increase": 496.0,
+    "guideline_rent_increase": 138.66,
+    "actual_pct_increase": 47.88,
+    "excess_pct_increase": 34.5
+  },
+  {
+    "city": "kawartha lakes",
+    "actual_rent_increase": 463.0,
+    "guideline_rent_increase": 130.09,
+    "actual_pct_increase": 47.63,
+    "excess_pct_increase": 34.25
+  },
+  {
+    "city": "ottawa",
+    "actual_rent_increase": 544.0,
+    "guideline_rent_increase": 160.2,
+    "actual_pct_increase": 45.45,
+    "excess_pct_increase": 32.07
+  },
+  {
+    "city": "clarington",
+    "actual_rent_increase": 539.0,
+    "guideline_rent_increase": 159.13,
+    "actual_pct_increase": 45.33,
+    "excess_pct_increase": 31.95
+  },
+  {
+    "city": "markham",
+    "actual_rent_increase": 605.0,
+    "guideline_rent_increase": 178.94,
+    "actual_pct_increase": 45.25,
+    "excess_pct_increase": 31.87
+  },
+  {
+    "city": "kingston",
+    "actual_rent_increase": 532.0,
+    "guideline_rent_increase": 158.6,
+    "actual_pct_increase": 44.89,
+    "excess_pct_increase": 31.51
+  },
+  {
+    "city": "thunder bay",
+    "actual_rent_increase": 425.0,
+    "guideline_rent_increase": 129.96,
+    "actual_pct_increase": 43.77,
+    "excess_pct_increase": 30.39
+  },
+  {
+    "city": "whitby",
+    "actual_rent_increase": 496.0,
+    "guideline_rent_increase": 152.31,
+    "actual_pct_increase": 43.59,
+    "excess_pct_increase": 30.21
+  },
+  {
+    "city": "hamilton",
+    "actual_rent_increase": 430.0,
+    "guideline_rent_increase": 135.04,
+    "actual_pct_increase": 42.62,
+    "excess_pct_increase": 29.24
+  },
+  {
+    "city": "burlington",
+    "actual_rent_increase": 583.0,
+    "guideline_rent_increase": 186.57,
+    "actual_pct_increase": 41.82,
+    "excess_pct_increase": 28.44
+  },
+  {
+    "city": "mississauga",
+    "actual_rent_increase": 554.0,
+    "guideline_rent_increase": 182.42,
+    "actual_pct_increase": 40.65,
+    "excess_pct_increase": 27.27
+  },
+  {
+    "city": "milton",
+    "actual_rent_increase": 501.0,
+    "guideline_rent_increase": 165.16,
+    "actual_pct_increase": 40.6,
+    "excess_pct_increase": 27.22
+  },
+  {
+    "city": "oshawa",
+    "actual_rent_increase": 510.0,
+    "guideline_rent_increase": 169.57,
+    "actual_pct_increase": 40.25,
+    "excess_pct_increase": 26.87
+  },
+  {
+    "city": "toronto",
+    "actual_rent_increase": 538.0,
+    "guideline_rent_increase": 184.43,
+    "actual_pct_increase": 39.04,
+    "excess_pct_increase": 25.66
+  },
+  {
+    "city": "ajax",
+    "actual_rent_increase": 486.0,
+    "guideline_rent_increase": 167.83,
+    "actual_pct_increase": 38.76,
+    "excess_pct_increase": 25.38
+  },
+  {
+    "city": "peterborough",
+    "actual_rent_increase": 396.0,
+    "guideline_rent_increase": 137.99,
+    "actual_pct_increase": 38.41,
+    "excess_pct_increase": 25.03
+  },
+  {
+    "city": "waterloo",
+    "actual_rent_increase": 486.0,
+    "guideline_rent_increase": 181.48,
+    "actual_pct_increase": 35.84,
+    "excess_pct_increase": 22.46
+  },
+  {
+    "city": "richmond hill",
+    "actual_rent_increase": 444.0,
+    "guideline_rent_increase": 171.58,
+    "actual_pct_increase": 34.63,
+    "excess_pct_increase": 21.25
+  },
+  {
+    "city": "barrie",
+    "actual_rent_increase": 411.0,
+    "guideline_rent_increase": 172.38,
+    "actual_pct_increase": 31.91,
+    "excess_pct_increase": 18.53
+  }
+]
