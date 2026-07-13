@@ -10,6 +10,8 @@
 	import { createFootnoteStore } from '$lib/footnotes/footnoteUtils';
 	import RentIncreaseBarChart from '$lib/charts/RentIncreaseBarChart.svelte';
 	import RentBenchmarkChart from '$lib/charts/RentBenchmarkChart.svelte';
+	import SupplyRentScatterPair from '$lib/charts/SupplyRentScatterPair.svelte';
+	import CityPeriodScatter from '$lib/charts/CityPeriodScatter.svelte';
 
 	const footnoteStore = createFootnoteStore();
 	const { footnotes, addFootnote } = footnoteStore;
@@ -20,6 +22,9 @@
 	];
 
 	import vis2Data from '$data/rising-rents/vis2_city_rent_vs_guideline.json';
+	import vis3aRaw from '$data/rising-rents/vis3a_supply_vs_rent_yoy.json';
+	import vis3bRaw from '$data/rising-rents/vis3b_demand_adjusted_supply_vs_rent.json';
+	import vis4Data from '$data/rising-rents/vis4_city_period_supply_rent.json';
 
 	// Filter out rows where any period value is null
 	import rawPctRaw from '$data/rental-increases/pct_increase_raw.json';
@@ -79,6 +84,14 @@
 		<p>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus eu dolor dapibus sodales. Aenean venenatis metus id eleifend tincidunt.
 		</p>
+
+		<SupplyRentScatterPair {vis3aRaw} {vis3bRaw} />
+
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus eu dolor dapibus sodales. Aenean venenatis metus id eleifend tincidunt.
+		</p>
+
+		<CityPeriodScatter data={vis4Data} />
 
 		<div class="details">
 			<h2>Data &amp; Methodology</h2>
