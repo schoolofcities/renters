@@ -145,7 +145,7 @@
                         x1={gx} y1={X_AXIS_TOP}
                         x2={gx} y2={svgHeight}
                     />
-                    <text class="axis-label"
+                    <text class="chart-axis-label"
                         x={gx} y={X_AXIS_TOP - 4}
                         text-anchor="middle"
                     >{fmtAxis(gl)}</text>
@@ -190,7 +190,7 @@
                     >{fmtPct(d.pct)}</text>
 
                     <!-- City name inside bar area -->
-                    <text class="bar-label"
+                    <text class="chart-axis-label bar-label"
                         x={X_START + 5} y={by + 5}
                     >{capitalize(d.label)}</text>
 
@@ -257,12 +257,6 @@
         stroke-width: 0.5px;
     }
 
-    .axis-label {
-        fill: var(--brandBlack);
-        font-size: 12px;
-        font-family: OpenSans;
-    }
-
     .bar-classifier-box {
         stroke-width: 1;
         stroke-opacity: 1;
@@ -271,24 +265,23 @@
     .bar-classifier-text {
         font-size: 12px;
         font-family: OpenSans;
-        font-weight: bold;
+        font-weight: 600;
     }
 
+    /* City-row label keeps the shared axis-label color/family but reads a size larger here */
     .bar-label {
-        fill: var(--brandGray70);
         font-size: 14px;
-        font-family: OpenSans;
     }
 
     .annotation-outline {
         fill: none;
-        stroke: var(--brandBlack);
+        stroke: var(--brandGray90);
         stroke-width: 1;
         stroke-opacity: 0.65;
     }
 
     .annotation-text {
-        fill: var(--brandBlack);
+        fill: var(--brandGray90);
         font-size: 12px;
         font-family: OpenSans;
         font-weight: 600;

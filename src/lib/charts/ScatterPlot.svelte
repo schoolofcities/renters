@@ -4,7 +4,8 @@
 
     /**
      * Reusable scatter plot with a linear trend line, an r-value caption, and optional per-point
-     * labels (shown always, or only on hover).
+     * labels (shown always, or only on hover/tap — tapping a point shows its label, tapping
+     * elsewhere or another point dismisses/switches it, so this also works on touch devices).
      *
      * @prop {Array} data - [{
      *   x, y, highlight?,        // highlight draws that dot in `darkColor`
@@ -96,7 +97,7 @@
 <div class="scatter-outer">
     <div class="scatter-wrap" bind:offsetWidth={containerW}>
         {#if containerW > 0}
-            <svg width={containerW} {height}>
+            <svg width={containerW} {height} onclick={() => (hoveredIndex = null)}>
                 <defs>
                     <clipPath id={clipId}>
                         <rect x="0" y="0" width={innerW} height={innerH} />
@@ -107,11 +108,11 @@
                     <!-- Gridlines + tick labels (the zero line, if shown, reads slightly darker) -->
                     {#each xAxis.ticks as t}
                         <line class="grid-line" class:zero-line={t === 0} x1={xScale(t)} y1={0} x2={xScale(t)} y2={innerH} />
-                        <text class="tick-label" x={xScale(t)} y={innerH + 16} text-anchor="middle">{xTickFormat(t)}</text>
+                        <text class="chart-axis-label" x={xScale(t)} y={innerH + 16} text-anchor="middle">{xTickFormat(t)}</text>
                     {/each}
                     {#each yAxis.ticks as t}
                         <line class="grid-line" class:zero-line={t === 0} x1={0} y1={yScale(t)} x2={innerW} y2={yScale(t)} />
-                        <text class="tick-label" x={-6} y={yScale(t)} text-anchor="end" dominant-baseline="middle">{yTickFormat(t)}</text>
+                        <text class="chart-axis-label" x={-6} y={yScale(t)} text-anchor="end" dominant-baseline="middle">{yTickFormat(t)}</text>
                     {/each}
 
                     <!-- Trend line -->
@@ -134,6 +135,7 @@
                             class:hoverable={d.label && d.labelMode === 'hover'}
                             onmouseenter={() => (hoveredIndex = i)}
                             onmouseleave={() => (hoveredIndex = null)}
+                            onclick={(e) => { e.stopPropagation(); hoveredIndex = i; }}
                         />
                     {/each}
 
@@ -149,9 +151,9 @@
                     {/each}
 
                     <!-- Axis labels -->
-                    <text class="axis-label" x={innerW / 2} y={innerH + 34} text-anchor="middle">{xLabel}</text>
+                    <text class="chart-axis-title" x={innerW / 2} y={innerH + 34} text-anchor="middle">{xLabel}</text>
                     {#if yLabel}
-                        <text class="axis-label" text-anchor="middle"
+                        <text class="chart-axis-title" text-anchor="middle"
                             transform="translate({-MARGIN.left + 8},{innerH / 2}) rotate(-90)"
                         >{yLabel}</text>
                     {/if}
@@ -161,7 +163,9 @@
         {/if}
     </div>
 
+    <!-- Correlation caption commented out for now — re-enable by uncommenting this line.
     <p class="corr-note">{fmtR(rValue)} — {rSignificant ? 'statistically significant' : 'not statistically significant'}</p>
+    -->
 </div>
 
 <style>
@@ -183,18 +187,6 @@
         stroke-width: 1;
     }
 
-    .tick-label {
-        font-family: OpenSans;
-        font-size: 11px;
-        fill: var(--brandGray70);
-    }
-
-    .axis-label {
-        font-family: OpenSans;
-        font-size: 12px;
-        fill: var(--brandGray90);
-    }
-
     .trend-line {
         stroke: var(--brandGray80);
         stroke-width: 1.5;
@@ -204,6 +196,7 @@
     .point-label {
         font-family: OpenSans;
         font-size: 11px;
+        font-weight: 600;
         fill: var(--brandGray90);
         pointer-events: none;
     }

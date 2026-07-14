@@ -65,6 +65,10 @@
             rSignificant={false}
         />
     </div>
+
+    <p class="chart-source-note">
+        Source: CMHC Rental Market Survey, Statistics Canada (Census of Population).
+    </p>
 </div>
 
 <style>

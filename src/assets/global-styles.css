@@ -393,11 +393,49 @@ li {
 	color: var(--brandMedGreen);
 }
 
-/* Shared source/methodology note under a chart — distinct from .caption-source (image credits) */
-.chart-source-note {
+/* Shared source/methodology note under a chart — distinct from .caption-source (image credits).
+   Selector is prefixed with `p` (not just `.chart-source-note`) so its specificity (0,1,1) ties
+   with — and, being declared later in the file, beats — the `.text p` / `.details p` / `.callout p`
+   mobile overrides below at ≤600px; a bare class selector loses that specificity fight and the
+   text balloons back up to the 15-18px body-text size on mobile. */
+p.chart-source-note {
 	font-family: OpenSans;
 	font-size: 12px;
 	color: var(--brandGray70);
 	line-height: 1.5;
 	margin-top: 10px;
+}
+
+/* Shared chart text roles — used across ScatterPlot, DualBarChart, RentBenchmarkChart, etc.
+   so the same kind of label (an axis tick, a semantic axis title, a legend) reads consistently
+   no matter which chart it's on. */
+.chart-axis-label {
+	font-family: OpenSans;
+	font-size: 12px;
+	fill: var(--brandGray70);
+}
+
+@media (max-width: 600px) {
+	.chart-axis-label {
+		font-size: 11px;
+	}
+}
+
+.chart-axis-title {
+	font-family: OpenSans;
+	font-size: 12px;
+	fill: var(--brandGray90);
+}
+
+/* Same specificity fix as p.chart-source-note above — this is also rendered as a <p>. */
+p.chart-legend-title {
+	font-family: OpenSans;
+	font-size: 14px;
+	color: var(--brandGray90);
+}
+
+.chart-legend-label {
+	font-family: OpenSans;
+	font-size: 14px;
+	fill: var(--brandGray90);
 }

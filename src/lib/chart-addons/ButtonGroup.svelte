@@ -8,7 +8,7 @@
 </script>
 
 <div id="destext">
-	<p>
+	<p class="chart-legend-title">
 		{@html label}
 	</p>
 </div>
@@ -41,11 +41,16 @@
 		cursor: pointer;
 		opacity: 0.5;
 		background-color: var(--brandWhite);
-		color: var(--brandDarkGray);
+		color: var(--brandGray90);
 		user-select: none;
-		font-family: TradeGothicBold, sans-serif;
-		font-size: 16px;
-		font-weight: normal;
+		font-family: OpenSans;
+		font-size: 14px;
+		font-weight: 600;
+		/* Prevents mobile Safari/Chrome's automatic text-inflation ("font boosting"), which
+		   targets short text in narrow flex columns exactly like these buttons and was making
+		   this text render far larger than 14px on phones despite no media query changing it. */
+		text-size-adjust: 100%;
+		-webkit-text-size-adjust: 100%;
 	}
 
 	.toggle-button.selected {
@@ -66,10 +71,6 @@
 
 	#destext p {
 		margin-bottom: -5px;
-		font-family: SourceSerif;
-		font-size: 16px;
 		line-height: 22px;
-		font-weight: normal;
-		color: var(--brandGray90);
 	}
 </style>

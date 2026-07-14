@@ -90,7 +90,7 @@
                         x2={innerW} y2={yScale(tick)}
                         class="grid-line"
                     />
-                    <text x={-9} y={yScale(tick)} class="y-label"
+                    <text x={-9} y={yScale(tick)} class="chart-axis-label"
                         text-anchor="end" dominant-baseline="middle"
                     >{fmtY(tick)}</text>
                 {/each}
@@ -100,7 +100,7 @@
                 {#each X_TICKS as tick}
                     <text
                         x={xScale(tick)} y={innerH + 22}
-                        class="x-label"
+                        class="chart-axis-label"
                         text-anchor="middle"
                     >{tick}</text>
                 {/each}
@@ -151,18 +151,6 @@
         stroke-width: 0.5;
     }
 
-    .y-label {
-        font-family: OpenSans;
-        font-size: 12px;
-        fill: var(--brandGray70);
-    }
-
-    .x-label {
-        font-family: OpenSans;
-        font-size: 12px;
-        fill: var(--brandGray70);
-    }
-
     .line {
         stroke-width: 2.75;
         stroke-linecap: round;
@@ -175,14 +163,12 @@
 
     .end-label {
         font-family: OpenSans;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 600;
     }
 
-
     /* ── Responsive ──────────────────────────────────────────────────────── */
     @media (max-width: 600px) {
-        .y-label, .x-label { font-size: 11px; }
         .end-label { font-size: 11px; }
     }
 

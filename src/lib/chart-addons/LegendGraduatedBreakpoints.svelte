@@ -54,7 +54,7 @@
 
 <div class="legend-section">
     <div class="legend-title">
-        <p>{title}</p>
+        <p class="chart-legend-title legend-title-text">{title}</p>
     </div>
     
     <div class="legend" bind:offsetWidth={legendWidth}>
@@ -79,7 +79,7 @@
                     <!-- Range labels centered under bars -->
                     {#each colors as color, i}
                         <text 
-                            class="legend-label" 
+                            class="chart-legend-label legend-label"
                             text-anchor="middle" 
                             x={boxWidth * i + (boxWidth / 2)} 
                             y="25"
@@ -91,7 +91,7 @@
                     <!-- Breakpoint labels at bar edges -->
                     {#each breakpoints as breakpoint, i}
                         <text 
-                            class="legend-label" 
+                            class="chart-legend-label legend-label"
                             text-anchor="middle" 
                             x={boxWidth * (i + 1)} 
                             y="25"
@@ -115,7 +115,7 @@
                     />
                     
                     <text 
-                        class="legend-label" 
+                        class="chart-legend-label legend-label"
                         text-anchor="middle" 
                         x={naBarStart + (naBarWidth / 2)} 
                         y="25"
@@ -140,19 +140,9 @@
         margin-left: 0px;
     }
 
-    .legend-title p {
-        font-family: OpenSans;
-        font-size: 15px;
+    .legend-title-text {
         line-height: 22px;
-        color: var(--brandGray90);
         margin-bottom: -5px;
-    }
-
-    .legend-label {
-        font-size: 14px;
-        fill: #000000;
-        font-family: OpenSans;
-        margin-bottom: 5px;
     }
 
     @media (max-width: 768px) {

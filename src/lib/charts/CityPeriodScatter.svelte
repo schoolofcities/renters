@@ -72,8 +72,8 @@
     />
 
     <p class="chart-source-note">
-        Source: CMHC Rental Market Survey. Each dot is one Ontario city — hover for the name.
-        {chartData.length} cities shown.
+        Source: CMHC Rental Market Survey. Each dot is one Ontario city; hover (or tap) to see the
+        name. {chartData.length} cities shown.
     </p>
 </div>
 
