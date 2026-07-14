@@ -23,7 +23,7 @@
 
 	<div class="text">
 		<p>
-			Learn more about how rent has changed across Ontario cities by <a href="{base}/higher-rents-higher-supply">viewing our analysis</a>.
+			Learn more about how rent has changed across Ontario cities by <a href="{base}/rising-rents-supply">viewing our analysis</a>.
 		</p>
 	</div>
 

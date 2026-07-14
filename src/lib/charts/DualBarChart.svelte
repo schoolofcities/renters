@@ -1,5 +1,6 @@
 <script>
     import { scaleLinear } from 'd3-scale';
+    import { capitalize } from '$lib/utils/format.js';
 
     /**
      * Generic reusable dual horizontal bar chart.
@@ -93,10 +94,6 @@
             return unit + (n / 1000).toFixed(decimals) + 'K';
         }
         return unit + n;
-    }
-
-    function capitalize(s) {
-        return s.replace(/\b\w/g, c => c.toUpperCase());
     }
 
     function isCity(label, target) {

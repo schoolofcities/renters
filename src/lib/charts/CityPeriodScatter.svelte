@@ -1,6 +1,7 @@
 <script>
     // import ButtonGroup from '$lib/chart-addons/ButtonGroup.svelte'; // re-enable with the period toggle below
     import ScatterPlot from './ScatterPlot.svelte';
+    import { capitalize } from '$lib/utils/format.js';
 
     /**
      * VIS 4 — single scatter plot (% change in rental units vs. % change in average rent, by
@@ -36,10 +37,6 @@
         'milton':          { labelDx: 0,  labelDy: 12,  labelAnchor: 'middle' }, // below, centered
     };
 
-    function capitalize(s) {
-        return s.replace(/\b\w/g, c => c.toUpperCase());
-    }
-
     let chartData = $derived.by(() => {
         return data
             .map(d => {
@@ -74,7 +71,7 @@
         rSignificant={periodInfo.significant}
     />
 
-    <p class="source-note">
+    <p class="chart-source-note">
         Source: CMHC Rental Market Survey. Each dot is one Ontario city — hover for the name.
         {chartData.length} cities shown.
     </p>
@@ -84,13 +81,5 @@
     .city-period-scatter {
         width: 100%;
         margin: 1.5rem 0;
-    }
-
-    .source-note {
-        font-size: 12px;
-        font-family: OpenSans;
-        color: var(--brandGray70);
-        margin-top: 0.75rem;
-        line-height: 1.5;
     }
 </style>

@@ -1,7 +1,7 @@
 <script>
     import { scaleLinear } from 'd3-scale';
     import { line as d3line } from 'd3-shape';
-    import benchmarkData from '$data/rising-rents/vis1_benchmark_index.json';
+    import benchmarkData from '$data/rising-rents-supply/vis1_benchmark_index.json';
 
     // ─── colours ─── bright, drawn from the brand palette; rent reads as the headline series ──
     const C_RENT      = '#DC4633'; // brandRed
@@ -127,7 +127,7 @@
         {/if}
     </div>
 
-    <p class="src">
+    <p class="chart-source-note">
         Source: CMHC Rental Market Survey, Statistics Canada, Ontario Ministry of Municipal Affairs and Housing.
         All series are indexed to 1,000 in 1990. Income data is not yet available for 2025. Nominal values do not
         account for inflation except where noted.
@@ -179,14 +179,6 @@
         font-weight: 600;
     }
 
-    /* ── Source note ─────────────────────────────────────────────────────── */
-    .src {
-        font-family: OpenSans;
-        font-size: 12px;
-        color: var(--brandGray70);
-        margin-top: 10px;
-        line-height: 1.5;
-    }
 
     /* ── Responsive ──────────────────────────────────────────────────────── */
     @media (max-width: 600px) {

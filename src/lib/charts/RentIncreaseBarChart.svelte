@@ -81,7 +81,7 @@
         annotateExcessCity={ANNOTATE_EXCESS_CITY}
     />
 
-    <p class="source-note">
+    <p class="chart-source-note">
         Source: CMHC Rental Market Survey, Ontario Ministry of Municipal Affairs and Housing. Average rent
         for all bedroom types, October surveys, 2018–2025. {chartData.length} cities shown. Nominal values
         do not account for inflation.
@@ -98,13 +98,5 @@
         display: block;
         border-top: solid 1px var(--brandGray);
         padding-top: 5px;
-    }
-
-    .source-note {
-        font-size: 12px;
-        font-family: OpenSans;
-        color: var(--brandGray70);
-        margin-top: 0.75rem;
-        line-height: 1.5;
     }
 </style>
