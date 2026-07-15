@@ -9,27 +9,17 @@
     const C_CPI       = '#007FA3'; // brandMedBlue
     const C_INCOME    = '#00A189'; // brandMedGreen
 
-    // Each series' end label is hand-placed (only 4 known, static lines), always as two stacked
-    // rows — name above, dollar value below:
-    //  - rent:      right-aligned to a point just past its dot, below the dot. Because "Average
-    //               rent" is much wider than "$3,003", right-aligning both rows keeps the (short)
-    //               value row's left edge clear of where the rent line itself passes through —
-    //               the wider name row is allowed to graze the line, same as before.
-    //  - guideline: "Rent Control" / value, centered, stacked above the dot, nudged right.
-    //  - income:    left-aligned just to the right of its dot (its line ends a year early, at
-    //               2024, so this reads to the right of that point), nudged up slightly.
-    //  - CPI:       centered, stacked below the dot — unchanged except a slight rightward nudge.
     const SERIES = [
-        { key: 'rent_index',         label: 'Average rent',    color: C_RENT,      dashed: true,  anchor: 'end',   dx: 24, nameGap: 12,  valueGap: 27 },
-        { key: 'rent_control_index', label: 'Rent Control',    color: C_GUIDELINE, dashed: false, anchor: 'middle', dx: 18, nameGap: -29, valueGap: -14 },
-        { key: 'income_index',       label: 'Income',          color: C_INCOME,    dashed: false, anchor: 'start', dx: 8,  nameGap: -4,  valueGap: 11 },
-        { key: 'cpi_index',          label: 'Inflation (CPI)', color: C_CPI,       dashed: false, anchor: 'middle', dx: 6,  nameGap: 30,  valueGap: 45 },
+        { key: 'rent_index',         label: 'Average rent',    color: C_RENT,      dashed: true,  anchor: 'start', dx: 0,  nameGap: 12,  valueGap: 26 },
+        { key: 'rent_control_index', label: 'Rent Control',    color: C_GUIDELINE, dashed: false, anchor: 'start', dx: 0, nameGap: -24, valueGap: -10  },
+        { key: 'income_index',       label: 'Income',          color: C_INCOME,    dashed: false, anchor: 'start', dx: 8,  nameGap: -4,  valueGap: 10 },
+        { key: 'cpi_index',          label: 'Inflation (CPI)', color: C_CPI,       dashed: false, anchor: 'start', dx: 0, nameGap: 12,  valueGap: 26 },
     ];
 
     // ─── layout ────────────────────────────────────────────────────────────────
-    // Right margin sized to the widest thing it has to hold: income's label, which now reads
-    // solidly to the right of its dot. That's the binding constraint — validated below.
-    const MARGIN   = { top: 16, right: 100, bottom: 36, left: 56 };
+    // Right margin sized to the widest thing it has to hold: "Inflation (CPI)" is now the
+    // longest left-aligned label reading rightward, so it's the binding constraint.
+    const MARGIN   = { top: 16, right: 80, bottom: 36, left: 56 };
     const CHART_H  = 340;
     const Y_DOMAIN = [900, 3100];
     const Y_TICKS  = [1000, 1500, 2000, 2500, 3000];

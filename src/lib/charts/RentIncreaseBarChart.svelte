@@ -14,18 +14,9 @@
      */
     let { data = [] } = $props();
 
-    // Data only covers the single 2018–2025 period, so there's no period selector.
-    // % mode is likewise fixed to the total/raw increase for now. To bring back the toggle
-    // between total and excess-above-guideline: make pctMode a $state, re-add a ButtonGroup
-    // (bind:selectedValue={pctMode}, import + options={MODE_OPTIONS} from constants.js), and
-    // pctMode already flows straight through to configKey and the pct field below.
     let pctMode = 'raw';
     let rank    = $state('value');
 
-    // The separate dual-bar legend was replaced with in-chart annotation (see DualBarChart):
-    // one example city's full bar is outlined + labeled "Total rent increase", and one example
-    // city's excess bar is outlined + labeled "Excess above rent control". Bound to specific
-    // cities (not rank), so the callouts stay put regardless of how `rank` re-sorts the list.
     const ANNOTATE_TOTAL_CITY  = 'kitchener';    // mid-table bar, plenty of blank space to its right
     const ANNOTATE_EXCESS_CITY = 'guelph'; // largest excess bar, clearly demonstrates the concept
 
