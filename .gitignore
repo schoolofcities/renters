@@ -6,6 +6,8 @@ data/cmhc-rental-raw
 data/geo
 data/statscan-quarterly-rental-raw
 
+analysis/falling-rents/headline_coding
+
 # SvelteKit
 .svelte-kit/
 build/
