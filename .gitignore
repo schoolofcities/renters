@@ -7,6 +7,7 @@ data/geo
 data/statscan-quarterly-rental-raw
 
 analysis/falling-rents/headline_coding
+analysis/falling-rents/peak_to_latest_summary.csv
 
 # SvelteKit
 .svelte-kit/
