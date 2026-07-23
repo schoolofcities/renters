@@ -1,254 +1,254 @@
 [
   {
     "index": 1990,
-    "rent_index": 1000.0,
-    "cpi_index": 1000.0,
-    "rent_control_index": 1000.0,
-    "income_index": 1000.0
+    "rent_index": 576,
+    "cpi_index": 576.0,
+    "rent_control_index": 576.0,
+    "income_index": 576.0
   },
   {
     "index": 1991,
-    "rent_index": 1057.29,
-    "cpi_index": 1047.01,
-    "rent_control_index": 1054.0,
-    "income_index": 959.45
+    "rent_index": 609,
+    "cpi_index": 603.08,
+    "rent_control_index": 607.1,
+    "income_index": 552.65
   },
   {
     "index": 1992,
-    "rent_index": 1093.75,
-    "cpi_index": 1057.18,
-    "rent_control_index": 1117.24,
-    "income_index": 981.58
+    "rent_index": 630,
+    "cpi_index": 608.94,
+    "rent_control_index": 643.53,
+    "income_index": 565.39
   },
   {
     "index": 1993,
-    "rent_index": 1123.26,
-    "cpi_index": 1076.24,
-    "rent_control_index": 1171.98,
-    "income_index": 966.66
+    "rent_index": 647,
+    "cpi_index": 619.91,
+    "rent_control_index": 675.06,
+    "income_index": 556.8
   },
   {
     "index": 1994,
-    "rent_index": 1144.1,
-    "cpi_index": 1076.24,
-    "rent_control_index": 1209.49,
-    "income_index": 967.96
+    "rent_index": 659,
+    "cpi_index": 619.91,
+    "rent_control_index": 696.67,
+    "income_index": 557.55
   },
   {
     "index": 1995,
-    "rent_index": 1166.67,
-    "cpi_index": 1102.92,
-    "rent_control_index": 1244.56,
-    "income_index": 991.97
+    "rent_index": 672,
+    "cpi_index": 635.28,
+    "rent_control_index": 716.87,
+    "income_index": 571.37
   },
   {
     "index": 1996,
-    "rent_index": 1182.29,
-    "cpi_index": 1120.71,
-    "rent_control_index": 1279.41,
-    "income_index": 994.39
+    "rent_index": 681,
+    "cpi_index": 645.53,
+    "rent_control_index": 736.94,
+    "income_index": 572.77
   },
   {
     "index": 1997,
-    "rent_index": 1189.24,
-    "cpi_index": 1141.04,
-    "rent_control_index": 1315.23,
-    "income_index": 1012.41
+    "rent_index": 685,
+    "cpi_index": 657.24,
+    "rent_control_index": 757.58,
+    "income_index": 583.15
   },
   {
     "index": 1998,
-    "rent_index": 1246.53,
-    "cpi_index": 1151.21,
-    "rent_control_index": 1354.69,
-    "income_index": 1059.12
+    "rent_index": 718,
+    "cpi_index": 663.1,
+    "rent_control_index": 780.3,
+    "income_index": 610.05
   },
   {
     "index": 1999,
-    "rent_index": 1288.19,
-    "cpi_index": 1174.08,
-    "rent_control_index": 1395.33,
-    "income_index": 1131.4
+    "rent_index": 742,
+    "cpi_index": 676.27,
+    "rent_control_index": 803.71,
+    "income_index": 651.69
   },
   {
     "index": 2000,
-    "rent_index": 1371.53,
-    "cpi_index": 1208.39,
-    "rent_control_index": 1431.61,
-    "income_index": 1193.74
+    "rent_index": 790,
+    "cpi_index": 696.03,
+    "rent_control_index": 824.61,
+    "income_index": 687.6
   },
   {
     "index": 2001,
-    "rent_index": 1423.61,
-    "cpi_index": 1245.24,
-    "rent_control_index": 1473.13,
-    "income_index": 1233.16
+    "rent_index": 820,
+    "cpi_index": 717.26,
+    "rent_control_index": 848.52,
+    "income_index": 710.3
   },
   {
     "index": 2002,
-    "rent_index": 1461.81,
-    "cpi_index": 1270.65,
-    "rent_control_index": 1530.58,
-    "income_index": 1250.63
+    "rent_index": 842,
+    "cpi_index": 731.89,
+    "rent_control_index": 881.61,
+    "income_index": 720.36
   },
   {
     "index": 2003,
-    "rent_index": 1461.81,
-    "cpi_index": 1304.96,
-    "rent_control_index": 1574.97,
-    "income_index": 1300.21
+    "rent_index": 842,
+    "cpi_index": 751.65,
+    "rent_control_index": 907.18,
+    "income_index": 748.92
   },
   {
     "index": 2004,
-    "rent_index": 1479.17,
-    "cpi_index": 1329.1,
-    "rent_control_index": 1620.64,
-    "income_index": 1316.23
+    "rent_index": 852,
+    "cpi_index": 765.56,
+    "rent_control_index": 933.49,
+    "income_index": 758.15
   },
   {
     "index": 2005,
-    "rent_index": 1489.58,
-    "cpi_index": 1358.32,
-    "rent_control_index": 1644.95,
-    "income_index": 1373.14
+    "rent_index": 858,
+    "cpi_index": 782.39,
+    "rent_control_index": 947.49,
+    "income_index": 790.93
   },
   {
     "index": 2006,
-    "rent_index": 1512.15,
-    "cpi_index": 1382.47,
-    "rent_control_index": 1679.49,
-    "income_index": 1394.22
+    "rent_index": 871,
+    "cpi_index": 796.3,
+    "rent_control_index": 967.39,
+    "income_index": 803.07
   },
   {
     "index": 2007,
-    "rent_index": 1524.31,
-    "cpi_index": 1407.88,
-    "rent_control_index": 1723.16,
-    "income_index": 1423.25
+    "rent_index": 878,
+    "cpi_index": 810.94,
+    "rent_control_index": 992.54,
+    "income_index": 819.79
   },
   {
     "index": 2008,
-    "rent_index": 1564.24,
-    "cpi_index": 1439.64,
-    "rent_control_index": 1747.29,
-    "income_index": 1483.29
+    "rent_index": 901,
+    "cpi_index": 829.24,
+    "rent_control_index": 1006.44,
+    "income_index": 854.38
   },
   {
     "index": 2009,
-    "rent_index": 1572.92,
-    "cpi_index": 1444.73,
-    "rent_control_index": 1778.74,
-    "income_index": 1443.0
+    "rent_index": 906,
+    "cpi_index": 832.16,
+    "rent_control_index": 1024.55,
+    "income_index": 831.17
   },
   {
     "index": 2010,
-    "rent_index": 1614.58,
-    "cpi_index": 1480.3,
-    "rent_control_index": 1816.09,
-    "income_index": 1469.55
+    "rent_index": 930,
+    "cpi_index": 852.66,
+    "rent_control_index": 1046.07,
+    "income_index": 846.46
   },
   {
     "index": 2011,
-    "rent_index": 1652.78,
-    "cpi_index": 1526.05,
-    "rent_control_index": 1828.8,
-    "income_index": 1496.46
+    "rent_index": 952,
+    "cpi_index": 879.0,
+    "rent_control_index": 1053.39,
+    "income_index": 861.96
   },
   {
     "index": 2012,
-    "rent_index": 1703.12,
-    "cpi_index": 1547.65,
-    "rent_control_index": 1885.5,
-    "income_index": 1530.77
+    "rent_index": 981,
+    "cpi_index": 891.45,
+    "rent_control_index": 1086.05,
+    "income_index": 881.72
   },
   {
     "index": 2013,
-    "rent_index": 1748.26,
-    "cpi_index": 1562.9,
-    "rent_control_index": 1932.63,
-    "income_index": 1511.75
+    "rent_index": 1007,
+    "cpi_index": 900.23,
+    "rent_control_index": 1113.2,
+    "income_index": 870.77
   },
   {
     "index": 2014,
-    "rent_index": 1789.93,
-    "cpi_index": 1599.75,
-    "rent_control_index": 1948.09,
-    "income_index": 1619.15
+    "rent_index": 1031,
+    "cpi_index": 921.45,
+    "rent_control_index": 1122.1,
+    "income_index": 932.63
   },
   {
     "index": 2015,
-    "rent_index": 1850.69,
-    "cpi_index": 1618.81,
-    "rent_control_index": 1979.26,
-    "income_index": 1624.7
+    "rent_index": 1066,
+    "cpi_index": 932.43,
+    "rent_control_index": 1140.06,
+    "income_index": 935.83
   },
   {
     "index": 2016,
-    "rent_index": 1901.04,
-    "cpi_index": 1648.03,
-    "rent_control_index": 2018.85,
-    "income_index": 1652.03
+    "rent_index": 1095,
+    "cpi_index": 949.27,
+    "rent_control_index": 1162.86,
+    "income_index": 951.57
   },
   {
     "index": 2017,
-    "rent_index": 1989.58,
-    "cpi_index": 1675.98,
-    "rent_control_index": 2049.13,
-    "income_index": 1736.95
+    "rent_index": 1146,
+    "cpi_index": 965.37,
+    "rent_control_index": 1180.3,
+    "income_index": 1000.49
   },
   {
     "index": 2018,
-    "rent_index": 2088.54,
-    "cpi_index": 1715.37,
-    "rent_control_index": 2086.02,
-    "income_index": 1835.99
+    "rent_index": 1203,
+    "cpi_index": 988.06,
+    "rent_control_index": 1201.55,
+    "income_index": 1057.53
   },
   {
     "index": 2019,
-    "rent_index": 2217.01,
-    "cpi_index": 1747.14,
-    "rent_control_index": 2123.56,
-    "income_index": 1827.63
+    "rent_index": 1277,
+    "cpi_index": 1006.35,
+    "rent_control_index": 1223.17,
+    "income_index": 1052.72
   },
   {
     "index": 2020,
-    "rent_index": 2338.54,
-    "cpi_index": 1758.58,
-    "rent_control_index": 2170.28,
-    "income_index": 1971.77
+    "rent_index": 1347,
+    "cpi_index": 1012.94,
+    "rent_control_index": 1250.08,
+    "income_index": 1135.74
   },
   {
     "index": 2021,
-    "rent_index": 2421.88,
-    "cpi_index": 1819.57,
-    "rent_control_index": 2170.28,
-    "income_index": 2051.16
+    "rent_index": 1395,
+    "cpi_index": 1048.07,
+    "rent_control_index": 1250.08,
+    "income_index": 1181.47
   },
   {
     "index": 2022,
-    "rent_index": 2559.03,
-    "cpi_index": 1942.82,
-    "rent_control_index": 2196.33,
-    "income_index": 2084.14
+    "rent_index": 1474,
+    "cpi_index": 1119.06,
+    "rent_control_index": 1265.08,
+    "income_index": 1200.47
   },
   {
     "index": 2023,
-    "rent_index": 2793.4,
-    "cpi_index": 2016.52,
-    "rent_control_index": 2251.23,
-    "income_index": 2212.09
+    "rent_index": 1609,
+    "cpi_index": 1161.51,
+    "rent_control_index": 1296.71,
+    "income_index": 1274.16
   },
   {
     "index": 2024,
-    "rent_index": 2892.36,
-    "cpi_index": 2064.8,
-    "rent_control_index": 2307.51,
-    "income_index": 2257.54
+    "rent_index": 1666,
+    "cpi_index": 1189.33,
+    "rent_control_index": 1329.13,
+    "income_index": 1300.34
   },
   {
     "index": 2025,
-    "rent_index": 3003.47,
-    "cpi_index": 2104.19,
-    "rent_control_index": 2365.2,
+    "rent_index": 1730,
+    "cpi_index": 1212.02,
+    "rent_control_index": 1362.36,
     "income_index": null
   }
 ]

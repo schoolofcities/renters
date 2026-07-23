@@ -21,8 +21,8 @@
     // longest left-aligned label reading rightward, so it's the binding constraint.
     const MARGIN   = { top: 16, right: 80, bottom: 36, left: 56 };
     const CHART_H  = 340;
-    const Y_DOMAIN = [900, 3100];
-    const Y_TICKS  = [1000, 1500, 2000, 2500, 3000];
+    const Y_DOMAIN = [500, 1750];
+    const Y_TICKS  = [500, 750, 1000, 1250, 1500, 1750];
     const X_TICKS  = [1990, 1997, 2004, 2011, 2018, 2025];
 
     // ─── reactive state ────────────────────────────────────────────────────────
@@ -119,8 +119,10 @@
 
     <p class="chart-source-note">
         Source: CMHC Rental Market Survey, Statistics Canada, Ontario Ministry of Municipal Affairs and Housing.
-        All series are indexed to 1,000 in 1990. Income data is not yet available for 2025. Nominal values do not
-        account for inflation except where noted.
+        Average rent begins at Ontario's actual average rent in 1990 ($576); CPI, the rent-control guideline, and
+        income are each pegged to that same starting value so their growth since 1990 can be compared directly in
+        dollar terms. Income data is not yet available for 2025. Nominal values do not account for inflation
+        except where noted.
     </p>
 
 </div>
