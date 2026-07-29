@@ -21,7 +21,7 @@
 
 <SeoHead
 	title="Rising Rents and Supply in Ontario's Cities"
-	description="Exploring rental housing affordability over time, examining how rents have changed across Ontario cities before and after the 2018 deregulation of rent control."
+	description="Exploring rental housing affordability over time, especially with large rent increases recently even while supply has gone up."
 	path="/rising-rents-supply"
 	image="rising-rents-supply-card.png"
 />
