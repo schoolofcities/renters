@@ -41,12 +41,6 @@
 
 <div class="rent-chart">
     <div class="controls">
-        <!-- Period selector removed: this dataset only covers 2018–2025. -->
-        <!-- <ButtonGroup options={PERIOD_OPTIONS} bind:selectedValue={period} onSelect={(v) => (period = v)} label="Time period:" /> -->
-       
-        <!-- "Show % as" toggle disabled for now — pctMode is fixed to 'raw' above. -->
-        <!-- <ButtonGroup options={MODE_OPTIONS} bind:selectedValue={pctMode} onSelect={(v) => (pctMode = v)} label="Show % as:" /> -->
-       
         <ButtonGroup
             options={RANK_OPTIONS}
             bind:selectedValue={rank}
@@ -87,7 +81,5 @@
 
     .controls {
         display: block;
-        border-top: solid 1px var(--brandGray);
-        padding-top: 5px;
     }
 </style>

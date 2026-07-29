@@ -5,13 +5,15 @@
 	import Logo from '$lib/header-footer/LogoTop.svelte';
 	import TitleStandard from '$lib/header-footer/TitleStandard.svelte';
 	import Footer from '$lib/header-footer/Footer.svelte';
+	import SeoHead from '$lib/header-footer/SeoHead.svelte';
 </script>
 
-<svelte:head>
-	<title>Renters | School of Cities</title>
-	<meta name="description" content="A School of Cities web project examining housing affordability and rental market trends in Ontario." />
-	<meta name="author" content="School of Cities" />
-</svelte:head>
+<SeoHead
+	title="Renters"
+	description="A School of Cities web project examining housing affordability and rental market trends in Ontario."
+	path="/"
+	image="rising-rents-supply-card.png"
+/>
 
 <main>
 	<Logo logoType="Blue" backgroundColor="var(--brandWhite)" />
