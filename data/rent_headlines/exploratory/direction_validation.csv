@@ -1,0 +1,475 @@
+row_id,validation_relevance,validation_direction,corrected,correction_note
+H00111,residential_market_rent,no_direction,True,"comparative level vs other cities, not a temporal change; also mentions future pressure building"
+H00159,residential_market_rent,falling,False,
+H00376,residential_market_rent,mixed_or_divergent,False,
+H00596,residential_market_rent,falling,False,
+H00717,other_irrelevant,not_applicable,True,"question about investor selling behavior, not a rent trend report"
+H00719,commercial_or_nonresidential,not_applicable,False,
+H00721,commercial_or_nonresidential,not_applicable,False,
+H00734,residential_market_rent,falling,False,
+H00775,residential_market_rent,falling,False,
+H00784,residential_market_rent,falling,False,
+H00786,residential_market_rent,falling,False,
+H00800,residential_market_rent,falling,False,
+H00819,residential_market_rent,mixed_or_divergent,False,
+H00824,residential_market_rent,falling,False,
+H00834,residential_market_rent,falling,False,
+H00873,residential_market_rent,falling,False,
+H00875,residential_market_rent,falling,False,
+H00953,residential_market_rent,falling,False,
+H00954,residential_market_rent,falling,False,
+H00955,residential_market_rent,falling,False,
+H01043,residential_market_rent,falling,False,
+H01048,residential_market_rent,falling,False,
+H01051,residential_market_rent,falling,False,
+H01052,residential_market_rent,falling,False,
+H01053,residential_market_rent,falling,False,
+H01054,residential_market_rent,falling,False,
+H01062,residential_market_rent,falling,False,
+H01082,residential_market_rent,falling,False,
+H01104,residential_market_rent,falling,False,
+H01108,residential_market_rent,falling,False,
+H01115,residential_market_rent,falling,False,
+H01154,residential_market_rent,falling,False,
+H01167,residential_market_rent,falling,False,
+H01168,residential_market_rent,falling,False,
+H01170,residential_market_rent,no_direction,True,"ranking claim, not a clear own-city temporal direction"
+H01194,residential_market_rent,falling,False,
+H01210,residential_market_rent,falling,False,
+H01211,residential_market_rent,falling,False,
+H01220,residential_market_rent,falling,False,
+H01296,residential_market_rent,falling,False,
+H01325,residential_market_rent,falling,False,
+H01350,residential_market_rent,falling,False,
+H01399,residential_market_rent,falling,False,
+H01452,residential_market_rent,falling,False,
+H01895,residential_market_rent,falling,False,
+H02105,residential_market_rent,no_direction,True,incentives/demand softening implied but no explicit rent price move stated
+H02111,residential_market_rent,falling,False,
+H02264,residential_market_rent,falling,False,
+H02366,residential_market_rent,no_direction,True,"'curb' suggests restraining growth, not necessarily an actual decline"
+H02424,residential_market_rent,falling,False,
+H02501,residential_market_rent,falling,False,
+H02513,residential_market_rent,falling,False,
+H02577,residential_market_rent,mixed_or_divergent,False,
+H02627,residential_market_rent,mixed_or_divergent,False,
+H02634,residential_market_rent,falling,False,
+H02642,residential_market_rent,falling,False,
+H02645,residential_market_rent,mixed_or_divergent,False,
+H02649,residential_market_rent,falling,False,
+H02650,residential_market_rent,falling,False,
+H02653,residential_market_rent,mixed_or_divergent,False,
+H02654,residential_market_rent,falling,False,
+H02655,residential_market_rent,mixed_or_divergent,False,
+H02667,residential_market_rent,falling,False,
+H02692,residential_market_rent,mixed_or_divergent,True,Hamilton down while Canada hits all-time high
+H02705,residential_market_rent,falling,False,
+H02707,residential_market_rent,falling,False,
+H02734,residential_market_rent,falling,False,
+H02740,residential_market_rent,mixed_or_divergent,True,Toronto at new lows while Canada still growing (just slower)
+H02743,residential_market_rent,falling,False,
+H02744,residential_market_rent,falling,False,
+H02765,residential_market_rent,falling,False,
+H02766,residential_market_rent,falling,False,
+H02768,residential_market_rent,falling,False,
+H02769,residential_market_rent,falling,False,
+H02772,residential_market_rent,falling,False,
+H02793,residential_market_rent,falling,False,
+H02814,residential_market_rent,falling,False,
+H02851,residential_market_rent,mixed_or_divergent,False,
+H02852,residential_market_rent,mixed_or_divergent,False,
+H02854,residential_market_rent,mixed_or_divergent,False,
+H02855,residential_market_rent,mixed_or_divergent,False,
+H02871,residential_market_rent,falling,False,
+H02872,residential_market_rent,falling,False,
+H02873,residential_market_rent,falling,False,
+H02874,residential_market_rent,falling,False,
+H02901,residential_market_rent,falling,False,
+H02912,residential_market_rent,no_direction,True,"'decline in momentum' = growth deceleration, not necessarily a level decline"
+H02927,residential_market_rent,falling,False,
+H02938,residential_market_rent,falling,False,
+H02940,residential_market_rent,falling,False,
+H02941,residential_market_rent,falling,False,
+H02942,residential_market_rent,falling,False,
+H02943,residential_market_rent,falling,False,
+H02948,residential_market_rent,falling,False,
+H02980,residential_market_rent,falling,False,
+H02981,residential_market_rent,falling,False,
+H02982,residential_market_rent,falling,False,
+H02983,residential_market_rent,falling,False,
+H02984,residential_market_rent,falling,False,
+H02985,residential_market_rent,falling,False,
+H02987,residential_market_rent,falling,False,
+H03009,residential_market_rent,falling,False,
+H03015,residential_market_rent,falling,False,
+H03016,residential_market_rent,falling,False,
+H03017,residential_market_rent,falling,False,
+H03018,residential_market_rent,falling,False,
+H03020,residential_market_rent,falling,False,
+H03021,residential_market_rent,falling,False,
+H03023,residential_market_rent,falling,False,
+H03027,residential_market_rent,falling,False,
+H03033,residential_market_rent,mixed_or_divergent,False,
+H03038,residential_market_rent,falling,False,
+H03040,residential_market_rent,falling,False,
+H03049,residential_market_rent,falling,False,
+H03052,residential_market_rent,falling,False,
+H03054,residential_market_rent,falling,False,
+H03055,residential_market_rent,falling,False,
+H03056,residential_market_rent,falling,False,
+H03075,residential_market_rent,falling,False,
+H03078,residential_market_rent,falling,False,
+H03079,residential_market_rent,falling,False,
+H03080,residential_market_rent,falling,False,
+H03085,residential_market_rent,falling,False,
+H03089,residential_market_rent,mixed_or_divergent,False,
+H03115,residential_market_rent,falling,False,
+H03116,residential_market_rent,falling,False,
+H03131,residential_market_rent,falling,False,
+H03136,residential_market_rent,falling,False,
+H03139,residential_market_rent,falling,False,
+H03164,residential_market_rent,falling,False,
+H03165,residential_market_rent,falling,False,
+H03168,residential_market_rent,falling,True,warns of future hike risk but current reported direction is decrease
+H03170,residential_market_rent,falling,False,
+H03192,residential_market_rent,falling,False,
+H03194,residential_market_rent,falling,False,
+H03195,residential_market_rent,falling,False,
+H03196,residential_market_rent,falling,False,
+H03197,residential_market_rent,falling,False,
+H03200,residential_market_rent,mixed_or_divergent,False,
+H03203,residential_market_rent,falling,False,
+H03210,residential_market_rent,falling,False,
+H03211,residential_market_rent,falling,False,
+H03212,residential_market_rent,falling,False,
+H03229,residential_market_rent,no_direction,True,incentives and rising vacancy implied but no explicit rent price direction stated
+H03238,residential_market_rent,falling,False,
+H03239,residential_market_rent,falling,False,
+H03241,residential_market_rent,falling,False,
+H03259,residential_market_rent,falling,False,
+H03270,residential_market_rent,falling,False,
+H03273,residential_market_rent,falling,False,
+H03278,residential_market_rent,falling,False,
+H03279,residential_market_rent,falling,False,
+H03289,residential_market_rent,falling,False,
+H03301,residential_market_rent,falling,False,
+H03302,residential_market_rent,falling,False,
+H03304,residential_market_rent,falling,False,
+H03306,residential_market_rent,falling,False,
+H03307,residential_market_rent,falling,False,
+H03314,residential_market_rent,falling,False,
+H03319,residential_market_rent,falling,False,
+H03320,residential_market_rent,falling,False,
+H03321,residential_market_rent,falling,False,
+H03324,residential_market_rent,falling,False,
+H03334,residential_market_rent,falling,False,
+H03351,residential_market_rent,falling,False,
+H03353,residential_market_rent,falling,False,
+H03354,residential_market_rent,falling,False,
+H03357,residential_market_rent,falling,False,
+H03358,residential_market_rent,falling,False,
+H03372,residential_market_rent,falling,False,
+H03373,residential_market_rent,falling,False,
+H03374,residential_market_rent,falling,False,
+H03375,residential_market_rent,falling,False,
+H03379,residential_market_rent,falling,False,
+H01805,residential_market_rent,rising,False,
+H01866,residential_market_rent,rising,False,
+H01423,residential_market_rent,rising,False,
+H02107,residential_rent_policy,not_applicable,True,"focus is on policy solutions to climbing rents, not the rent report itself"
+H02596,residential_market_rent,rising,False,
+H01714,residential_market_rent,rising,False,
+H02190,residential_market_rent,rising,False,
+H03309,residential_market_rent,rising,False,
+H01742,residential_market_rent,rising,False,
+H02403,residential_market_rent,rising,False,
+H02338,residential_market_rent,rising,False,
+H00088,residential_market_rent,rising,False,
+H00066,residential_market_rent,rising,False,
+H02447,residential_market_rent,rising,False,
+H03011,residential_market_rent,rising,False,
+H02670,residential_market_rent,rising,False,
+H02583,residential_market_rent,rising,False,
+H01412,residential_market_rent,no_direction,True,"describes high level, no stated trend"
+H00323,residential_market_rent,rising,False,
+H03149,residential_market_rent,rising,False,
+H00155,residential_rent_policy,not_applicable,True,"about rent control being lifted / apartment supply, not a rent-price report"
+H00401,residential_market_rent,rising,False,
+H01698,residential_market_rent,rising,False,
+H01730,individual_tenant_landlord_case,not_applicable,False,
+H02160,residential_market_rent,rising,False,
+H01338,residential_market_rent,rising,False,
+H02537,residential_market_rent,rising,False,
+H02008,residential_market_rent,rising,False,
+H02468,residential_market_rent,rising,False,
+H02268,residential_market_rent,rising,False,
+H01869,residential_market_rent,rising,False,
+H02431,residential_market_rent,rising,False,
+H02339,residential_market_rent,rising,False,
+H01992,other_irrelevant,not_applicable,True,primarily about digital-nomad/Airbnb policy; rent fear is a side reference
+H02296,residential_market_rent,rising,False,
+H02993,residential_market_rent,rising,False,
+H02121,residential_market_rent,rising,False,
+H00333,residential_market_rent,rising,False,
+H00019,residential_market_rent,rising,False,
+H02110,residential_market_rent,rising,False,
+H00360,residential_market_rent,rising,False,
+H02899,residential_market_rent,rising,False,
+H02474,residential_market_rent,rising,False,
+H01616,residential_rent_policy,not_applicable,True,climbing rent is context; main story is a policy proposal for emergency units
+H00300,residential_market_rent,rising,False,
+H01986,residential_market_rent,rising,False,
+H00349,residential_market_rent,rising,False,
+H01243,residential_market_rent,rising,False,
+H00337,residential_market_rent,no_direction,True,"'out of control' describes level, no explicit change stated"
+H01454,residential_market_rent,rising,False,
+H03034,residential_market_rent,rising,False,
+H00346,residential_market_rent,rising,False,
+H02182,residential_market_rent,rising,False,
+H03067,residential_market_rent,rising,False,
+H03002,residential_market_rent,rising,False,
+H00449,residential_market_rent,rising,False,
+H03193,residential_market_rent,rising,False,
+H01116,residential_market_rent,rising,False,
+H01980,residential_market_rent,rising,False,
+H02341,residential_market_rent,rising,False,
+H01624,residential_market_rent,no_direction,True,"'market tightens' implies demand/vacancy, no explicit price direction stated"
+H01925,residential_market_rent,rising,False,
+H02621,residential_market_rent,rising,False,
+H02739,residential_market_rent,rising,False,
+H00304,residential_market_rent,rising,False,
+H00017,residential_market_rent,rising,False,
+H01801,residential_market_rent,rising,False,
+H01736,residential_market_rent,rising,False,
+H02157,residential_market_rent,no_direction,True,"opinion piece on 'out-of-control' rents, no explicit change stated"
+H02040,residential_market_rent,rising,False,
+H02380,residential_market_rent,rising,False,
+H02972,residential_market_rent,rising,False,
+H02806,residential_market_rent,rising,False,
+H01483,residential_market_rent,no_direction,True,"level comparison ('highest'/'remains'), no explicit recent change"
+H01975,residential_market_rent,rising,False,
+H02112,residential_market_rent,rising,False,
+H00394,residential_market_rent,rising,False,
+H00146,individual_tenant_landlord_case,not_applicable,True,"specific apartment building's tenants, not a market-wide report"
+H01708,residential_market_rent,rising,False,
+H01697,residential_market_rent,rising,False,
+H02715,residential_market_rent,rising,False,
+H00900,residential_market_rent,no_direction,True,'pressure on rents' implies upward but no explicit figure/direction
+H02261,commercial_or_nonresidential,not_applicable,True,"retail REIT rent rates, not residential"
+H00345,residential_market_rent,rising,False,
+H02294,residential_market_rent,rising,False,
+H01557,residential_market_rent,rising,False,
+H01629,residential_market_rent,rising,False,
+H01753,residential_market_rent,rising,False,
+H00095,residential_market_rent,no_direction,True,"level comparison ('highest'), no explicit recent change"
+H02511,residential_market_rent,rising,False,
+H01945,residential_market_rent,rising,False,
+H03384,residential_market_rent,rising,False,
+H02674,residential_market_rent,rising,False,
+H02291,residential_market_rent,rising,False,
+H01675,residential_market_rent,rising,False,
+H00940,residential_market_rent,no_direction,True,"'sky-high' describes level, no explicit trend"
+H02075,residential_market_rent,rising,False,
+H02032,residential_market_rent,rising,False,
+H02675,residential_market_rent,rising,False,
+H02900,residential_market_rent,rising,False,
+H02464,residential_market_rent,rising,False,
+H03062,residential_market_rent,rising,False,
+H02691,residential_market_rent,rising,False,
+H00142,residential_market_rent,rising,False,
+H01179,residential_market_rent,rising,False,
+H02307,residential_market_rent,rising,False,
+H02746,residential_market_rent,rising,False,
+H02665,residential_market_rent,rising,False,
+H02457,residential_market_rent,rising,False,
+H00738,residential_market_rent,rising,False,
+H01893,residential_market_rent,rising,False,
+H02738,residential_market_rent,rising,False,
+H02862,residential_market_rent,rising,False,
+H02352,residential_market_rent,no_direction,True,affordability struggle worsening; no explicit rent price movement stated
+H02351,residential_market_rent,no_direction,True,"affordability crisis framing, no explicit rent change stated"
+H01830,residential_market_rent,rising,False,
+H00395,residential_market_rent,rising,False,
+H01891,residential_market_rent,rising,False,
+H01865,residential_market_rent,rising,False,
+H00980,residential_market_rent,rising,False,
+H01281,residential_market_rent,rising,False,
+H02896,residential_market_rent,rising,False,
+H01960,residential_market_rent,rising,False,
+H02528,residential_market_rent,no_direction,True,"affordability problem growing / vacancy declining, no explicit rent-price change stated"
+H02277,residential_market_rent,rising,False,
+H01764,residential_market_rent,rising,False,
+H03010,residential_market_rent,stable,True,'persist' suggests continuation of a high level rather than active increase
+H01862,residential_market_rent,rising,False,
+H02488,residential_market_rent,rising,False,
+H01737,individual_tenant_landlord_case,not_applicable,False,
+H02076,residential_market_rent,rising,False,
+H02002,individual_tenant_landlord_case,not_applicable,True,"no location/market data given, reads as a specific case"
+H02536,residential_market_rent,rising,False,
+H01657,residential_market_rent,rising,False,
+H02620,residential_market_rent,rising,False,
+H02448,residential_market_rent,rising,False,
+H02923,residential_market_rent,no_direction,True,"comparative snapshot between groups, no temporal trend stated"
+H01583,residential_market_rent,rising,False,
+H02693,residential_market_rent,rising,False,
+H02183,residential_market_rent,no_direction,True,"reports a rent level, no explicit change stated"
+H03181,residential_market_rent,rising,False,
+H00335,residential_market_rent,rising,False,
+H02106,residential_market_rent,rising,False,
+H02016,individual_tenant_landlord_case,not_applicable,True,first-person personal account
+H01751,residential_market_rent,rising,False,
+H02302,residential_market_rent,rising,False,
+H01623,residential_market_rent,rising,False,
+H00377,residential_market_rent,rising,False,
+H02480,residential_market_rent,rising,False,
+H02470,residential_market_rent,rising,False,
+H02820,other_irrelevant,not_applicable,True,"political rhetoric, no specific rent data"
+H02242,individual_tenant_landlord_case,not_applicable,True,specific court case
+H03198,residential_market_rent,stable,True,'remains over' indicates steady level
+H00195,individual_tenant_landlord_case,not_applicable,True,personal rent situation
+H02977,commercial_or_nonresidential,not_applicable,True,office space rent
+H03287,other_irrelevant,not_applicable,False,
+H02391,residential_market_rent,no_direction,False,
+H02682,other_irrelevant,not_applicable,False,
+H02887,unrelated_rent_usage,not_applicable,False,
+H02926,other_irrelevant,not_applicable,False,
+H00181,residential_market_rent,no_direction,False,
+H01140,residential_rent_policy,not_applicable,True,income-assistance clawback affecting rent affordability
+H00229,residential_market_rent,no_direction,False,
+H01829,residential_market_rent,no_direction,True,"burden statement, no trend"
+H00177,residential_market_rent,no_direction,False,
+H00220,unrelated_rent_usage,not_applicable,False,
+H01162,individual_tenant_landlord_case,not_applicable,True,personal rent situation
+H03333,residential_market_rent,no_direction,True,"cross-sectional comparison, not a trend"
+H01469,unrelated_rent_usage,not_applicable,False,
+H02694,residential_market_rent,no_direction,False,
+H01005,residential_market_rent,no_direction,False,
+H02379,residential_market_rent,no_direction,False,
+H03297,residential_market_rent,no_direction,True,affordability/burden statement
+H03126,unrelated_rent_usage,not_applicable,False,
+H00193,residential_market_rent,no_direction,False,
+H01358,other_irrelevant,not_applicable,True,"land/reconciliation metaphor, opinion"
+H03051,other_irrelevant,not_applicable,True,credit-building product advice
+H01648,other_irrelevant,not_applicable,True,generic buy-vs-rent finance advice
+H01967,residential_market_rent,no_direction,False,
+H02482,residential_market_rent,no_direction,False,
+H03252,other_irrelevant,not_applicable,True,credit-building advice
+H03097,other_irrelevant,not_applicable,True,"job recruitment perk (free rent), not market data"
+H02267,residential_market_rent,no_direction,True,affordability stat
+H02214,unrelated_rent_usage,not_applicable,False,
+H01237,unrelated_rent_usage,not_applicable,False,
+H02514,residential_market_rent,no_direction,False,
+H00204,unrelated_rent_usage,not_applicable,False,
+H00243,residential_market_rent,stable,True,asks why rent isn't falling despite vacancy rise; implies rent staying high
+H02026,residential_market_rent,no_direction,False,
+H00327,other_irrelevant,not_applicable,False,
+H00027,unrelated_rent_usage,not_applicable,True,TV show title
+H01207,commercial_or_nonresidential,not_applicable,True,non-profit office space lease
+H02059,other_irrelevant,not_applicable,True,"humor column, ambiguous meaning"
+H02998,unrelated_rent_usage,not_applicable,False,
+H01592,residential_market_rent,no_direction,False,
+H02711,residential_market_rent,no_direction,False,
+H02373,commercial_or_nonresidential,not_applicable,True,corporate office/booth rent
+H00025,unrelated_rent_usage,not_applicable,True,musical
+H00246,individual_tenant_landlord_case,not_applicable,True,rental listing scam case
+H03053,residential_market_rent,no_direction,False,
+H01036,individual_tenant_landlord_case,not_applicable,True,fraud case
+H03172,other_irrelevant,not_applicable,True,personal finance negotiation advice
+H00000,residential_market_rent,no_direction,False,
+H03142,residential_market_rent,stable,True,'remain' indicates steady high level
+H01459,residential_market_rent,rising,True,'moves up' to more expensive ranking implies rent increase
+H01370,residential_market_rent,no_direction,False,
+H00059,unrelated_rent_usage,not_applicable,False,
+H02314,unrelated_rent_usage,not_applicable,False,
+H02483,residential_market_rent,no_direction,True,affordability stat
+H01857,other_irrelevant,not_applicable,True,"contest giveaway, not market data"
+H00089,residential_market_rent,no_direction,False,
+H03345,residential_market_rent,rising,True,'Rising Toronto rent' explicit
+H00290,other_irrelevant,not_applicable,False,
+H01302,residential_rent_policy,not_applicable,True,political fallout from a rent-raising policy decision
+H02679,residential_market_rent,no_direction,True,"high rent cited as factor, no trend"
+H02755,unrelated_rent_usage,not_applicable,False,
+H02771,individual_tenant_landlord_case,not_applicable,True,"scam victims, personal cases"
+H00245,individual_tenant_landlord_case,not_applicable,True,rental listing scam
+H01457,individual_tenant_landlord_case,not_applicable,True,specific legal penalty case
+H00359,residential_market_rent,no_direction,False,
+H02721,residential_market_rent,no_direction,False,
+H02143,other_irrelevant,not_applicable,False,
+H01184,residential_market_rent,no_direction,False,
+H03385,other_irrelevant,not_applicable,False,
+H03366,commercial_or_nonresidential,not_applicable,True,arts studio space
+H00765,other_irrelevant,not_applicable,False,
+H01632,residential_market_rent,no_direction,True,burden statement
+H01555,residential_market_rent,no_direction,False,
+H02864,unrelated_rent_usage,not_applicable,False,
+H03243,other_irrelevant,not_applicable,True,credit-reporting product
+H02919,residential_market_rent,no_direction,True,burden/level statement
+H03152,other_irrelevant,not_applicable,False,
+H00273,unrelated_rent_usage,not_applicable,False,
+H03043,other_irrelevant,not_applicable,True,credit-building advice
+H02019,residential_market_rent,no_direction,True,affordability quote
+H03214,residential_rent_policy,not_applicable,True,political dispute over NYC rent policy (rent freeze context)
+H03219,residential_market_rent,no_direction,False,
+H00176,residential_market_rent,no_direction,False,
+H01797,other_irrelevant,not_applicable,False,
+H02239,individual_tenant_landlord_case,not_applicable,True,specific court case (duplicate)
+H02782,other_irrelevant,not_applicable,False,
+H01804,residential_market_rent,no_direction,True,"high rent cited, no trend direction"
+H01510,unrelated_rent_usage,not_applicable,False,
+H01701,residential_market_rent,no_direction,False,
+H00186,individual_tenant_landlord_case,not_applicable,True,specific org's own rent situation
+H00236,residential_market_rent,no_direction,False,
+H03258,residential_market_rent,stable,True,'still among cheapest' indicates continuity
+H00415,unrelated_rent_usage,not_applicable,False,
+H02142,other_irrelevant,not_applicable,True,"secondary-suite housing policy idea, not rent price/policy"
+H03355,residential_market_rent,no_direction,False,
+H02567,other_irrelevant,not_applicable,False,
+H00002,other_irrelevant,not_applicable,True,"societal commentary, no rent price data"
+H03340,commercial_or_nonresidential,not_applicable,True,nonprofit office building situation
+H00226,residential_market_rent,no_direction,False,
+H01353,other_irrelevant,not_applicable,False,
+H00160,residential_market_rent,no_direction,False,
+H00612,unrelated_rent_usage,not_applicable,False,
+H02733,residential_market_rent,no_direction,True,"vague column title, level only"
+H01060,unrelated_rent_usage,not_applicable,False,
+H01456,individual_tenant_landlord_case,not_applicable,True,penalty case (duplicate)
+H03001,unrelated_rent_usage,not_applicable,False,
+H02021,other_irrelevant,not_applicable,False,
+H01458,residential_rent_policy,not_applicable,True,affordable housing framed as election issue
+H01788,unrelated_rent_usage,not_applicable,False,
+H02404,individual_tenant_landlord_case,not_applicable,True,rental listing scam
+H01965,residential_market_rent,no_direction,False,
+H02478,residential_market_rent,no_direction,False,
+H02187,residential_market_rent,no_direction,False,
+H02626,residential_market_rent,no_direction,False,
+H00577,other_irrelevant,not_applicable,True,"political unrest story (China), not price data"
+H03133,unrelated_rent_usage,not_applicable,False,
+H03160,residential_market_rent,no_direction,True,"'high rents' level cited, insurance-advice framing"
+H01410,other_irrelevant,not_applicable,True,"rental listing ad, not market trend"
+H03329,other_irrelevant,not_applicable,False,
+H00185,residential_market_rent,no_direction,True,survey/affordability stat
+H02641,individual_tenant_landlord_case,not_applicable,True,"personal living/rent situation, advice column"
+H00094,residential_rent_policy,not_applicable,True,'Rent Control' explicitly named as topic
+H03087,other_irrelevant,not_applicable,True,"exploitative practice, not a price level"
+H03233,residential_market_rent,no_direction,False,
+H02751,other_irrelevant,not_applicable,False,
+H02944,other_irrelevant,not_applicable,True,credit card product feature
+H00403,residential_market_rent,no_direction,False,
+H00194,unrelated_rent_usage,not_applicable,False,
+H01092,other_irrelevant,not_applicable,True,payment product launch
+H02701,residential_market_rent,no_direction,False,
+H03228,other_irrelevant,not_applicable,True,"family living-arrangement strategy, not market data"
+H00162,residential_market_rent,no_direction,False,
+H02664,residential_market_rent,no_direction,False,
+H00087,other_irrelevant,not_applicable,False,
+H02866,residential_market_rent,stable,True,"'still too damn high' indicates persistence, not change"
+H00222,unrelated_rent_usage,not_applicable,False,
+H02449,residential_market_rent,no_direction,True,study finds no clear directional impact
+H01625,residential_market_rent,rising,True,'has become unaffordable' implies rent increased over time
+H01692,residential_market_rent,no_direction,False,
+H00363,individual_tenant_landlord_case,not_applicable,True,personal celebrity rent dispute claim
+H01003,residential_rent_policy,not_applicable,True,explicit rent-freeze policy
+H01600,other_irrelevant,not_applicable,True,product/service announcement
+H03256,residential_market_rent,no_direction,False,
+H02044,unrelated_rent_usage,not_applicable,False,
+H01631,residential_market_rent,no_direction,False,

@@ -1,0 +1,406 @@
+row_id,magnitude_context,historical_context,peak_context,current_level_context,affordability_context,contrasting_geography_context,numerical_context,rationale,direction_group
+H00111,False,False,False,False,False,True,False,Compares London's rents to other major cities.,falling
+H00159,False,True,False,False,False,True,False,Mentions a four-year high for vacancies and contrasting downtown Toronto condo rents.,falling
+H00596,True,False,False,False,False,False,False,Notes that rent is down slightly.,falling
+H00717,False,False,False,False,False,False,False,No specific context applied.,falling
+H00734,False,False,False,False,False,False,True,Includes a 14 per cent figure for the change.,falling
+H00775,False,False,False,False,False,False,False,No specific context applied.,falling
+H00784,False,False,False,False,False,False,False,No specific context applied.,falling
+H00786,False,False,False,False,False,False,False,No specific context applied.,falling
+H00800,False,False,False,False,False,False,True,Includes a 5.5 per cent numerical change.,falling
+H00824,False,False,False,False,False,False,False,No specific context applied.,falling
+H00834,False,False,False,False,False,False,False,No specific context applied.,falling
+H00873,False,False,False,False,False,False,False,No specific context applied.,falling
+H00875,False,False,False,False,False,True,False,Contrasts Vancouver drop with people choosing Burnaby.,falling
+H00953,False,False,False,False,False,False,False,No specific context applied.,falling
+H00954,False,False,False,False,False,False,False,No specific context applied.,falling
+H00955,False,False,False,False,False,False,False,No specific context applied.,falling
+H01043,False,False,False,False,False,False,False,No specific context applied.,falling
+H01048,False,False,False,False,False,False,False,No specific context applied.,falling
+H01051,False,False,False,False,False,False,True,Includes a numerical percentage figure of nearly 114 per cent.,falling
+H01052,False,False,False,False,False,False,True,Includes a numerical percentage figure of 114%.,falling
+H01053,False,False,False,False,False,False,False,No specific context applied.,falling
+H01054,False,False,False,False,False,False,True,Includes a numerical percentage drop of more than 16%.,falling
+H01062,False,False,False,False,True,False,False,Explicitly notes Toronto has not become more affordable.,falling
+H01082,False,False,False,False,False,False,False,No specific context applied.,falling
+H01104,False,False,False,False,False,False,True,Includes a numerical percentage drop of 17 per cent.,falling
+H01108,False,False,False,True,False,False,False,Headline notes rents remain high despite falling.,falling
+H01115,False,False,False,False,False,False,False,No specific context applied beyond direction of change.,falling
+H01154,False,False,False,False,False,False,False,No specific context applied.,falling
+H01167,False,False,False,False,False,False,True,Headline contains an explicit percentage figure for the rent change.,falling
+H01168,False,False,False,False,False,False,False,No specific context applied.,falling
+H01170,False,False,False,False,False,False,False,No specific context applied.,falling
+H01194,False,True,False,False,False,False,False,Headline explicitly mentions rent dropped to 2019 rates.,falling
+H01210,False,False,False,False,False,False,False,No specific context applied.,falling
+H01211,False,False,False,False,False,False,False,No specific context applied.,falling
+H01220,False,False,False,False,False,False,False,No specific context applied.,falling
+H01296,False,False,False,False,False,False,False,No specific context applied.,falling
+H01325,False,False,False,False,False,False,False,No specific context applied.,falling
+H01350,False,False,False,False,False,False,True,Headline includes an explicit percentage figure for price drops.,falling
+H01399,False,False,False,False,False,False,False,No specific context applied.,falling
+H01452,True,False,False,False,False,False,False,Headline specifies that rents are down slightly.,falling
+H01895,False,False,False,False,False,False,False,No specific context applied.,falling
+H02105,False,False,False,False,False,False,False,No specific context applied.,falling
+H02111,False,False,False,False,False,False,False,No specific context applied.,falling
+H02264,False,False,False,False,False,False,True,Headline contains an explicit dollar figure threshold.,falling
+H02366,False,False,False,False,False,False,False,No specific context applied.,falling
+H02424,False,False,False,False,False,False,True,Headline contains an explicit dollar figure threshold.,falling
+H02501,False,False,False,False,False,False,False,No specific context applied.,falling
+H02513,False,False,False,False,False,False,False,No specific context applied.,falling
+H02634,False,False,False,False,False,False,True,Headline contains an explicit dollar figure threshold.,falling
+H02642,False,False,False,False,False,False,False,No specific context applied.,falling
+H02649,False,False,False,False,False,False,True,Headline contains a numerical percentage for the rent change.,falling
+H02650,False,True,False,False,False,False,True,Headline includes a numerical percentage and historical reference to 15 years.,falling
+H02654,False,False,False,False,False,False,True,Headline contains a specific dollar amount for the rent drop.,falling
+H02667,False,True,False,False,False,False,False,Headline references a specific historical period (last spring).,falling
+H02692,False,False,False,True,False,False,True,Headline includes numerical context and references an all-time high.,falling
+H02705,False,True,False,False,False,False,False,Headline references a specific past year (2023).,falling
+H02707,False,False,False,False,False,False,False,Headline simply reports ongoing rent decreases without additional context.,falling
+H02734,False,True,False,False,False,False,False,Headline includes historical context relative to the last 3 years.,falling
+H02740,True,False,False,False,False,False,False,Headline mentions slowest annual growth in price hikes as magnitude context.,falling
+H02743,True,False,False,False,False,False,False,Headline explicitly characterizes the decrease as slight.,falling
+H02744,False,False,False,False,False,False,False,Headline reports consecutive months of drops without extra context.,falling
+H02765,False,True,False,False,False,False,False,Headline references a historical timeframe dating back to 2021.,falling
+H02766,False,True,False,False,False,False,False,Headline provides historical context spanning three years.,falling
+H02768,False,True,False,False,False,False,False,Headline provides historical context spanning three years.,falling
+H02769,False,True,False,False,False,False,False,Headline provides historical context spanning three years.,falling
+H02772,False,True,False,False,False,False,False,Headline provides historical context spanning three years.,falling
+H02793,False,False,False,True,False,False,False,Headline notes rents remained the highest in Canada.,falling
+H02814,False,False,False,False,False,False,False,Headline questions falling rent trends and mentions supply side.,falling
+H02871,False,False,False,False,False,False,False,Headline reports study findings on short-term rental restrictions.,falling
+H02872,False,False,False,False,False,False,False,Headline reports study findings on short-term rental restrictions.,falling
+H02873,False,False,False,False,False,False,False,Headline reports study findings on short-term rental rules.,falling
+H02874,False,False,False,False,False,False,False,Headline reports study findings on short-term rental restrictions.,falling
+H02901,False,False,False,False,False,False,False,Headline reports the beginning of a downward rent trend.,falling
+H02912,True,False,False,False,False,False,False,Headline cites a deceleration in momentum as magnitude context.,falling
+H02927,False,False,False,False,False,False,False,Headline states rents are falling and promises explanations.,falling
+H02938,False,False,False,False,False,False,False,No specific context types are present in this headline.,falling
+H02940,False,False,False,False,False,False,False,No specific context types are present in this headline.,falling
+H02941,False,False,False,False,False,False,False,No specific context types are present in this headline.,falling
+H02942,False,False,False,False,False,False,False,No specific context types are present in this headline.,falling
+H02943,False,False,False,False,False,False,False,No specific context types are present in this headline.,falling
+H02948,False,True,False,False,False,False,False,The headline references a 3-year historical timeframe.,falling
+H02980,False,False,True,False,False,False,False,The headline references a 15-month low.,falling
+H02981,False,False,False,False,False,False,True,The headline includes a specific dollar value for the change.,falling
+H02982,False,True,True,True,False,False,False,"Includes peak context (15-month low), historical context, and current level context.",falling
+H02983,False,False,False,False,False,False,False,No specific context types are present in this headline.,falling
+H02984,False,False,True,False,False,False,False,The headline references a 15-month low peak context.,falling
+H02985,False,False,False,False,True,False,False,The headline explicitly notes that affordability remains challenging.,falling
+H02987,False,False,False,False,False,False,False,No specific context types are present in this headline.,falling
+H03009,False,False,False,False,False,True,False,The headline contrasts multiple specific geography segments.,falling
+H03015,False,False,False,False,False,False,False,No specific context types are present in this headline.,falling
+H03016,False,False,True,False,False,False,False,The headline references a 17-month low peak context.,falling
+H03017,False,False,False,False,False,True,False,The headline contrasts Calgary's drop against the rest of Canada.,falling
+H03018,False,False,True,False,False,False,False,The headline references a 17-month low peak context.,falling
+H03020,False,False,False,False,False,False,False,No specific context types are present in this headline.,falling
+H03021,False,False,False,False,False,False,True,The headline provides a specific percentage change figure.,falling
+H03023,False,False,False,False,False,False,False,No specific context types are present in this headline.,falling
+H03027,False,False,False,False,False,False,False,No specific context types are present in this headline.,falling
+H03038,False,False,False,True,False,False,False,The headline explicitly mentions Canada's most expensive cities.,falling
+H03040,False,False,True,False,False,False,False,The headline frames the drop as falling from pandemic highs.,falling
+H03049,False,False,False,False,False,False,False,No specific context types are present in this headline.,falling
+H03052,False,False,False,False,False,False,False,Reports a national rent low without additional contextual qualifiers.,falling
+H03054,False,False,False,False,False,False,True,Includes a specific dollar figure for the rent level.,falling
+H03055,False,False,False,False,False,False,False,Reports a national rent low without additional context.,falling
+H03056,False,False,False,False,False,False,False,Notes a drop to a low without further contextual details.,falling
+H03075,False,False,False,False,True,False,False,Explicitly states that affordability remains elusive despite falling rents.,falling
+H03078,False,False,False,False,False,False,True,Includes a specific dollar figure for the average asking rent.,falling
+H03079,False,False,False,False,True,False,True,Includes a dollar drop and notes not everyone will feel relief.,falling
+H03080,False,False,False,False,False,False,True,Includes a specific dollar figure for average asking rents.,falling
+H03085,False,False,False,False,False,False,True,Includes an explicit percentage drop of 4.8%.,falling
+H03115,False,False,False,False,False,False,True,Includes a specific dollar amount for average asking rents.,falling
+H03116,False,False,False,False,False,False,True,Includes a specific dollar amount for average asking rents.,falling
+H03131,False,False,False,False,False,False,False,Reports falling rent prices in specific areas without extra context.,falling
+H03136,False,False,False,False,False,False,True,Includes a specific dollar amount for average asking rents.,falling
+H03139,False,False,False,False,False,False,False,Reports a rent drop in Toronto over the last year without extra context.,falling
+H03164,False,False,False,False,False,False,True,Includes a specific dollar figure for average asking rents.,falling
+H03165,False,False,False,False,False,False,True,Includes a specific dollar figure for average asking rents.,falling
+H03170,False,False,False,False,True,False,False,Explicitly highlights poor affordability and debt burdens despite lower rents.,falling
+H03192,False,True,False,False,False,False,False,Explicitly notes that rents remain above 2022 levels.,falling
+H03194,False,False,False,False,True,False,False,Notes that coming down rates do not bring relief for everyone.,falling
+H03195,False,False,False,False,True,False,False,Explicitly states tenants are not feeling relief despite easing rents.,falling
+H03196,False,False,False,False,False,False,False,Reports on immigration caps contributing to lower rents without extra context.,falling
+H03197,False,False,False,False,False,False,False,Reports Vancouver rents dropping as the major metro market softens.,falling
+H03203,False,False,False,False,False,False,False,Frames falling rents as a good home-buying opportunity without specific contexts.,falling
+H03210,False,False,False,False,False,False,True,Includes a specific dollar figure for average asking rents.,falling
+H03211,False,False,False,False,False,False,True,Includes a specific dollar figure for average asking rents.,falling
+H03212,False,False,False,False,False,False,False,Reports cooling rents without any specific additional contexts.,falling
+H03229,False,False,False,False,False,False,False,Notes incentives and vacancy rates without explicit rent change contexts.,falling
+H03238,False,False,False,False,False,False,False,Reports falling rents for 11 straight months without extra context.,falling
+H03239,False,False,False,False,False,False,True,Includes a numerical percentage figure for the rent dip.,falling
+H03241,False,False,False,False,False,False,False,Mentions regional leadership in rent decline without extra context.,falling
+H03259,False,False,False,False,False,False,True,Includes an explicit dollar figure for asking rents.,falling
+H03270,True,False,False,False,False,False,False,Uses the magnitude term 'rapidly' to describe rent easing.,falling
+H03273,False,False,False,False,False,False,False,Reports rent dips and immigration slowing without further context.,falling
+H03278,False,False,False,False,False,False,True,Includes an explicit dollar figure for October asking rents.,falling
+H03279,False,True,False,False,False,False,False,Provides historical context by citing a 40-month low.,falling
+H03289,False,False,False,False,False,False,False,Discusses student caps lowering rents without specific comparative contexts.,falling
+H03301,False,False,False,False,False,False,True,Includes an explicit dollar figure for November asking rents.,falling
+H03302,False,False,False,False,False,False,False,Notes falling rents and condo seller behavior without explicit contexts.,falling
+H03304,False,False,False,False,False,False,False,Reports falling rents impacting REITs without specific rental contexts.,falling
+H03306,False,False,False,False,False,False,False,Reports B.C. rent declines leading jurisdictions without extra context.,falling
+H03307,False,False,False,False,False,False,True,Includes an explicit percentage figure for provincial rate dips.,falling
+H03314,False,False,False,False,False,False,False,Mentions falling rents as part of general optimism for 2026.,falling
+H03319,False,False,False,False,False,False,False,Reports annual rent drops without quantitative or comparative context.,falling
+H03320,False,False,False,False,False,False,False,Reports year-over-year rent declines without explicit extra contexts.,falling
+H03321,False,False,False,False,False,False,True,Includes an explicit approximate dollar figure for December rents.,falling
+H03324,False,False,False,False,False,False,False,Notes falling rents and warning signs without explicit contexts.,falling
+H03334,False,False,False,False,False,False,False,Reports dropping rents offering relief without explicit criteria.,falling
+H03351,False,False,False,False,False,False,True,Includes an explicit monthly dollar figure for Toronto asking rents.,falling
+H03353,False,False,False,False,False,False,False,Reports consecutive months of falling rents without additional context.,falling
+H03354,False,False,False,False,False,False,False,Reports consecutive months of falling rents without additional context.,falling
+H03357,False,False,False,False,False,False,False,No specific context dimensions apply to this headline.,falling
+H03358,False,False,False,False,False,False,False,No specific context dimensions apply to this headline.,falling
+H03372,False,False,False,False,False,False,True,Includes numerical context with a dollar figure for asking rent.,falling
+H03373,False,False,False,False,False,False,False,No specific context dimensions apply to this headline.,falling
+H03374,False,True,False,False,False,False,False,Provides historical context by citing a 33-month low.,falling
+H03375,False,False,False,False,False,False,False,No specific context dimensions apply to this headline.,falling
+H03379,False,False,False,True,False,False,False,Provides current level context by asking why it still feels so expensive.,falling
+H03168,False,False,False,False,True,False,False,"The headline notes that tenants remain vulnerable, indicating lingering affordability concerns despite rent decreases.",falling
+H03019,False,False,False,False,False,False,False,Reports basic change in rural Alberta without extra context.,rising
+H00323,False,False,False,False,True,False,False,Mentions once affordable status implying affordability loss.,rising
+H02157,False,False,False,False,False,False,False,Discusses rent control or blame without analytical context metrics.,rising
+H02149,False,False,False,False,False,False,False,"Notes tightest market in nearly a decade, but lacks specific rent context features.",rising
+H01581,False,False,False,False,False,True,False,Compares Vancouver's jump against other major Canadian cities.,rising
+H01714,False,False,False,False,False,False,True,Contains an explicit 20% numerical figure for the increase.,rising
+H00349,False,False,False,False,False,False,False,Reports Ottawa vacancy and rent direction using a conjunction.,rising
+H02596,False,True,False,False,False,False,True,Provides a three-year historical timeframe and 40% numerical figure.,rising
+H01751,False,False,False,False,False,True,False,Compares Windsor's rent jump against the rest of the country.,rising
+H00088,False,False,False,False,False,False,False,Notes partial rent increase without additional metrics.,rising
+H00066,True,False,False,False,False,False,False,Uses the word 'slightly' to indicate magnitude context.,rising
+H02002,False,False,False,False,False,False,True,Includes an explicit 23.5 per cent numerical figure.,rising
+H01960,False,False,False,False,False,False,False,Describes artists being forced out by soaring rents without targeted context fields.,rising
+H00155,False,False,False,False,False,False,False,Mentions a record apartment surge rather than rent peak or magnitude.,rising
+H01483,False,False,False,True,False,False,False,Explicitly notes rent rates are highest and most expensive.,rising
+H02127,False,False,False,False,False,True,False,Compares Halifax's year over year rent increase to other Canadian cities.,rising
+H02448,False,False,False,False,True,False,True,Provides an 11% numerical figure and notes that even roommates do not help.,rising
+H02474,False,False,False,False,False,False,False,Discusses landlord rent increases above caps without specific contextual categories.,rising
+H01765,False,True,False,False,False,False,False,References a historical timeframe of more than three years.,rising
+H02583,True,False,False,False,False,False,False,Explicitly states that Hamilton rents grew 'slightly'.,rising
+H02897,True,False,False,False,False,False,False,Explicitly states that Canada's rent growth 'slows'.,rising
+H01391,False,False,False,False,False,False,False,Calls for action on housing and skyrocketing rents without specific contextual markers.,rising
+H01281,False,False,False,False,False,False,False,Reports on a protest over rising rents without specific context flags.,rising
+H03384,False,False,False,False,True,False,False,"Notes that soaring rents deepen the poverty crisis, implying poor affordability.",rising
+H03171,True,False,False,False,False,False,False,Explicitly notes a 'modest' increase in Niagara rents.,rising
+H02294,False,False,False,False,False,False,True,Headline contains a numerical percentage figure for the rent increase.,rising
+H01422,False,True,False,False,False,False,False,Headline references pre-pandemic levels as a historical context point.,rising
+H02462,False,False,False,False,False,False,False,Headline notes multiple housing issues without explicit contextual markers for rent trends.,rising
+H01874,False,False,False,False,False,False,False,Headline discusses home ownership impact without specific rent context types.,rising
+H02447,False,False,True,False,False,False,False,"Headline mentions a nine-month high, providing peak context.",rising
+H03010,False,False,False,True,False,False,False,Headline states that high rents persist despite changing vacancies.,rising
+H01875,False,False,False,False,False,False,False,Headline reports lagging benefits as rents explode without specific contextual types.,rising
+H00333,False,False,False,False,False,False,False,Headline discusses impact on the poor without explicit contextual markers.,rising
+H02972,False,True,False,False,False,False,True,Headline provides a numerical percentage and historical context about the past decade.,rising
+H00360,False,False,False,False,False,False,False,Headline compares rent rise to general inflation.,rising
+H02131,False,False,False,False,False,False,False,Headline focuses generally on rent control and surging prices.,rising
+H00019,False,False,False,False,False,False,False,Headline poses a question about a development project and rent.,rising
+H00449,False,False,False,False,False,False,False,Headline discusses COVID-19 struggles and renters seeking protection.,rising
+H02376,False,False,True,False,False,False,False,Headline explicitly states that rent hit a new high.,rising
+H01993,False,False,False,False,False,False,False,Headline notes data on condo rent rising without specific context types.,rising
+H03128,True,False,False,False,False,False,False,"Headline notes the pace of rent increases slows, providing magnitude context.",rising
+H03145,False,False,False,False,False,False,False,Headline blames corporate property owners for rent increases.,rising
+H00300,False,True,False,False,False,False,False,Headline references a historical year (1991) for context.,rising
+H02538,False,False,False,False,False,False,False,Headline simply reports that rent prices climb in Windsor.,rising
+H01716,False,True,False,False,False,False,True,Headline contains a numerical percentage and historical reference to last year.,rising
+H00337,False,False,False,False,False,False,False,Headline presents a reader letter complaining about out-of-control rents.,rising
+H01745,False,False,False,False,False,False,False,Headline uses descriptive idiom about soaring inflation and rent.,rising
+H01968,False,False,False,False,False,False,False,Headline discusses housing supply and rising rent costs in Windsor-Essex.,rising
+H00346,False,False,False,False,False,True,True,Headline includes a percentage for vacancy rate and contrasts it with skyrocketing rents.,rising
+H01975,False,False,False,False,True,False,False,Headline explicitly states tenants are squeezed by soaring rents.,rising
+H03011,False,False,False,False,False,False,False,The headline reports vacancies surging while rents keep rising without any additional context.,rising
+H02247,False,False,False,False,False,False,True,The headline includes an explicit percentage figure for the rent increase.,rising
+H01760,False,False,False,False,False,False,False,The headline reports rising prices causing concerns without specific contextual data.,rising
+H00401,False,False,False,False,False,False,False,The headline notes soaring median rent reflecting a hot market without extra context.,rising
+H01454,False,False,False,True,False,False,False,"The headline notes Kelowna is the fifth most expensive rental market, providing current level context.",rising
+H02049,False,False,False,False,False,False,True,The headline includes a specific percentage figure and year for the average rent increase.,rising
+H03177,False,True,False,False,False,False,True,The headline includes a percentage change and spans a six-year historical timeframe.,rising
+H02712,False,False,False,False,False,False,False,The headline describes rent prices as out of control according to a tenant group.,rising
+H01992,False,False,False,False,False,False,False,The headline mentions rising rent fears despite government efforts.,rising
+H02340,False,False,False,False,False,False,False,The headline reports soaring rent prices across regions without specific extra context.,rising
+H00304,False,True,False,False,False,False,False,The headline references a one-year timeframe following a policy change.,rising
+H01489,False,False,False,True,False,False,False,The headline provides current level context by listing Kelowna as the 4th most expensive place.,rising
+H00017,False,False,False,True,False,False,True,The headline includes percentage figures and identifies Toronto as having the highest rents.,rising
+H02353,False,False,False,False,True,False,False,The headline provides affordability context by stating rent prices keep workers from making ends meet.,rising
+H01814,False,False,False,False,False,False,False,The headline reports a sharp jump in Toronto rents echoing other cities.,rising
+H02662,False,False,False,False,False,False,False,The headline identifies Saskatchewan as a new frontier for rising rents.,rising
+H01767,False,True,False,False,False,False,True,The headline includes a 20 per cent figure and a last year historical timeframe.,rising
+H02378,False,False,True,False,False,False,False,The headline frames rent as hitting a new high in July.,rising
+H02900,True,False,False,False,False,False,True,The headline includes a percentage rise and reports a slowing trend for magnitude context.,rising
+H02788,True,False,False,True,False,False,True,"The headline notes a dollar level, a slowing growth pace, and that average rent tops a threshold.",rising
+H02086,False,False,False,True,False,False,False,The headline highlights having the 8th highest average rent as unacceptable.,rising
+H01877,False,False,False,False,False,False,False,The headline reports housing benefits lagging as rents explode.,rising
+H03076,False,False,False,False,False,False,False,The headline notes officials looking into major rent increases post-wildfire.,rising
+H00394,False,False,False,False,False,False,False,The headline records Victoria and Abbotsford as having the biggest jumps nationwide.,rising
+H00146,False,False,False,False,True,False,False,The headline provides affordability context by stating rent increases could leave tenants on streets.,rising
+H01681,False,False,True,False,False,False,False,The headline explicitly mentions rents soaring to record highs.,rising
+H02184,False,False,False,False,False,False,True,The headline contains an explicit percentage figure for the increase.,rising
+H02669,False,False,False,False,False,False,False,The headline simply reports rising rent trends without specific contextual details.,rising
+H00900,False,False,False,False,True,False,False,The headline includes a quote highlighting that the renter cannot afford to live there.,rising
+H02244,False,False,False,False,False,False,False,The headline reports strong rent growth without additional specified contexts.,rising
+H00345,False,False,False,False,False,False,False,"The headline notes the fastest rate in a decade, but lacks the specific named historical context.",rising
+H02532,False,False,True,False,False,False,False,The headline references the lowest vacancy rate on record.,rising
+H01801,False,False,False,False,False,False,True,The headline provides an explicit percentage increase for the rents.,rising
+H01622,False,False,False,False,False,False,True,The headline includes an explicit percentage figure for the average rent increase.,rising
+H00095,False,False,False,True,False,False,False,The headline explicitly notes Vancouver has the highest rents.,rising
+H02468,False,False,True,False,False,False,False,The headline explicitly states average rent reaches new records.,rising
+H02292,False,False,False,False,False,False,False,The headline reports higher rents and a tight new rental market era.,rising
+H03002,False,False,False,False,False,False,False,The headline identifies towns with the biggest rent increases.,rising
+H02880,False,False,False,False,True,False,False,The headline explicitly states that students are struggling through rising costs.,rising
+H02291,False,True,False,False,False,False,False,The headline explicitly compares current average rent to pandemic lows.,rising
+H01628,False,False,False,True,False,False,False,The headline explicitly describes rents reaching insane levels.,rising
+H00940,False,False,False,True,False,False,False,The headline explicitly describes Hamilton rents as sky-high.,rising
+H01925,False,False,False,False,False,False,False,The headline reports a double-digit increase in rent rates.,rising
+H02994,False,False,False,False,False,False,False,The headline contrasts vacancy rates going up with rent going up.,rising
+H02470,False,False,True,False,False,False,False,The headline explicitly states that rents reach record highs.,rising
+H02896,True,False,False,False,False,False,True,The headline explicitly notes a monthly slowdown and gives a percentage.,rising
+H02339,False,False,True,False,False,False,False,The headline explicitly states average rent hits a record high.,rising
+H01945,False,False,False,False,False,False,True,The headline contains an explicit percentage figure for the year-over-year jump.,rising
+H01881,False,False,True,False,False,False,False,The headline explicitly states rent prices reached a new high.,rising
+H00142,False,False,False,False,False,False,False,The headline discusses low vacancy rates leading to higher rent.,rising
+H01179,False,False,False,False,False,False,False,The headline lacks any specific contextual markers.,rising
+H02504,False,False,False,False,False,True,False,It contrasts Quebec rent increases with the rest of the country.,rising
+H01739,False,False,False,False,False,False,True,It includes an explicit percentage and timeframe for the increase.,rising
+H02350,False,False,False,False,True,False,False,It highlights poor affordability by showing rents dwarf minimum wage.,rising
+H02351,False,False,False,False,True,False,True,It provides a dollar figure and highlights poor affordability.,rising
+H00738,False,True,False,False,False,False,True,It includes historical comparison to 2019 and a percentage figure.,rising
+H02695,False,False,False,False,False,False,False,It notes large gains in Saskatchewan without specific metrics.,rising
+H02638,False,False,False,False,False,False,False,It reports heavy increases without quantitative or comparative context.,rising
+H03105,False,False,False,False,False,False,False,It notes a dramatic rent triple without standard contextual categories.,rising
+H02125,False,False,False,False,True,False,False,It addresses affordability burdens hitting seniors due to costs.,rising
+H00395,False,False,False,False,False,True,False,It contrasts national jumps by highlighting specific leading cities.,rising
+H03077,False,False,False,False,False,False,False,It mentions major post-wildfire increases without specific metrics.,rising
+H01630,False,False,False,False,False,False,False,It mentions vacancy rates alongside rent increases without other context.,rising
+H00980,False,False,False,False,False,False,False,It describes enormous rises and anti-poverty calls without specific context.,rising
+H01284,False,False,False,True,False,False,False,It explicitly states Kelowna is among the most expensive locations.,rising
+H02856,False,False,False,False,False,False,True,It includes a numerical dollar threshold for monthly rent.,rising
+H02526,False,False,True,False,False,False,False,It explicitly frames the prices as hitting a new record peak.,rising
+H02576,False,False,False,False,False,False,True,It provides a specific dollar figure for average asking rent.,rising
+H01862,False,False,False,False,False,False,False,It mentions a rise in Ontario without giving the actual figure.,rising
+H01698,False,False,False,False,True,False,False,It highlights college students being squeezed by housing costs.,rising
+H02033,False,False,False,False,False,False,True,It includes both a percentage change and a dollar figure.,rising
+H02486,False,False,False,False,False,False,True,It includes a percentage figure for recent provincial rent increases.,rising
+H02537,False,False,True,False,False,False,True,It includes a record-setting peak framing and a percentage figure.,rising
+H03309,True,False,False,False,False,False,False,It explicitly reports that rent growth slowed down.,rising
+H02073,False,False,True,False,False,False,False,It explicitly mentions rental prices hitting a record high.,rising
+H01708,False,False,False,False,False,False,False,This headline mentions demand and supply drivers but provides no contextual metrics.,rising
+H02853,False,False,False,False,False,True,False,It contrasts smaller markets with larger ones regarding rent increases.,rising
+H01991,False,False,False,False,False,False,True,It provides a 20% numerical increase figure.,rising
+H02665,False,False,False,False,False,False,False,This headline is a quiz prompt with no specific rent context.,rising
+H01661,False,False,False,False,False,False,True,It includes a 23 per cent numerical change.,rising
+H02575,False,False,False,False,False,False,True,It provides dollar and percentage figures for asking rents.,rising
+H02691,False,False,True,False,False,False,True,It notes a record rent level and includes a dollar figure.,rising
+H01584,False,False,False,False,False,False,False,It mentions general worry about rising prices without specific rent metrics.,rising
+H02715,True,False,False,False,False,False,False,It explicitly describes the rent rise as slight.,rising
+H02620,False,False,False,False,False,False,False,This headline focuses on U.S. inflation rather than specific rent context.,rising
+H02741,True,False,False,False,False,False,True,It notes that price growth slows and provides a 7% numerical figure.,rising
+H00335,False,False,False,False,True,True,False,It contrasts affordability across Canadian cities while highlighting affordability status.,rising
+H02093,False,False,False,True,False,False,False,It explicitly states that rents are kept high.,rising
+H02141,False,False,False,False,False,False,False,It simply reports that Calgary rents rose to start the year.,rising
+H02581,False,False,False,False,False,True,False,It contrasts Toronto with other cities experiencing rent spikes.,rising
+H01624,False,False,False,False,False,False,False,It mentions market tightness due to supply and demand.,rising
+H00377,False,False,False,False,True,False,False,It highlights seniors growing fearful regarding skyrocketing rent.,rising
+H02336,False,False,False,False,True,False,False,It mentions a push for affordable housing as rents rise.,rising
+H02132,False,False,False,False,False,False,False,It reports ongoing rent increases without additional context.,rising
+H00020,False,False,False,False,False,False,False,It reports rising rents and dipping vacancies in Calgary.,rising
+H02166,False,False,False,False,False,False,True,It provides a specific dollar figure for average rent.,rising
+H00351,False,False,False,False,False,False,False,It reports tight vacancies and higher rents alongside more units.,rising
+H00205,False,False,False,False,False,False,False,It states that asking rents in Alberta increased.,rising
+H02352,False,False,False,False,True,False,False,It highlights workers' worsening struggle to pay rent.,rising
+H01594,False,False,False,False,False,False,False,It simply notes rental prices are up in December.,rising
+H01964,False,False,False,False,False,False,True,The headline includes an explicit percentage figure for the annual rent increase.,rising
+H02436,False,True,False,False,False,False,False,The headline provides historical context by comparing current rent rises to the 1970s.,rising
+H02518,False,False,False,False,False,False,False,The headline only reports the ongoing upward direction of rents without additional context.,rising
+H02342,False,False,False,True,False,False,False,The headline indicates current rent levels are at an all-time high.,rising
+H01979,False,False,False,False,False,False,False,The headline simply states that rents are continuing to rise in Niagara.,rising
+H02488,False,False,False,False,False,False,False,The headline poses a rhetorical question about neighborhood rents without providing specific context.,rising
+H01990,False,False,False,False,False,False,True,The headline includes an explicit percentage figure for the condo rent increase.,rising
+H01901,False,False,True,False,False,False,True,Mentions a record high and a dollar figure.,rising
+H02091,False,False,False,True,False,False,False,Highlights ever-increasing rents.,rising
+H01799,False,False,False,False,False,True,False,Compares Toronto and Vancouver.,rising
+H03191,False,False,False,False,False,False,False,Questions why prices are soaring despite rent control.,rising
+H00347,False,False,False,False,False,False,True,Includes a numerical dollar figure.,rising
+H02112,False,False,False,False,False,False,True,Includes a specific percentage increase.,rising
+H00187,False,False,False,True,False,False,False,Notes that high rents put housing out of reach.,rising
+H02502,False,False,True,False,False,False,True,Mentions a percentage and the highest reported level.,rising
+H02746,False,False,False,False,False,False,False,Reports rent climbing in Calgary without extra context.,rising
+H03205,False,False,False,False,False,False,False,Reports on trapped homeowners due to rising lot rents.,rising
+H01557,False,False,False,False,False,False,False,Reports continued rising and a forecast.,rising
+H02621,False,False,False,False,False,False,False,Connects rents to US inflation.,rising
+H02076,False,False,True,False,False,False,True,Mentions a record dollar figure.,rising
+H02420,False,False,True,False,False,False,True,Notes a record hit with a dollar figure.,rising
+H02085,True,False,False,False,True,False,False,Describes rents as creeping up but still affordable.,rising
+H01742,False,False,False,False,False,False,False,Reports that average rent jumped.,rising
+H02536,False,False,True,False,True,False,False,Mentions record-high rents and a housing crisis.,rising
+H03069,False,False,False,False,False,False,True,Includes a 35% hike and six-year timeframe.,rising
+H02275,False,False,False,False,False,False,False,Mentions rent driving inflation.,rising
+H01540,False,False,False,False,True,False,False,Notes international students struggling to find rooms.,rising
+H02479,False,False,True,False,False,False,False,Reports a new high for six consecutive months.,rising
+H02296,True,False,False,False,False,False,False,Notes that rent growth is slowing.,rising
+H02375,False,False,True,False,False,False,False,Reports that rent hit a new high.,rising
+H01831,False,False,True,False,False,True,False,Notes record highs alongside a weakening housing market.,rising
+H02302,False,False,False,False,False,False,True,Includes an explicit 15% annual increase figure.,rising
+H03193,False,False,False,False,True,False,False,Affordability context applies as it notes Red Deer is affordable despite rising rents.,rising
+H03222,False,False,False,False,True,False,False,Affordability context applies due to the extreme financial burden left by rent hikes.,rising
+H01764,False,False,False,False,False,True,False,Contrasting geography context applies by comparing Quebec regions.,rising
+H02405,False,False,True,False,False,False,False,Peak context applies as it notes rent reached an all-time high.,rising
+H02992,True,False,False,False,False,False,False,Magnitude context applies because it reports rent growth is cooling.,rising
+H02830,False,False,False,False,False,False,False,No context criteria apply.,rising
+H02480,False,False,False,False,False,False,False,No context criteria apply.,rising
+H00170,False,False,False,False,True,False,False,Affordability context applies as rising rents hit minimum-wage earners.,rising
+H01672,False,False,False,False,True,False,False,Affordability context applies due to the burden on food bank visits from rent increases.,rising
+H01647,False,False,False,False,True,False,False,Affordability context applies as soaring rents trap tenants and burden new neighbours.,rising
+H01006,False,False,False,True,False,False,False,Current level context applies as it states rent is too high.,rising
+H00350,False,False,False,False,False,False,False,No context criteria apply.,rising
+H02186,False,False,False,False,False,False,True,Numerical context applies due to the explicit 20.5 percent figure.,rising
+H00102,False,False,False,False,False,False,False,No context criteria apply.,rising
+H02079,False,False,False,True,False,False,True,Numerical and current level context apply as it gives a dollar threshold.,rising
+H02277,False,False,False,True,False,False,True,Numerical and current level context apply with percentage and price figures.,rising
+H01512,False,False,False,False,False,False,False,No context criteria apply.,rising
+H02763,False,False,False,False,True,False,False,Affordability context applies as sky-high rents force creative hardship adaptations.,rising
+H01105,False,False,False,False,True,False,False,Affordability context applies as skyrocketing rents create hardship.,rising
+H02403,False,False,False,False,False,False,False,No context criteria apply.,rising
+H02172,False,False,False,False,False,False,False,No context criteria apply.,rising
+H02967,False,False,False,True,True,False,False,Current level and affordability contexts apply due to mention of high rents and housing crunch.,rising
+H02300,False,False,False,False,False,False,True,Numerical context applies due to the explicit 25% figure.,rising
+H03181,False,True,False,False,False,False,True,Numerical and historical context apply by comparing rents over a six-year period.,rising
+H00143,False,False,False,False,False,False,False,No context criteria apply.,rising
+H01234,False,False,False,False,False,False,False,The headline reports tenant displacement without explicit rent context metrics.,rising
+H03147,False,False,False,False,False,False,False,It discusses financial firms driving up rents without additional context dimensions.,rising
+H01738,False,True,False,False,False,False,False,It references historical context by mentioning 2019.,rising
+H02030,False,False,False,False,False,False,True,It provides a specific dollar figure of $2K a month.,rising
+H00945,False,False,False,False,False,True,False,It uses contrasting geography by noting Hamilton is one of just 10 cities to see jumps.,rising
+H02690,False,False,True,False,False,False,False,It frames the change relative to a new record high.,rising
+H03149,False,False,False,False,False,True,False,It contrasts Toronto landlord behavior with other landlords.,rising
+H02032,False,False,False,False,False,False,False,It only states year-over-year rent increases without extra context.,rising
+H00588,True,False,False,False,False,False,False,It explicitly describes the rent increase as slight.,rising
+H01808,False,False,False,False,True,False,False,"It explicitly notes that rising rents are pricing families out, indicating affordability issues.",rising
+H01323,False,False,False,False,False,False,False,It poses a question about whether rents hit the floor without other context criteria.,rising
+H03070,False,False,False,False,False,False,False,It notes rent control exemptions and soaring rents without meeting specific context definitions.,rising
+H02236,False,False,True,False,False,False,True,"It hits a record level and includes a specific dollar figure of $3,000.",rising
+H02739,True,False,False,False,False,False,True,It notes growth slows (magnitude) and gives a specific dollar and percentage figure.,rising
+H03345,False,False,False,False,False,False,False,It links rising rent to a dating trend without specific context variables.,rising
+H02533,False,False,False,True,False,True,False,It highlights Vancouver having the highest rents nationally through current-level and contrasting geography context.,rising
+H02572,True,False,False,False,False,False,False,It explicitly states that apartment rents increase slightly.,rising
+H01694,False,False,False,True,False,False,False,"It indicates no relief for soaring rents, reflecting current level context.",rising
+H02189,False,False,False,False,False,False,False,It simply states annual average rents are up.,rising
+H02525,False,True,False,False,False,False,False,It references historical context by mentioning 1988.,rising
+H00933,False,False,False,False,False,False,False,It mentions rents still on the rise with a generic hedge word without meeting specific sub-criteria.,rising
+H01625,False,False,False,False,True,False,False,It explicitly highlights how unaffordable rent has become.,rising
+H02709,False,True,False,False,False,False,True,It includes a 27 per cent figure and references a 4-year historical period.,rising
+H02161,False,False,False,False,False,False,False,It reports soaring rents due to an undercounted surge of people.,rising
+H00344,False,False,False,False,False,False,False,It mentions more apartments at a higher cost using a generic contrasting word without specific qualifying context.,rising
+H02151,False,False,False,True,False,False,False,"Headline notes rents are out of control, providing current level context.",rising
+H01755,False,False,False,False,False,False,False,Reports rising rents without any additional context.,rising
+H01657,False,True,False,False,False,False,True,Provides a percentage change and compares it to last March.,rising
+H00409,False,False,False,False,False,False,False,Simply notes the climbing average rent.,rising
+H02084,False,False,False,False,False,False,False,Reports skyrocketing rents and prices in Turkey without special context.,rising
+H02121,False,False,True,False,False,False,False,Frames the growth pace as a record.,rising
+H00372,False,False,False,False,False,False,False,Reports direction of rent and vacancy changes.,rising
+H00216,False,False,False,False,False,False,False,Mentions resident fears regarding rent and evictions.,rising
+H01891,True,False,False,False,False,False,False,"Explicitly states rents are increasing less than expected, giving magnitude context.",rising
+H01885,False,False,False,False,True,False,False,Indicates extreme affordability pressure pushing students to shelters.,rising
+H02150,False,False,False,False,False,False,False,Attributes rent increases to vacation rentals.,rising
+H02356,False,False,False,False,True,False,False,Explicitly highlights poor affordability relative to minimum wage.,rising
+H02428,False,False,True,False,False,False,False,Notes that prices hit new highs.,rising
+H02516,False,False,False,False,False,False,True,Contains an explicit 9% surge figure for the year.,rising
+H01980,False,False,False,False,False,True,True,Provides a 33% numerical figure and compares it nationally as the biggest increase.,rising
