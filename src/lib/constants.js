@@ -57,3 +57,9 @@ export const SPIKE_LEGEND_TITLES = {
     excess_2011_2018: '% increase in monthly rent beyond rent control, 2018 vs. 2011, excluding inflation',
     excess_2018_2025: '% increase in monthly rent beyond rent control, 2025 vs. 2018, excluding inflation',
 };
+
+// Map style options for the falling-rents net-change map
+export const MAP_STYLE_OPTIONS = [
+    { label: 'Spike map', value: 'spike' },
+    { label: 'Arrow map', value: 'arrow' },
+];
