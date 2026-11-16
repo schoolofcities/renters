@@ -8,6 +8,7 @@ data/statscan-quarterly-rental-raw
 
 analysis/falling-rents/headline_coding
 analysis/falling-rents/peak_to_latest_summary.csv
+analysis/ownership-management
 
 # SvelteKit
 .svelte-kit/
@@ -28,3 +29,5 @@ node_modules/
 # OS
 .DS_Store
 Thumbs.db
+# Ownership & management consolidation (raw downloads + derived data)
+data/ownership-management

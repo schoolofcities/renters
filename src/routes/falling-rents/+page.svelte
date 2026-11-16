@@ -56,7 +56,7 @@
 				The map shows the net percentage change in the asking rent for a two-bedroom apartment between the first quarter of 2019 and the first quarter of 2026. This is a net change across the whole period, not the decline from each city's peak. Cities need at least eight quarters of data and a first-quarter 2019 value to be included, which leaves out Saguenay and Trois-Rivières. The Canada-wide figure uses Statistics Canada's own aggregate across all census metropolitan areas.
 			</p>
 			<p>
-				Spikes and arrows are drawn at city-centre points, and the provincial boundaries are simplified. The map is cropped north of the cities in the data, and the inset enlarges the Windsor to Québec City corridor, where cities are too close together to read at national scale. Ottawa and Gatineau, two halves of one metropolitan area about four kilometres apart, are nudged apart so both remain visible.
+				Arrows are drawn at city-centre points and grouped into four size classes (under 25 per cent, 25–50, 50–75, and 75 or more), and the provincial boundaries are simplified. The map is cropped north of the cities in the data, and three insets enlarge Southern British Columbia, Southern Ontario with Ottawa, and Southern Québec, where cities are too close together to read at national scale. Ottawa and Gatineau, two halves of one metropolitan area about four kilometres apart, are nudged apart so both remain visible.
 			</p>
 			<p>
 				You can find all the data and code for this article on our <a href="https://github.com/schoolofcities/renters" target="_blank">GitHub repository</a>.

@@ -1,19 +1,22 @@
 <script>
-    import { geoIdentity, geoPath, scaleLinear } from 'd3';
+    import { geoIdentity, geoPath } from 'd3';
     import MapTooltip from '$lib/maps/MapTooltip.svelte';
 
     let {
         frames,              // [{ id: 'main', ... }, { id: 'bc' | 'on' | 'qc', fit, extent, region, rotation, order, row, ... }] — see the plotting-data notebook
         cities = [],         // [{ city, pct_change, base_rent, latest_rent }]; frame points index into this
-        mode = 'spike',      // 'spike' | 'arrow'
         tiltDeg = 15,        // arrow lean from vertical, clockwise (chosen in the notebook by minimising arrow overlaps)
-        maxValue = 100,      // value that maps to the longest spike / arrow; shared by every frame so lengths are comparable
-        keyValues = [25, 50, 100],
+        keyTitle = 'Net change in asking rent, %',
+        classBreaks = [25, 50, 75],   // % change thresholds between the size classes (4 classes → 3 breaks)
         ariaLabel = 'Map of net change in asking rents by city',
         descriptor = '',     // shown in tooltip, e.g. "Q1 2019 – Q1 2026"
     } = $props();
 
-    const COLOR             = '#d73256';
+    // Four size classes: arrows get longer, thicker and darker with the class. Light → dark single-hue ramp.
+    const CLASS_COLORS      = ['#ec8aa0', '#dc5577', '#bf2150', '#7e1234'];
+    const CLASS_LEN_FRAC    = [0.36, 0.58, 0.80, 1];    // share of the longest arrow length
+    const CLASS_STROKE      = [1.5, 2.1, 2.7, 3.3];     // px
+    const CLASS_KEY_VALUES  = [15, 37, 62, 90];         // a value inside each class, used to draw the legend arrows
     const FALLBACK_WIDTH    = 700;  // px — used before the container is first measured
     const PAD_X             = 12;   // px — left/right gutter around the national map
     const TIP_GAP           = 6;    // px — gap between the tallest glyph tip and the top edge of its frame
@@ -21,11 +24,17 @@
     const MIN_HIT_HEIGHT    = 16;   // px — minimum touch-target height
     const FADE_FRACTION     = 0.14; // share of the national map's height over which the northern crop fades out
     const OVERLAY_MIN_WIDTH = 600;  // px — narrower than this, insets form two rows and the key moves above the map
+    const BC_WIDTH_FRAC     = 0.22; // desktop: Southern BC box width as a share of the map width
+    const BC_MIN_WIDTH      = 150;  // px — floor, so Vancouver and Victoria keep room for their labels as the chart narrows
+    const ROW_WIDTH_FRAC    = 0.88; // desktop: share of the map width the Ontario + Quebec boxes together span
+    const BC_GAP            = 30;   // px — gap between the national map's southern border and the BC box
+    const LEADER_SPREAD     = 8;    // px — how far apart a region's leader lines land on its inset box
     const INSET_PAD         = 6;    // px — padding inside an inset box
     const INSET_GAP         = 8;    // px — gap between neighbouring inset boxes
     const CAPTION_H         = 18;   // px — room under each inset box for its title
     const MIN_LABEL_MAIN    = 500;  // px — the national map shows city labels only when at least this wide
-    const KEY_SPACING       = 46;   // px — distance between key glyphs
+    const KEY_SPACING       = 43;   // px — preferred distance between legend arrows (shrinks to fit the blank space on narrower screens)
+    const KEY_SPACING_MIN   = 33;   // px
 
     let containerWidth = $state(null);
     let width = $derived(containerWidth ?? FALLBACK_WIDTH);
@@ -35,20 +44,21 @@
 
     let overlay  = $derived(width >= OVERLAY_MIN_WIDTH);
     let small    = $derived(width < 500);
-    let maxLen   = $derived(Math.min(70, Math.max(38, width * 0.10)));    // px length of the longest glyph
-    let lenScale = $derived(scaleLinear().domain([0, maxValue]).range([0, maxLen]).clamp(true));
+    let maxLen   = $derived(Math.min(70, Math.max(38, width * 0.10)));    // px length of the longest arrow
     let fontSize = $derived(small ? 11 : 12);
     let keyBoxH  = $derived(maxLen + 24);
 
-    // Bolder as they get longer: stroke / base width grows with the value
-    const strokeFor = (v) => (1.2 + 1.8 * Math.min(v, maxValue) / maxValue) * (small ? 0.9 : 1);
-    const halfFor   = (v) => (1.5 + 1.7 * Math.min(v, maxValue) / maxValue) * (small ? 0.85 : 1);
+    const classOf   = (v) => classBreaks.filter(b => v >= b).length;     // 0 … classBreaks.length
+    const lenFor    = (v) => maxLen * CLASS_LEN_FRAC[classOf(v)];
+    const strokeFor = (v) => CLASS_STROKE[classOf(v)] * (small ? 0.9 : 1);
+    // Short labels (the legend caption carries the % sign): "<25", "25–50", "50–75", "75+"
+    let classLabels = $derived(classBreaks.map((b, i) => i === 0 ? `<${b}` : `${classBreaks[i - 1]}–${b}`).concat(`${classBreaks[classBreaks.length - 1]}+`));
 
     // Headroom above a frame = just enough that its tallest glyph tip stays inside the frame
     function headroomFor(points, top, k) {
         return Math.ceil(Math.max(
             TIP_GAP,
-            ...points.map(p => lenScale(cities[p.i].pct_change) - (top - p.y) * k + TIP_GAP),
+            ...points.map(p => lenFor(cities[p.i].pct_change) - (top - p.y) * k + TIP_GAP),
         ));
     }
 
@@ -59,8 +69,9 @@
     }
 
     // ── Layout ────────────────────────────────────────────────────────────────
-    // Reference key → national map → insets. Desktop: key sits over Hudson Bay and every inset shares one row at one zoom.
-    // Phone: the key is a strip above the map and the insets pack into two rows.
+    // Desktop: national map on top; Southern BC sits in the blank space just south of BC; Southern Ontario and Southern
+    // Quebec span the full width in one row underneath; the legend fills the blank space between the BC box and Ontario's outline.
+    // Phone: the legend is a strip above the map and the insets pack into two rows.
 
     let layout = $derived.by(() => {
         const innerW = width - PAD_X * 2;
@@ -70,23 +81,42 @@
         const mainH   = (main.extent[3] - main.extent[1]) * kMain;
         const mainTop = keyH + headroomFor(main.points, main.extent[3], kMain);
         const mainBottom = mainTop + mainH;
+        const mainProj = makeProjection(main.extent[0], main.extent[3], kMain, PAD_X, mainTop);
 
-        const rowGroups = overlay ? [insets] : [0, 1].map(r => insets.filter(f => f.row === r)).filter(r => r.length);
+        // Box size for one inset at scale k
+        const size = (f, k) => {
+            const hr = Math.max(INSET_PAD, headroomFor(f.points, f.fit[3], k));
+            const mapH = (f.fit[3] - f.fit[1]) * k;
+            return { f, k, hr, mapH, bw: (f.fit[2] - f.fit[0]) * k + INSET_PAD * 2, bh: hr + mapH + INSET_PAD };
+        };
 
-        let y = mainBottom + (overlay ? 16 : 12);
         const boxes = [];
-        for (const row of rowGroups) {
-            // Box widths are proportional to each inset's visible width times its zoom factor (dense areas get more zoom)
-            const fitW = f => (f.fit[2] - f.fit[0]) * (f.zoom ?? 1);
-            const avail = innerW - (row.length - 1) * INSET_GAP - row.length * INSET_PAD * 2;
-            const kBase = avail / row.reduce((s, f) => s + fitW(f), 0);
+        let y = mainBottom + (overlay ? 16 : 12);
+        let bcBox = null;
 
-            const sized = row.map(f => {
-                const k = kBase * (f.zoom ?? 1);
-                const hr = Math.max(INSET_PAD, headroomFor(f.points, f.fit[3], k));
-                const mapH = (f.fit[3] - f.fit[1]) * k;
-                return { f, k, hr, mapH, bw: (f.fit[2] - f.fit[0]) * k + INSET_PAD * 2, bh: hr + mapH + INSET_PAD };
-            });
+        if (overlay) {
+            const bc = insets.find(f => f.id === 'bc');
+            if (bc) {
+                const ringBottom = Math.max(...bc.region.map(pt => mainProj(pt)[1]));
+                const k = (Math.max(innerW * BC_WIDTH_FRAC, BC_MIN_WIDTH) - INSET_PAD * 2) / (bc.fit[2] - bc.fit[0]);
+                const s = size(bc, k);
+                bcBox = { x: PAD_X, y: ringBottom + BC_GAP, w: s.bw, h: s.bh };
+                boxes.push({ ...s, box: bcBox });
+                y = Math.max(y, bcBox.y + bcBox.h + CAPTION_H + 6);
+            }
+        }
+
+        const rest = insets.filter(f => !(overlay && f.id === 'bc'));
+        const rowGroups = overlay ? [rest] : [0, 1].map(r => insets.filter(f => f.row === r)).filter(r => r.length);
+
+        for (const row of rowGroups) {
+            // Box widths are proportional to each inset's visible width times its zoom factor
+            const fitW = f => (f.fit[2] - f.fit[0]) * (f.zoom ?? 1);
+            const rowW = overlay ? innerW * ROW_WIDTH_FRAC : innerW;
+            const avail = rowW - (row.length - 1) * INSET_GAP - row.length * INSET_PAD * 2;
+            const kBase = avail / row.reduce((sum, f) => sum + fitW(f), 0);
+
+            const sized = row.map(f => size(f, kBase * (f.zoom ?? 1)));
             // every box in a row gets the row's height; spare height is split above/below the map
             const rowH = Math.max(...sized.map(s => s.bh));
             let x = PAD_X;
@@ -97,7 +127,7 @@
             y += rowH + CAPTION_H + 6;
         }
 
-        return { kMain, mainH, mainTop, mainBottom, keyH, boxes, height: y - 6 };
+        return { kMain, mainH, mainTop, mainBottom, keyH, boxes, bcBox, mainProj, height: y - 6 };
     });
 
     // ── Glyphs ────────────────────────────────────────────────────────────────
@@ -108,50 +138,44 @@
     let px = $derived(Math.cos(theta));    // perpendicular to it
     let py = $derived(Math.sin(theta));
 
-    // One glyph at pixel (x, y) for value v. Shared by the data glyphs and the reference key.
+    // One arrow at pixel (x, y) for value v. Shared by the data arrows and the legend.
     function makeGlyph(x, y, v) {
-        const len = lenScale(v);
-        const g = { x, y, len, v, tipX: x, tipY: y - len };
-
-        if (mode === 'spike') {
-            const hw = halfFor(v);
-            g.points = `${x - hw},${y} ${x + hw},${y} ${x},${y - len}`;
-            g.hitMinX = x - Math.max(hw * 3, MIN_HIT_HALF);
-            g.hitW    = Math.max(hw * 3, MIN_HIT_HALF) * 2;
-            g.hitMinY = y - Math.max(len, MIN_HIT_HEIGHT);
-            g.hitH    = Math.max(len, MIN_HIT_HEIGHT);
-            g.samples = [];
-            for (let t = 0; t <= len; t += 5) g.samples.push([x, y - t, hw * (1 - t / Math.max(len, 1)) + 1]);
-        } else {
-            const sw = strokeFor(v);
-            const tipX = x + ux * len, tipY = y + uy * len;
-            g.tipX = tipX; g.tipY = tipY;
-            const head = Math.min(len, 2.6 * sw + 3.5);
-            const hw = head * 0.45;
-            const baseX = tipX - ux * head, baseY = tipY - uy * head;   // where the head meets the shaft
-            g.sw = sw;
-            g.radius = sw * 0.9 + 0.6;
-            g.shaft = { x1: x, y1: y, x2: baseX + ux, y2: baseY + uy };
-            g.points = `${tipX},${tipY} ${baseX + px * hw},${baseY + py * hw} ${baseX - px * hw},${baseY - py * hw}`;
-            const pad = 6;
-            g.hitMinX = Math.min(x, tipX) - pad;
-            g.hitW    = Math.abs(tipX - x) + pad * 2;
-            g.hitMinY = Math.min(y, tipY) - pad;
-            g.hitH    = Math.abs(tipY - y) + pad * 2;
-            g.samples = [];
-            for (let t = 0; t <= len; t += 5) g.samples.push([x + ux * t, y + uy * t, sw / 2 + 1]);
-        }
+        const cls = classOf(v);
+        const len = lenFor(v);
+        const sw = strokeFor(v);
+        const tipX = x + ux * len, tipY = y + uy * len;
+        const head = Math.min(len, 2.6 * sw + 3.5);
+        const hw = head * 0.45;
+        const baseX = tipX - ux * head, baseY = tipY - uy * head;   // where the head meets the shaft
+        const pad = 6;
+        const g = {
+            x, y, len, v, cls, sw, tipX, tipY, color: CLASS_COLORS[cls],
+            radius: sw * 0.9 + 0.6,
+            shaft: { x1: x, y1: y, x2: baseX + ux, y2: baseY + uy },
+            points: `${tipX},${tipY} ${baseX + px * hw},${baseY + py * hw} ${baseX - px * hw},${baseY - py * hw}`,
+            hitMinX: Math.min(x, tipX) - pad, hitW: Math.abs(tipX - x) + pad * 2,
+            hitMinY: Math.min(y, tipY) - pad, hitH: Math.abs(tipY - y) + pad * 2,
+            samples: [],
+        };
+        for (let t = 0; t <= len; t += 5) g.samples.push([x + ux * t, y + uy * t, sw / 2 + 1]);
         return g;
     }
 
     // ── Label placement ───────────────────────────────────────────────────────
-    // Try each city's label in priority order at a few spots around its base and keep the first that clears every
-    // glyph and every label already placed; if none fit, the label is simply left off (hover / tap still names it).
+    // Labels are tried in priority order (major cities first). Each is put at the nearest free spot around its OWN city dot
+    // (arrows lean up-right, so the clear sides are usually right, left and below), rejecting any spot that
+    //   • hits an arrow or an already-placed label, or
+    //   • sits closer to another city's dot than to its own (which would read as that city's label).
+    // If no spot within MAX_LABEL_DIST fits, the label is left off — hover / tap still names the city.
+
+    const SHAFT_CLEARANCE = 9;   // px along an arrow from its dot that stays off-limits to other cities' labels, even in pass 2
+    const MAX_LABEL_DIST = 24;   // px — farthest the nearest edge of a label may be from its dot
 
     function rectHitsCircle(r, cx, cy, rad) {
         const nx = Math.max(r[0], Math.min(cx, r[2])), ny = Math.max(r[1], Math.min(cy, r[3]));
         return (nx - cx) ** 2 + (ny - cy) ** 2 < rad * rad;
     }
+    const distToRect = (r, px, py) => Math.hypot(Math.max(r[0] - px, 0, px - r[2]), Math.max(r[1] - py, 0, py - r[3]));
 
     function placeLabels(glyphs, order, bounds, reserved = []) {
         const byIndex = new Map(glyphs.map(g => [g.i, g]));
@@ -164,27 +188,54 @@
             if (!g || g.faint) continue;
             const text = entry.text ?? cities[g.i].city;
             const w = text.length * cw + 2;
-            // Spots to try, best first: beside the base, above the tip (good for short glyphs), below, then beside the glyph's middle
-            const mx = (g.x + g.tipX) / 2, my = (g.y + g.tipY) / 2;
-            const candidates = [
-                { anchor: 'start',  x: g.x + 7,  y: g.y + 4,       x0: g.x + 7 },
-                { anchor: 'end',    x: g.x - 7,  y: g.y + 4,       x0: g.x - 7 - w },
-                { anchor: 'middle', x: g.tipX,   y: g.tipY - 5,    x0: g.tipX - w / 2 },
-                { anchor: 'middle', x: g.x,      y: g.y + 16,      x0: g.x - w / 2 },
-                { anchor: 'start',  x: g.x + 4,  y: g.y + 16,      x0: g.x + 4 },
-                { anchor: 'end',    x: g.x - 4,  y: g.y + 16,      x0: g.x - 4 - w },
-                { anchor: 'start',  x: mx + 6,   y: my + 4,        x0: mx + 6 },
-                { anchor: 'end',    x: mx - 6,   y: my + 4,        x0: mx - 6 - w },
-            ];
-            for (const c of candidates) {
-                const r = [c.x0, c.y - fontSize + 2, c.x0 + w, c.y + 2];
-                if (r[0] < bounds.x0 || r[2] > bounds.x1 || r[1] < bounds.y0 || r[3] > bounds.y1) continue;
-                if (placed.some(p => r[0] < p[2] && r[2] > p[0] && r[1] < p[3] && r[3] > p[1])) continue;
-                // a glyph's own first few pixels (its base) don't count against its label
-                if (allSamples.some(({ s, owner, t }) => !(owner === g.i && t < 6) && rectHitsCircle(r, s[0], s[1], s[2]))) continue;
-                placed.push(r);
-                labels.push({ key: g.i, x: c.x, y: c.y, anchor: c.anchor, text });
-                break;
+
+            // Every spot beside / below the dot, nearest first
+            const spots = [];
+            for (const dy of [4, 15, -6, 26, -17]) {
+                spots.push({ anchor: 'start', x: g.x + 7, y: g.y + dy, x0: g.x + 7 });
+                spots.push({ anchor: 'end',   x: g.x - 7, y: g.y + dy, x0: g.x - 7 - w });
+            }
+            for (const dy of [16, 28]) {
+                spots.push({ anchor: 'middle', x: g.x,     y: g.y + dy, x0: g.x - w / 2 });
+                spots.push({ anchor: 'start',  x: g.x + 4, y: g.y + dy, x0: g.x + 4 });
+                spots.push({ anchor: 'end',    x: g.x - 4, y: g.y + dy, x0: g.x - 4 - w });
+            }
+            for (const c of spots) {
+                c.r = [c.x0, c.y - fontSize + 2, c.x0 + w, c.y + 2];
+                // closeness = gap between the dot and the label's nearest edge (so long names aren't penalised), centre distance as a tie-break
+                c.d = distToRect(c.r, g.x, g.y) + 0.02 * Math.hypot((c.r[0] + c.r[2]) / 2 - g.x, (c.r[1] + c.r[3]) / 2 - g.y);
+            }
+            spots.sort((a, b) => a.d - b.d);
+
+            // Pass 1: spots that touch nothing. Pass 2 (major cities only): a spot may cross another city's arrow shaft — never its dot,
+            // never this city's own arrow — because the label's white halo keeps it readable and a missing major city reads worse than a crossing.
+            for (const pass of entry.major ? [1, 2] : [1]) {
+                let done = false;
+                for (const c of spots) {
+                    if (c.d > MAX_LABEL_DIST) break;
+                    const r = c.r;
+                    if (r[0] < bounds.x0 || r[2] > bounds.x1 || r[1] < bounds.y0 || r[3] > bounds.y1) continue;
+                    if (placed.some(p => r[0] < p[2] && r[2] > p[0] && r[1] < p[3] && r[3] > p[1])) continue;
+                    if (allSamples.some(({ s, owner, t }) => {
+                        if (!rectHitsCircle(r, s[0], s[1], s[2])) return false;
+                        if (owner === g.i) return t >= 6;                     // a glyph's own first few pixels (its base) don't count against its label
+                        return pass === 1 || t < SHAFT_CLEARANCE;             // pass 2 tolerates other arrows' shafts but not their dots
+                    })) continue;
+                    // must read as THIS city's label: no other city's dot may be nearer to it than ours (ties go to whichever dot is nearer the label's centre)
+                    const own = distToRect(r, g.x, g.y);
+                    const cx = (r[0] + r[2]) / 2, cy = (r[1] + r[3]) / 2;
+                    const ownC = Math.hypot(cx - g.x, cy - g.y);
+                    if (glyphs.some(o => {
+                        if (o.i === g.i) return false;
+                        const d = distToRect(r, o.x, o.y);
+                        return d < own - 0.5 || (Math.abs(d - own) <= 0.5 && Math.hypot(cx - o.x, cy - o.y) <= ownC);
+                    })) continue;
+                    placed.push(r);
+                    labels.push({ key: g.i, x: c.x, y: c.y, anchor: c.anchor, text });
+                    done = true;
+                    break;
+                }
+                if (done) break;
             }
         }
         return labels;
@@ -208,9 +259,11 @@
     // Everything the SVG draws, derived from the layout above
     let drawn = $derived.by(() => {
         const L = layout;
-        const mainProj = makeProjection(main.extent[0], main.extent[3], L.kMain, PAD_X, L.mainTop);
+        const mainProj = L.mainProj;
+        // On desktop the BC box sits over part of the national map's blank margin: keep national labels out from under it (and its caption)
+        const mainReserved = L.bcBox ? [[L.bcBox.x - 2, L.bcBox.y - 2, L.bcBox.x + L.bcBox.w + 2, L.bcBox.y + L.bcBox.h + CAPTION_H + 4]] : [];
         const mainFrame = buildFrame(main, mainProj,
-            { x0: 0, x1: width, y0: L.keyH, y1: L.mainBottom }, width >= MIN_LABEL_MAIN, true);
+            { x0: 0, x1: width, y0: L.keyH, y1: L.mainBottom }, width >= MIN_LABEL_MAIN, true, mainReserved);
 
         const insetFrames = L.boxes.map(b => {
             const proj = makeProjection(b.f.fit[0], b.f.fit[3], b.k, b.box.x + INSET_PAD, b.box.y + b.hr);
@@ -228,26 +281,36 @@
             // outline of this inset's region on the national map + leader lines to the box (desktop only)
             const ring = b.f.region.map(([x, y]) => mainProj([x, y]));
             const low = [...ring].sort((a, c) => c[1] - a[1]).slice(0, 2).sort((a, c) => a[0] - c[0]);   // two lowest corners, left → right
+            // Lines land on the box's top edge just outside the region's own width (clamped to the box), so they stay short and don't sweep across the map
+            const land = (x) => Math.max(b.box.x, Math.min(b.box.x + b.box.w, x));
             const lines = overlay ? [
-                { x1: low[0][0], y1: low[0][1], x2: b.box.x,           y2: b.box.y },
-                { x1: low[1][0], y1: low[1][1], x2: b.box.x + b.box.w, y2: b.box.y },
+                { x1: low[0][0], y1: low[0][1], x2: land(low[0][0] - LEADER_SPREAD), y2: b.box.y },
+                { x1: low[1][0], y1: low[1][1], x2: land(low[1][0] + LEADER_SPREAD), y2: b.box.y },
             ] : [];
             return {
-                ...fr, title: b.f.title, box: b.box, lines, north,
+                ...fr, title: b.f.title, box: b.box, lines, north, ringMaxX: Math.max(...ring.map(p => p[0])),
                 ring: 'M' + ring.map(p => p.join(',')).join('L') + 'Z',
             };
         });
 
-        // Reference key: desktop → over Hudson Bay (anchor from the notebook); phone → strip above the national map
-        let origin;
-        if (overlay) {
-            const [ax, ay] = mainProj(main.key_anchor);
-            origin = { x: ax + 14, y: ay - 18, boxX: ax, boxY: ay - keyBoxH };
+        // Legend: desktop → blank US-side space between the BC box and Ontario's outline, bottom-aligned with the BC box;
+        // phone → strip above the national map
+        let origin, spacing = KEY_SPACING;
+        if (overlay && L.bcBox) {
+            // Right edge of the plot, over the Atlantic. Spacing shrinks on narrower screens so the legend stays clear of Quebec's outline.
+            const n = CLASS_KEY_VALUES.length - 1;
+            const ringRight = Math.max(...insetFrames.filter(f => f.id !== 'bc').map(f => f.ringMaxX));
+            const rightEdge = width - PAD_X - 14;
+            spacing = Math.max(KEY_SPACING_MIN, Math.min(KEY_SPACING, (rightEdge - 26 - ringRight) / n));
+            origin = { x: rightEdge - n * spacing, y: L.mainBottom - 20 };
+        } else if (overlay) {
+            origin = { x: PAD_X + 14, y: L.mainBottom - 22 };
         } else {
-            origin = { x: PAD_X + 14, y: L.keyH - 20, boxX: PAD_X, boxY: 0 };
+            origin = { x: PAD_X + 14, y: L.keyH - 20 };
         }
-        const key = keyValues.map((v, j) => ({ ...makeGlyph(origin.x + j * KEY_SPACING, origin.y, v), label: `+${v}%` }));
-        return { mainFrame, insetFrames, key, origin };
+        const key = CLASS_KEY_VALUES.map((v, j) => ({ ...makeGlyph(origin.x + j * spacing, origin.y, v), label: classLabels[j] }));
+        const keyTitleX = overlay ? origin.x + (CLASS_KEY_VALUES.length - 1) * spacing + 18 : origin.x - 18;
+        return { mainFrame, insetFrames, key, origin, keyTitleX };
     });
 
     // Unique ids so several maps on one page don't collide
@@ -266,13 +329,9 @@
 </script>
 
 {#snippet shape(g)}
-    {#if mode === 'spike'}
-        <polygon class="shape" points={g.points} fill={COLOR} stroke="white" stroke-width="0.6" />
-    {:else}
-        <line class="shape" x1={g.shaft.x1} y1={g.shaft.y1} x2={g.shaft.x2} y2={g.shaft.y2} stroke={COLOR} stroke-width={g.sw} stroke-linecap="round" />
-        <circle class="shape" cx={g.x} cy={g.y} r={g.radius} fill={COLOR} stroke="white" stroke-width="0.6" />
-        <polygon class="shape" points={g.points} fill={COLOR} stroke="white" stroke-width="0.6" stroke-linejoin="round" />
-    {/if}
+    <line class="shape" x1={g.shaft.x1} y1={g.shaft.y1} x2={g.shaft.x2} y2={g.shaft.y2} stroke={g.color} stroke-width={g.sw} stroke-linecap="round" />
+    <circle class="shape" cx={g.x} cy={g.y} r={g.radius} fill={g.color} stroke="white" stroke-width="0.6" />
+    <polygon class="shape" points={g.points} fill={g.color} stroke="white" stroke-width="0.6" stroke-linejoin="round" />
 {/snippet}
 
 {#snippet glyphLayer(frame)}
@@ -338,15 +397,13 @@
             {/each}
         </g>
 
-        <!-- Reference key: what a spike / arrow length means -->
+        <!-- Legend: the four size / colour classes -->
         <g class="key">
-            {#if overlay}
-                <rect x={drawn.origin.boxX} y={drawn.origin.boxY} width={keyValues.length * KEY_SPACING + 6} height={keyBoxH} fill="white" opacity="0.92" />
-            {/if}
             {#each drawn.key as g}
                 {@render shape(g)}
                 <text class="chart-axis-label key-label" x={g.x} y={g.y + 14} text-anchor="middle">{g.label}</text>
             {/each}
+            <text class="chart-axis-label key-label key-title" x={drawn.keyTitleX} y={drawn.origin.y + 28} text-anchor={overlay ? 'end' : 'start'}>{keyTitle}</text>
         </g>
 
         <!-- Where each inset comes from -->
@@ -417,7 +474,8 @@
         stroke-width: 1;
     }
     .inset-title { fill: var(--brandGray90); font-family: OpenSansBold; }
-    .key-label { fill: var(--brandGray70); }
+    .key-label { fill: var(--brandGray70); font-size: 10.5px; }
+    .key-title { font-family: OpenSansBold; }
 
     .north line { stroke: var(--brandGray60); stroke-width: 1.2; }
     .north polygon { fill: var(--brandGray60); }
