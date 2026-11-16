@@ -1,22 +1,29 @@
 <script>
     import { geoIdentity, geoPath } from 'd3';
     import MapTooltip from '$lib/maps/MapTooltip.svelte';
+    import RentTooltipBody from '$lib/chart-addons/RentTooltipBody.svelte';
 
     let {
         frames,              // [{ id: 'main', ... }, { id: 'bc' | 'on' | 'qc', fit, extent, region, rotation, order, row, ... }] — see the plotting-data notebook
         cities = [],         // [{ city, pct_change, base_rent, latest_rent }]; frame points index into this
         tiltDeg = 15,        // arrow lean from vertical, clockwise (chosen in the notebook by minimising arrow overlaps)
-        keyTitle = 'Net change in asking rent, %',
-        classBreaks = [25, 50, 75],   // % change thresholds between the size classes (4 classes → 3 breaks)
+        keyTitle = ['Net change in asking rent, %'],   // legend caption, one string per line
+        measure = 'nominal', // 'nominal' | 'real' — which net change the arrows show (real = after inflation)
+        classBreaksNominal = [25, 50, 75],   // % change thresholds between the 4 size classes, nominal view
+        classBreaksReal = [10, 25, 40],      // … and for the after-inflation view
         ariaLabel = 'Map of net change in asking rents by city',
-        descriptor = '',     // shown in tooltip, e.g. "Q1 2019 – Q1 2026"
+        baseQuarter = '',    // pop-up: "Q1 2019"
+        latestQuarter = '',  // pop-up: "Q1 2026"
+        realYear = 2025,     // pop-up: the dollars after-inflation rents are expressed in
+        scaleUp = null,      // pop-up: $ that fills the dollar bar to the right of its line (shared across the page's pop-ups)
+        scaleDown = null,    // pop-up: $ that fills it to the left
     } = $props();
 
     // Four size classes: arrows get longer, thicker and darker with the class. Light → dark single-hue ramp.
     const CLASS_COLORS      = ['#ec8aa0', '#dc5577', '#bf2150', '#7e1234'];
     const CLASS_LEN_FRAC    = [0.36, 0.58, 0.80, 1];    // share of the longest arrow length
     const CLASS_STROKE      = [1.5, 2.1, 2.7, 3.3];     // px
-    const CLASS_KEY_VALUES  = [15, 37, 62, 90];         // a value inside each class, used to draw the legend arrows
+    const DECLINE_COLOR     = '#3a7bab';                // a value below zero (only possible after inflation) is drawn as a blue arrow pointing down
     const FALLBACK_WIDTH    = 700;  // px — used before the container is first measured
     const PAD_X             = 12;   // px — left/right gutter around the national map
     const TIP_GAP           = 6;    // px — gap between the tallest glyph tip and the top edge of its frame
@@ -33,8 +40,10 @@
     const INSET_GAP         = 8;    // px — gap between neighbouring inset boxes
     const CAPTION_H         = 18;   // px — room under each inset box for its title
     const MIN_LABEL_MAIN    = 500;  // px — the national map shows city labels only when at least this wide
-    const KEY_SPACING       = 43;   // px — preferred distance between legend arrows (shrinks to fit the blank space on narrower screens)
-    const KEY_SPACING_MIN   = 33;   // px
+    const KEY_SPACING       = 37;   // px — preferred distance between legend arrows (shrinks to fit the blank space on narrower screens)
+    const KEY_SPACING_MIN   = 31;   // px — still clears the class labels
+    const KEY_DECLINE_GAP   = 9;    // px — extra room after the decline arrow, whose label ("Decline") is wider than the class labels
+    const KEY_TITLE_LINE    = 12;   // px — line height of the legend caption
 
     let containerWidth = $state(null);
     let width = $derived(containerWidth ?? FALLBACK_WIDTH);
@@ -46,19 +55,31 @@
     let small    = $derived(width < 500);
     let maxLen   = $derived(Math.min(70, Math.max(38, width * 0.10)));    // px length of the longest arrow
     let fontSize = $derived(small ? 11 : 12);
-    let keyBoxH  = $derived(maxLen + 24);
+    let keyBoxH  = $derived(maxLen + 30 + KEY_TITLE_LINE);   // legend strip on phones; always room for a two-line caption so nothing shifts when it changes
 
-    const classOf   = (v) => classBreaks.filter(b => v >= b).length;     // 0 … classBreaks.length
+    const valueOf   = (c) => (measure === 'real' ? c.real_pct : c.pct_change);
+    let classBreaks = $derived(measure === 'real' ? classBreaksReal : classBreaksNominal);
+    // A decline (v < 0) gets no size class: it is drawn at the shortest length, in its own colour, pointing the other way
+    const classOfWith = (v, breaks) => (v < 0 ? 0 : breaks.filter(b => v >= b).length);   // 0 … breaks.length
+    const classOf   = (v) => classOfWith(v, classBreaks);
     const lenFor    = (v) => maxLen * CLASS_LEN_FRAC[classOf(v)];
-    const strokeFor = (v) => CLASS_STROKE[classOf(v)] * (small ? 0.9 : 1);
-    // Short labels (the legend caption carries the % sign): "<25", "25–50", "50–75", "75+"
-    let classLabels = $derived(classBreaks.map((b, i) => i === 0 ? `<${b}` : `${classBreaks[i - 1]}–${b}`).concat(`${classBreaks[classBreaks.length - 1]}+`));
+    const strokeFor = (v) => (v < 0 ? CLASS_STROKE[1] : CLASS_STROKE[classOf(v)]) * (small ? 0.9 : 1);
+    const colorFor  = (v) => (v < 0 ? DECLINE_COLOR : CLASS_COLORS[classOf(v)]);
+    // The longest an arrow can be in EITHER view, so the layout (headroom above each frame) is the same in both and nothing moves when the view is switched
+    const layoutLen = (c) => maxLen * CLASS_LEN_FRAC[Math.max(classOfWith(c.pct_change, classBreaksNominal), classOfWith(c.real_pct, classBreaksReal))];
+    // Short labels (the legend caption carries the % sign): "0–25", "25–50", "50–75", "75+"
+    let classLabels = $derived(classBreaks.map((b, i) => `${i === 0 ? 0 : classBreaks[i - 1]}–${b}`).concat(`${classBreaks[classBreaks.length - 1]}+`));
+    // A value inside each class, used to draw the legend arrows
+    let classKeyValues = $derived.by(() => {
+        const b = classBreaks, last = b.length - 1;
+        return [b[0] * 0.6, ...b.slice(1).map((v, i) => (b[i] + v) / 2), b[last] + (b[last] - (b[last - 1] ?? 0)) * 0.6];
+    });
 
     // Headroom above a frame = just enough that its tallest glyph tip stays inside the frame
     function headroomFor(points, top, k) {
         return Math.ceil(Math.max(
             TIP_GAP,
-            ...points.map(p => lenFor(cities[p.i].pct_change) - (top - p.y) * k + TIP_GAP),
+            ...points.map(p => layoutLen(cities[p.i]) - (top - p.y) * k + TIP_GAP),
         ));
     }
 
@@ -91,7 +112,7 @@
         };
 
         const boxes = [];
-        let y = mainBottom + (overlay ? 16 : 12);
+        let y = mainBottom + (overlay ? 16 + KEY_TITLE_LINE : 12);
         let bcBox = null;
 
         if (overlay) {
@@ -143,21 +164,23 @@
         const cls = classOf(v);
         const len = lenFor(v);
         const sw = strokeFor(v);
-        const tipX = x + ux * len, tipY = y + uy * len;
-        const head = Math.min(len, 2.6 * sw + 3.5);
-        const hw = head * 0.45;
-        const baseX = tipX - ux * head, baseY = tipY - uy * head;   // where the head meets the shaft
+        const dir = v < 0 ? -1 : 1;                              // a decline points the opposite way (down and to the left)
+        const dx = dir * ux, dy = dir * uy;
+        const tipX = x + dx * len, tipY = y + dy * len;
+        const head = Math.min(len, 2.4 * sw + 3.2);
+        const hw = head * 0.36;
+        const baseX = tipX - dx * head, baseY = tipY - dy * head;   // where the head meets the shaft
         const pad = 6;
         const g = {
-            x, y, len, v, cls, sw, tipX, tipY, color: CLASS_COLORS[cls],
+            x, y, len, v, cls, sw, tipX, tipY, color: colorFor(v),
             radius: sw * 0.9 + 0.6,
-            shaft: { x1: x, y1: y, x2: baseX + ux, y2: baseY + uy },
+            shaft: { x1: x, y1: y, x2: baseX + dx, y2: baseY + dy },
             points: `${tipX},${tipY} ${baseX + px * hw},${baseY + py * hw} ${baseX - px * hw},${baseY - py * hw}`,
             hitMinX: Math.min(x, tipX) - pad, hitW: Math.abs(tipX - x) + pad * 2,
             hitMinY: Math.min(y, tipY) - pad, hitH: Math.abs(tipY - y) + pad * 2,
             samples: [],
         };
-        for (let t = 0; t <= len; t += 5) g.samples.push([x + ux * t, y + uy * t, sw / 2 + 1]);
+        for (let t = 0; t <= len; t += 5) g.samples.push([x + dx * t, y + dy * t, sw / 2 + 1]);
         return g;
     }
 
@@ -244,7 +267,7 @@
     function buildFrame(f, projection, bounds, showLabels, isMain, reserved = []) {
         const glyphs = f.points.map(p => {
             const [x, y] = projection([p.x, p.y]);
-            return { ...makeGlyph(x, y, cities[p.i].pct_change), i: p.i, faint: isMain && p.in_inset };
+            return { ...makeGlyph(x, y, valueOf(cities[p.i])), i: p.i, faint: isMain && p.in_inset };
         });
         // Longest first, so shorter glyphs draw on top where they overlap; faint (inset-covered) ones sit underneath
         glyphs.sort((a, b) => (b.faint - a.faint) || (b.v - a.v));
@@ -296,20 +319,30 @@
         // Legend: desktop → blank US-side space between the BC box and Ontario's outline, bottom-aligned with the BC box;
         // phone → strip above the national map
         let origin, spacing = KEY_SPACING;
+        // The legend: a decline arrow first (in both views, so the legend never changes shape), then the size classes
+        const keyItems = [
+            { v: -1, label: 'Decline' },
+            ...classKeyValues.map((v, j) => ({ v, label: classLabels[j] })),
+        ];
+        const n = keyItems.length - 1;
+        const keyW = (j) => j * spacing + (j > 0 ? KEY_DECLINE_GAP : 0);    // x offset of item j
         if (overlay && L.bcBox) {
             // Right edge of the plot, over the Atlantic. Spacing shrinks on narrower screens so the legend stays clear of Quebec's outline.
-            const n = CLASS_KEY_VALUES.length - 1;
             const ringRight = Math.max(...insetFrames.filter(f => f.id !== 'bc').map(f => f.ringMaxX));
             const rightEdge = width - PAD_X - 14;
-            spacing = Math.max(KEY_SPACING_MIN, Math.min(KEY_SPACING, (rightEdge - 26 - ringRight) / n));
-            origin = { x: rightEdge - n * spacing, y: L.mainBottom - 20 };
+            spacing = Math.max(KEY_SPACING_MIN, Math.min(KEY_SPACING, (rightEdge - 16 - KEY_DECLINE_GAP - ringRight) / n));
+            origin = { x: rightEdge - keyW(n), y: L.mainBottom - 20 };
         } else if (overlay) {
             origin = { x: PAD_X + 14, y: L.mainBottom - 22 };
         } else {
-            origin = { x: PAD_X + 14, y: L.keyH - 20 };
+            origin = { x: PAD_X + 14, y: L.keyH - 30 - KEY_TITLE_LINE };
         }
-        const key = CLASS_KEY_VALUES.map((v, j) => ({ ...makeGlyph(origin.x + j * spacing, origin.y, v), label: classLabels[j] }));
-        const keyTitleX = overlay ? origin.x + (CLASS_KEY_VALUES.length - 1) * spacing + 18 : origin.x - 18;
+        // a downward arrow starts higher, so the whole arrow sits above the legend's baseline like the others
+        const key = keyItems.map((it, j) => ({
+            ...makeGlyph(origin.x + keyW(j), it.v < 0 ? origin.y - Math.abs(uy) * lenFor(it.v) : origin.y, it.v),
+            label: it.label,
+        }));
+        const keyTitleX = overlay ? origin.x + keyW(n) + 18 : origin.x - 18;
         return { mainFrame, insetFrames, key, origin, keyTitleX };
     });
 
@@ -324,8 +357,7 @@
         tooltip = { clientX: e.clientX, clientY: e.clientY, city: cities[g.i] };
     }
 
-    const fmtPct = v => (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
-    const fmtUsd = v => '$' + Math.round(v).toLocaleString('en-CA');
+    const fmtPct = v => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(1) + '%';
 </script>
 
 {#snippet shape(g)}
@@ -397,13 +429,15 @@
             {/each}
         </g>
 
-        <!-- Legend: the four size / colour classes -->
+        <!-- Legend: the size / colour classes (plus a decline arrow when a city is below zero) -->
         <g class="key">
             {#each drawn.key as g}
                 {@render shape(g)}
-                <text class="chart-axis-label key-label" x={g.x} y={g.y + 14} text-anchor="middle">{g.label}</text>
+                <text class="chart-axis-label key-label" x={g.x} y={drawn.origin.y + 14} text-anchor="middle">{g.label}</text>
             {/each}
-            <text class="chart-axis-label key-label key-title" x={drawn.keyTitleX} y={drawn.origin.y + 28} text-anchor={overlay ? 'end' : 'start'}>{keyTitle}</text>
+            <text class="chart-axis-label key-label key-title" x={drawn.keyTitleX} y={drawn.origin.y + 28} text-anchor={overlay ? 'end' : 'start'}>
+                {#each keyTitle as line, i}<tspan x={drawn.keyTitleX} dy={i === 0 ? 0 : KEY_TITLE_LINE}>{line}</tspan>{/each}
+            </text>
         </g>
 
         <!-- Where each inset comes from -->
@@ -437,14 +471,28 @@
     </svg>
 
     {#if tooltip}
+        {@const c = tooltip.city}
         <MapTooltip
             x={tooltip.clientX}
             y={tooltip.clientY}
-            title={tooltip.city.city}
-            value={fmtPct(tooltip.city.pct_change)}
-            descriptor="{fmtUsd(tooltip.city.base_rent)} → {fmtUsd(tooltip.city.latest_rent)} · {descriptor}"
+            title={c.city}
+            width={276}
             ondismiss={() => (tooltip = null)}
-        />
+        >
+            <RentTooltipBody
+                nominalPct={c.pct_change}
+                realPct={c.real_pct}
+                baseRent={c.base_rent}
+                latestRent={c.latest_rent}
+                realBaseRent={c.real_base_rent}
+                {realYear}
+                {baseQuarter}
+                {latestQuarter}
+                {measure}
+                {scaleUp}
+                {scaleDown}
+            />
+        </MapTooltip>
     {/if}
 </div>
 

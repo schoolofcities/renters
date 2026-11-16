@@ -8,8 +8,10 @@
 	import SeoHead from '$lib/header-footer/SeoHead.svelte';
 	import ChartLabel from '$lib/chart-addons/ChartLabel.svelte';
 	import NetChangeMapChart from '$lib/maps/NetChangeMapChart.svelte';
+	import CityTrajectoryMultiples from '$lib/charts/CityTrajectoryMultiples.svelte';
 
 	import vis1Data from '$data/falling-rents/vis1_net_change_map.json';
+	import vis2Data from '$data/falling-rents/vis2_city_trajectories.json';
 </script>
 
 
@@ -47,6 +49,17 @@
 		<ChartLabel text="Asking rents are still well above 2019 levels in every city" />
 		<NetChangeMapChart data={vis1Data} />
 
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+		</p>
+
+		<p>
+			Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+		</p>
+
+		<ChartLabel text="Most cities climbed fast, then eased back – but every city is still above where it started in 2019" />
+		<CityTrajectoryMultiples data={vis2Data} />
+
 		<div class="details">
 			<h2>Data &amp; Methodology</h2>
 			<p>
@@ -56,7 +69,10 @@
 				The map shows the net percentage change in the asking rent for a two-bedroom apartment between the first quarter of 2019 and the first quarter of 2026. This is a net change across the whole period, not the decline from each city's peak. Cities need at least eight quarters of data and a first-quarter 2019 value to be included, which leaves out Saguenay and Trois-Rivières. The Canada-wide figure uses Statistics Canada's own aggregate across all census metropolitan areas.
 			</p>
 			<p>
-				Arrows are drawn at city-centre points and grouped into four size classes (under 25 per cent, 25–50, 50–75, and 75 or more), and the provincial boundaries are simplified. The map is cropped north of the cities in the data, and three insets enlarge Southern British Columbia, Southern Ontario with Ottawa, and Southern Québec, where cities are too close together to read at national scale. Ottawa and Gatineau, two halves of one metropolitan area about four kilometres apart, are nudged apart so both remain visible.
+				The small multiples chart plots, for every city and for Canada as a whole, the net percentage change in the same two-bedroom asking rent from the first quarter of 2019 at each quarter through the first quarter of 2026. Every city is measured against its own starting level, and all panels share one vertical scale so the shapes of the trends can be compared directly. Where a quarter has no published value, the line is drawn straight from the quarter before to the quarter after. Each chart can be switched between nominal change and change after inflation, and each pop-up shows both, with a thin bar for the change in dollars: a line marks the starting asking rent, and the shading runs to its right for an increase or to its left for a decrease, on one scale for every pop-up. For the after-inflation view, the starting asking rent is restated in 2025 dollars using Statistics Canada's consumer price index for the city's province (Canada's for the national line), and since the index is not yet published beyond 2025 the latest asking rent is left as is, which slightly understates recent inflation. Canada is shown large, followed by four featured cities (Vancouver, Calgary, Toronto and Montréal) chosen as big markets from across the country; all other cities follow in alphabetical order.
+			</p>
+			<p>
+				Arrows are drawn at city-centre points and grouped into four size classes: 0–25 per cent, 25–50, 50–75 and 75 or more for nominal change, and 0–10, 10–25, 25–40 and 40 or more after inflation, whose changes are smaller. A blue arrow pointing down marks a decline, which only happens after inflation (Toronto). Arrows lean only so they overlap less; the lean carries no information. The provincial boundaries are simplified and the map is cropped north of the cities in the data. Three insets enlarge Southern British Columbia, Southern Ontario, and Southern Québec, where cities are too close together to read at national scale; the two eastern insets are rotated 30 degrees, with a north arrow, and cities in an inset appear faintly on the national map. Ottawa and Gatineau, two halves of one metropolitan area about four kilometres apart, are nudged apart so both remain visible.
 			</p>
 			<p>
 				You can find all the data and code for this article on our <a href="https://github.com/schoolofcities/renters" target="_blank">GitHub repository</a>.

@@ -1,4 +1,6 @@
 <script>
+    import SegmentedToggle from '$lib/chart-addons/SegmentedToggle.svelte';
+    import ChartHeader from '$lib/chart-addons/ChartHeader.svelte';
     import CanadaGlyphMap from '$lib/maps/CanadaGlyphMap.svelte';
 
     /**
@@ -8,29 +10,51 @@
 
     let { meta, cities, frames } = $derived(data);
 
-    let legendTitle = $derived(`Net change in ${meta.bedroom} asking rent, ${meta.baseline_quarter} to ${meta.latest_quarter}`);
-    let descriptor = $derived(`${meta.baseline_quarter} – ${meta.latest_quarter}`);
+    // Nominal = rents as advertised; real = after inflation (starting rents restated in latest-CPI dollars)
+    const MEASURES = [
+        { label: 'Nominal', value: 'nominal' },
+        { label: 'After inflation', value: 'real' },
+    ];
+    let measure = $state('nominal');
+
+    let real = $derived(measure === 'real');
+
+    // Dollar scale shared by every pop-up bar: how much an increase / a decrease needs to fill its side of the line (rounded up to $50), so bar lengths compare across cities
+    let deltas    = $derived(cities.flatMap(r => [r.latest_rent - r.base_rent, r.latest_rent - r.real_base_rent]));
+    let scaleUp   = $derived(Math.ceil(Math.max(...deltas, 0) / 50) * 50);
+    let scaleDown = $derived(Math.ceil(Math.max(...deltas.map(d => -d), 0) / 50) * 50);
+    let legendBase  = $derived(`Net change in ${meta.bedroom} asking rent, ${meta.baseline_quarter} to ${meta.latest_quarter}`);
+    let legendTitle = $derived(`${legendBase}${real ? ', after inflation' : ''}`);
+    // legend caption, split over two lines after inflation
+    let keyTitle = $derived(real ? ['Net change in asking rent,', 'adjusted for inflation, %'] : ['Net change in asking rent, %']);
 </script>
 
 <div class="net-change-map">
-    <p class="chart-legend-title legend-title">{legendTitle}</p>
+    <ChartHeader title={legendTitle} titleLongest="{legendBase}, after inflation" hint="Hover or tap an arrow for details.">
+        {#snippet controls()}
+            <SegmentedToggle options={MEASURES} bind:value={measure} label="Show net change as" />
+        {/snippet}
+    </ChartHeader>
 
     <CanadaGlyphMap
         {frames}
         {cities}
+        {measure}
         tiltDeg={meta.arrow_tilt_deg}
-        classBreaks={meta.class_breaks}
-        {descriptor}
+        classBreaksNominal={meta.class_breaks}
+        classBreaksReal={meta.class_breaks_real}
+        {keyTitle}
+        baseQuarter={meta.baseline_quarter}
+        latestQuarter={meta.latest_quarter}
+        realYear={meta.real_dollar_year}
+        {scaleUp}
+        {scaleDown}
     />
 
     <p class="chart-source-note">
-        Source: Statistics Canada, Table 46-10-0092-01. Asking rent for newly advertised {meta.bedroom}s,
-        {meta.baseline_quarter} vs. {meta.latest_quarter}. Each arrow shows the net percentage change in asking rent over that period;
-        longer, thicker and darker arrows mean a larger increase (under 25%, 25–50%, 50–75%, 75% or more). Arrows lean {Math.abs(meta.arrow_tilt_deg)}° only so they overlap less, and direction carries no information.
-        {meta.n_cities} cities shown; {meta.excluded.join(' and ')} lack enough two-bedroom data.
-        Insets enlarge Southern BC, Southern Ontario with Ottawa, and Southern Quebec, where cities are too close together to read at national scale;
-        the two eastern insets are rotated 30° (north arrow shown), and cities in an inset appear faintly on the national map.
-        Ottawa and Gatineau are drawn slightly apart. Nominal values do not account for inflation.
+        Source: Statistics Canada, Table 46-10-0092-01 and consumer price indexes. Each arrow shows the net change in a city's {meta.bedroom} asking rent from {meta.baseline_quarter} to {meta.latest_quarter};
+        longer, darker arrows mean a larger increase, and a blue arrow pointing down marks a decline. After inflation, rents are in {meta.real_dollar_year} dollars.
+        Insets enlarge crowded areas. {meta.n_cities} cities shown.
     </p>
 </div>
 
@@ -38,12 +62,5 @@
     .net-change-map {
         width: 100%;
         margin: 1.5rem 0;
-    }
-    p.legend-title {
-        border-top: solid 1px var(--brandGray);
-        padding-top: 8px;
-        margin-top: 0;
-        margin-bottom: 4px;
-        line-height: 22px;
     }
 </style>
