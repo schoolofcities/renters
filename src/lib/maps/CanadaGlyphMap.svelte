@@ -19,8 +19,9 @@
         scaleDown = null,    // pop-up: $ that fills it to the left
     } = $props();
 
-    // Four size classes: arrows get longer, thicker and darker with the class. Light → dark single-hue ramp.
-    const CLASS_COLORS      = ['#ec8aa0', '#dc5577', '#bf2150', '#7e1234'];
+    // Four size classes: arrows get longer, thicker and darker with the class. A short slice of the spectrum used for the years in the histogram:
+    // orange-red → red → crimson → plum.
+    const CLASS_COLORS      = ['#eb5700', '#d13641', '#ae205a', '#841b65'];
     const CLASS_LEN_FRAC    = [0.36, 0.58, 0.80, 1];    // share of the longest arrow length
     const CLASS_STROKE      = [1.5, 2.1, 2.7, 3.3];     // px
     const DECLINE_COLOR     = '#3a7bab';                // a value below zero (only possible after inflation) is drawn as a blue arrow pointing down

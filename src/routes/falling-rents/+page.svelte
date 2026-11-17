@@ -9,9 +9,11 @@
 	import ChartLabel from '$lib/chart-addons/ChartLabel.svelte';
 	import NetChangeMapChart from '$lib/maps/NetChangeMapChart.svelte';
 	import CityTrajectoryMultiples from '$lib/charts/CityTrajectoryMultiples.svelte';
+	import RentChangeHistogram from '$lib/charts/RentChangeHistogram.svelte';
 
 	import vis1Data from '$data/falling-rents/vis1_net_change_map.json';
 	import vis2Data from '$data/falling-rents/vis2_city_trajectories.json';
+	import vis3Data from '$data/falling-rents/vis3_rent_change_histogram.json';
 </script>
 
 
@@ -60,6 +62,17 @@
 		<ChartLabel text="Most cities climbed fast, then eased back – but every city is still above where it started in 2019" />
 		<CityTrajectoryMultiples data={vis2Data} />
 
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+		</p>
+
+		<p>
+			Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+		</p>
+
+		<ChartLabel text="Before inflation, average rents in occupied apartments fell in only 5 of 280 city-years since 2019" />
+		<RentChangeHistogram data={vis3Data} />
+
 		<div class="details">
 			<h2>Data &amp; Methodology</h2>
 			<p>
@@ -73,6 +86,9 @@
 			</p>
 			<p>
 				Arrows are drawn at city-centre points and grouped into four size classes: 0–25 per cent, 25–50, 50–75 and 75 or more for nominal change, and 0–10, 10–25, 25–40 and 40 or more after inflation, whose changes are smaller. A blue arrow pointing down marks a decline, which only happens after inflation (Toronto). Arrows lean only so they overlap less; the lean carries no information. The provincial boundaries are simplified and the map is cropped north of the cities in the data. Three insets enlarge Southern British Columbia, Southern Ontario, and Southern Québec, where cities are too close together to read at national scale; the two eastern insets are rotated 30 degrees, with a north arrow, and cities in an inset appear faintly on the national map. Ottawa and Gatineau, two halves of one metropolitan area about four kilometres apart, are nudged apart so both remain visible.
+			</p>
+			<p>
+				The histogram uses a different source, the <a href="https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/housing-data/data-tables/rental-market" target="_blank">CMHC Rental Market Survey</a>, which each October records the average rent in purpose-built rental apartments that are already occupied, for all unit types together. For each of 40 cities and each year from 2019 to 2025 we take the percentage change in that average since the previous October, round it to one decimal, and place the city-year in a one-point band; the height of a bar is the number of city-years in the band, and the colours split it by year. That makes 280 city-years in all. Windsor is left out because the survey has too few years for it, and St. Catharines–Niagara because its summary table cannot be used. A change in the average can also reflect new buildings entering the survey, not only rent increases for the same tenants. The after-inflation view removes the change in the consumer price index for the city's province between the two Octobers; since the index is not yet published beyond 2025, the latest year slightly understates inflation. Both views share one scale, so nothing moves when you switch between them.
 			</p>
 			<p>
 				You can find all the data and code for this article on our <a href="https://github.com/schoolofcities/renters" target="_blank">GitHub repository</a>.
