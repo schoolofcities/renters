@@ -1,0 +1,1 @@
+import{q as t,r as S,v as b,e as h,S as k}from"./DR6ooME4.js";function u(r,i){return r===i||r?.[k]===i}function c(r={},i,a,q){return t(()=>{var f,s;return S(()=>{f=s,s=[],h(()=>{r!==a(...s)&&(i(r,...s),f&&u(a(...f),r)&&i(null,...f))})}),()=>{b(()=>{s&&u(a(...s),r)&&i(null,...s)})}}),r}export{c as b};

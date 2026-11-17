@@ -1,6 +1,7 @@
 <script>
 	import '../../assets/global-styles.css';
 
+	import Password from '$lib/Password.svelte';
 	import Logo from '$lib/header-footer/LogoTop.svelte';
 	import TitleStandard from '$lib/header-footer/TitleStandard.svelte';
 	import AuthorDate from '$lib/header-footer/AuthorDate.svelte';
@@ -25,6 +26,8 @@
 
 
 <main>
+
+	<Password />
 
 	<Logo logoType="Blue" backgroundColor="var(--brandWhite)" />
 
