@@ -2,6 +2,7 @@
     import { geoIdentity, geoPath } from 'd3';
     import MapTooltip from '$lib/maps/MapTooltip.svelte';
     import RentTooltipBody from '$lib/chart-addons/RentTooltipBody.svelte';
+    import { FALLING_RENT_CLASS_COLORS, FALLING_RENT_DECLINE_COLOR } from '$lib/constants.js';
 
     let {
         frames,              // [{ id: 'main', ... }, { id: 'bc' | 'on' | 'qc', fit, extent, region, rotation, order, row, ... }] — see the plotting-data notebook
@@ -19,12 +20,11 @@
         scaleDown = null,    // pop-up: $ that fills it to the left
     } = $props();
 
-    // Four size classes: arrows get longer, thicker and darker with the class. A short slice of the spectrum used for the years in the histogram:
-    // orange-red → red → crimson → plum.
-    const CLASS_COLORS      = ['#eb5700', '#d13641', '#ae205a', '#841b65'];
+    // Four size classes: arrows get longer, thicker and darker with the class, stepping along a short slice of the histogram's spectrum (see constants.js).
+    const CLASS_COLORS      = FALLING_RENT_CLASS_COLORS;
     const CLASS_LEN_FRAC    = [0.36, 0.58, 0.80, 1];    // share of the longest arrow length
     const CLASS_STROKE      = [1.5, 2.1, 2.7, 3.3];     // px
-    const DECLINE_COLOR     = '#3a7bab';                // a value below zero (only possible after inflation) is drawn as a blue arrow pointing down
+    const DECLINE_COLOR     = FALLING_RENT_DECLINE_COLOR;                // a value below zero (only possible after inflation) is drawn as a blue arrow pointing down
     const FALLBACK_WIDTH    = 700;  // px — used before the container is first measured
     const PAD_X             = 12;   // px — left/right gutter around the national map
     const TIP_GAP           = 6;    // px — gap between the tallest glyph tip and the top edge of its frame

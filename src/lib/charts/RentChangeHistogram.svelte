@@ -16,10 +16,10 @@
 
     // ─── nominal / after inflation ─────────────────────────────────────────────
     const MEASURES = [
-        { label: 'Nominal', value: 'nominal' },
         { label: 'After inflation', value: 'real' },
+        { label: 'Nominal', value: 'nominal' },
     ];
-    let measure = $state('nominal');
+    let measure = $state('real');
     let real = $derived(measure === 'real');
 
     // One colour per year, a warm-to-cool spectrum from amber (2019) through orange, red and pink to purple (2025), all from the site's own palette. Each step is
@@ -82,7 +82,7 @@
 
 <div class="histogram">
     <ChartHeader
-        title="Yearly change in average rent paid{real ? ', after inflation' : ''}"
+        title="Yearly change in average rent paid{real ? ', after inflation' : ', nominal'}"
         titleLongest="Yearly change in average rent paid, after inflation"
         hint="Hover or tap a bar for the cities."
     >
@@ -165,8 +165,8 @@
     {/if}
 
     <p class="chart-source-note">
-        Source: CMHC Rental Market Survey (October), average rent in purpose-built rental apartments, and Statistics Canada consumer price indexes. Each coloured block is the number of cities
-        (of {meta.n_cities}) whose average rent changed by that much from the previous October, in one-point bands; after inflation, provincial prices are removed.
+        Source: CMHC Rental Market Survey (October) and Statistics Canada consumer price indexes. Each block counts the cities (of {meta.n_cities}) whose average rent in occupied
+        purpose-built apartments changed by that much since the previous October, in one-point bands.
     </p>
 
     <table class="sr-only">

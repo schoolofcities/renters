@@ -25,10 +25,11 @@
         yLabels = false,        // featured: print tick numbers inside the plot, top-left (the page does this for the first panel in each row only)
         active = false,         // tiny: reveal the y-axis numbers
         xTicks = [],            // featured: [{ label, i }] printed under the panel
+        color = '#bf2150',      // the city's line, coloured like its arrow on the map
     } = $props();
 
-    // Same pink as the map's strong arrows; Canada is a neutral grey
-    const C_LINE = '#bf2150';
+    // The line takes its colour from the caller (the size class of the city's net change); the Canada reference line is a neutral grey
+    let C_LINE = $derived(color);
     const C_REF  = '#c3c3c3';
 
     let featured = $derived(variant === 'featured');
@@ -122,7 +123,7 @@
             <circle cx={xScale(last.i)} cy={yScale(last.v)} r={featured ? (large ? 3.6 : compact ? 2.4 : 3) : 2.2} fill={C_LINE} />
         {/if}
         {#if featured && last}
-            <text x={xScale(last.i) + (compact ? 5 : 7)} y={yScale(last.v)} class="end-label" class:large class:compact dominant-baseline="middle">{fmtPct(last.v)}</text>
+            <text x={xScale(last.i) + (compact ? 5 : 7)} y={yScale(last.v)} class="end-label" class:large class:compact fill={C_LINE} dominant-baseline="middle">{fmtPct(last.v)}</text>
         {/if}
 
         <!-- tiny: numbers appear only on hover / tap, tucked inside the panel just under each gridline (as on the featured panels) -->
@@ -177,7 +178,6 @@
     .end-label {
         font-family: OpenSansBold;
         font-size: 12px;
-        fill: #bf2150;
     }
     .end-label.large { font-size: 14px; }
     .end-label.compact { font-size: 10px; }

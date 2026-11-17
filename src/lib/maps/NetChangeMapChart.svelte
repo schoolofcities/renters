@@ -10,12 +10,12 @@
 
     let { meta, cities, frames } = $derived(data);
 
-    // Nominal = rents as advertised; real = after inflation (starting rents restated in latest-CPI dollars)
+    // After inflation (starting rents restated in latest-CPI dollars) is the default view; nominal = rents as advertised
     const MEASURES = [
-        { label: 'Nominal', value: 'nominal' },
         { label: 'After inflation', value: 'real' },
+        { label: 'Nominal', value: 'nominal' },
     ];
-    let measure = $state('nominal');
+    let measure = $state('real');
 
     let real = $derived(measure === 'real');
 
@@ -24,7 +24,7 @@
     let scaleUp   = $derived(Math.ceil(Math.max(...deltas, 0) / 50) * 50);
     let scaleDown = $derived(Math.ceil(Math.max(...deltas.map(d => -d), 0) / 50) * 50);
     let legendBase  = $derived(`Net change in ${meta.bedroom} asking rent, ${meta.baseline_quarter} to ${meta.latest_quarter}`);
-    let legendTitle = $derived(`${legendBase}${real ? ', after inflation' : ''}`);
+    let legendTitle = $derived(`${legendBase}${real ? ', after inflation' : ', nominal'}`);
     // legend caption, split over two lines after inflation
     let keyTitle = $derived(real ? ['Net change in asking rent,', 'adjusted for inflation, %'] : ['Net change in asking rent, %']);
 </script>
@@ -52,9 +52,8 @@
     />
 
     <p class="chart-source-note">
-        Source: Statistics Canada, Table 46-10-0092-01 and consumer price indexes. Each arrow shows the net change in a city's {meta.bedroom} asking rent from {meta.baseline_quarter} to {meta.latest_quarter};
-        longer, darker arrows mean a larger increase, and a blue arrow pointing down marks a decline. After inflation, rents are in {meta.real_dollar_year} dollars.
-        Insets enlarge crowded areas. {meta.n_cities} cities shown.
+        Source: Statistics Canada, Table 46-10-0092-01 and consumer price indexes. Arrows show each city's net change in {meta.bedroom} asking rent, {meta.baseline_quarter} to {meta.latest_quarter}, in {meta.real_dollar_year} dollars after inflation;
+        longer, darker arrows mean a larger increase, blue a decline. Insets enlarge crowded areas.
     </p>
 </div>
 

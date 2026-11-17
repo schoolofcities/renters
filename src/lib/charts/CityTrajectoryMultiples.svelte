@@ -4,20 +4,22 @@
     import ChartHeader from '$lib/chart-addons/ChartHeader.svelte';
     import RentTooltipBody from '$lib/chart-addons/RentTooltipBody.svelte';
     import MapTooltip from '$lib/maps/MapTooltip.svelte';
+    import { FALLING_RENT_CLASS_COLORS, FALLING_RENT_DECLINE_COLOR } from '$lib/constants.js';
 
     /**
      * @prop {Object} data - vis2_city_trajectories JSON ({ meta, canada, featured, others })
+     * @prop {number[]} classBreaksNominal / classBreaksReal - the map's size-class thresholds (% change), so a line takes the colour of its city's arrow
      */
-    let { data } = $props();
+    let { data, classBreaksNominal = [25, 50, 75], classBreaksReal = [10, 25, 40] } = $props();
 
     let { meta, canada, featured, others } = $derived(data);
 
     // ─── nominal / after inflation ─────────────────────────────────────────────
     const MEASURES = [
-        { label: 'Nominal', value: 'nominal' },
         { label: 'After inflation', value: 'real' },
+        { label: 'Nominal', value: 'nominal' },
     ];
-    let measure = $state('nominal');
+    let measure = $state('real');
     let real = $derived(measure === 'real');
 
     const valuesOf = (rec) => (real ? rec.values_real : rec.values);
@@ -87,11 +89,25 @@
     let scaleDown = $derived(Math.ceil(Math.max(...deltas.map(d => -d), 0) / 50) * 50);
     const latestOf = (rec) => (real ? rec.real_pct : rec.latest);
 
+    // A city's line is coloured like its arrow on the map: by the size class of its latest net change (blue for a decline).
+    let classBreaks = $derived(real ? classBreaksReal : classBreaksNominal);
+    const colorOf = (rec) => {
+        const v = latestOf(rec);
+        return v < 0 ? FALLING_RENT_DECLINE_COLOR : FALLING_RENT_CLASS_COLORS[classBreaks.filter((b) => v >= b).length];
+    };
+    // compact key under the controls: the decline first, then one chip per class (its range, in %); Canada sits apart at the end
+    let keyItems = $derived([
+        { color: FALLING_RENT_DECLINE_COLOR, label: 'Decline' },
+        ...classBreaks.map((b, i) => ({ color: FALLING_RENT_CLASS_COLORS[i], label: `${i === 0 ? 0 : classBreaks[i - 1]}–${b}%` })),
+        { color: FALLING_RENT_CLASS_COLORS[classBreaks.length], label: `${classBreaks[classBreaks.length - 1]}%+` },
+        { color: '#c3c3c3', label: 'Canada', thin: true, apart: true },
+    ]);
+
 </script>
 
 <div class="trajectories">
     <ChartHeader
-        title="Net change in {meta.bedroom} asking rent since {meta.baseline_quarter}{real ? ', after inflation' : ''}"
+        title="Net change in {meta.bedroom} asking rent since {meta.baseline_quarter}{real ? ', after inflation' : ', nominal'}"
         titleLongest="Net change in {meta.bedroom} asking rent since {meta.baseline_quarter}, after inflation"
         hint="Hover or tap any chart for details."
     >
@@ -99,10 +115,14 @@
             <SegmentedToggle options={MEASURES} bind:value={measure} label="Show net change as" />
         {/snippet}
         {#snippet legend()}
-            <span class="swatches">
-                <span class="swatch"><svg width="22" height="8" aria-hidden="true"><line x1="1" x2="21" y1="4" y2="4" stroke="#bf2150" stroke-width="2.2" stroke-linecap="round" /></svg>City</span>
-                <span class="swatch"><svg width="22" height="8" aria-hidden="true"><line x1="1" x2="21" y1="4" y2="4" stroke="#c3c3c3" stroke-width="1.6" stroke-linecap="round" /></svg>Canada</span>
-            </span>
+            <div class="key" role="group" aria-label="Line colours: net change in asking rent">
+                {#each keyItems as k (k.label)}
+                    <span class="key-item" class:apart={k.apart}>
+                        <svg width="26" height="6" aria-hidden="true"><line x1="1.5" x2="24.5" y1="3" y2="3" stroke={k.color} stroke-width={k.thin ? 1.8 : 3} stroke-linecap="round" /></svg>
+                        <span class="key-label">{k.label}</span>
+                    </span>
+                {/each}
+            </div>
         {/snippet}
     </ChartHeader>
 
@@ -132,6 +152,7 @@
                         variant="featured"
                         large
                         title={canada.city}
+                        color={colorOf(canada)}
                         yLabels
                         xTicks={endTicks}
                     />
@@ -160,6 +181,7 @@
                             variant="featured"
                             compact={compactFeatured}
                             title={rec.city}
+                            color={colorOf(rec)}
                             yLabels={!compactFeatured && i % 2 === 0}
                             xTicks={compactFeatured ? [] : endTicks}
                         />
@@ -192,6 +214,7 @@
                             {yTicks}
                             variant="tiny"
                             title={rec.city}
+                            color={colorOf(rec)}
                             label={rec.short}
                             labelSize={tinyLabelSize}
                             active={active === rec.city}
@@ -223,8 +246,8 @@
     {/if}
 
     <p class="chart-source-note">
-        Source: Statistics Canada, Table 46-10-0092-01 and consumer price indexes. Each line is a city's net change in {meta.bedroom} asking rent from its own {meta.baseline_quarter} level, on one vertical scale;
-        the grey line is Canada. After inflation, rents are in {meta.real_dollar_year} dollars. {meta.n_cities} cities shown.
+        Source: Statistics Canada, Table 46-10-0092-01 and consumer price indexes. Each line is a city's net change in {meta.bedroom} asking rent from its own {meta.baseline_quarter} level,
+        in {meta.real_dollar_year} dollars after inflation; colours match the map's arrows; grey is Canada.
     </p>
 </div>
 
@@ -234,18 +257,11 @@
         margin: 1.5rem 0;
     }
 
-    .swatches {
-        display: inline-flex;
-        gap: 14px;
-        white-space: nowrap;
-    }
-    .swatch {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 13px;
-        color: var(--brandGray70);
-    }
+    /* compact key: a short line in each class colour with its range underneath, then the decline and Canada */
+    .key { display: inline-flex; gap: 8px; }
+    .key-item { display: inline-flex; flex-direction: column; align-items: center; gap: 3px; }
+    .key-item.apart { margin-left: 10px; }
+    .key-label { font-size: 11px; line-height: 13px; color: var(--brandGray70); white-space: nowrap; }
 
     .grid-measure { width: 100%; }
 

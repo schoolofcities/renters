@@ -1,7 +1,7 @@
 <script>
     /**
      * Body of the asking-rent pop-up shared by the map and the trajectory chart (the title is the card's own bold heading).
-     * A small two-row table — nominal, then after inflation — with the net change and the monthly asking rent, start → latest.
+     * A small two-row table — after inflation, then nominal — with the net change and the monthly asking rent, start → latest.
      * Under each row a thin bar shows the change in dollars: a line marks the starting rent, and the shading runs to the right of it
      * for an increase or to the left for a decrease. Almost every change is an increase, so the line sits near the left and most of the
      * bar is room for increases. Both rows (and every pop-up on the page) share one dollar scale.
@@ -16,7 +16,7 @@
         realYear,
         baseQuarter,
         latestQuarter,
-        measure = 'nominal',     // 'nominal' | 'real': which row to emphasise
+        measure = 'real',        // 'nominal' | 'real': which row to emphasise
         peak = null,             // { pct, quarter } — optional
         scaleUp = null,          // $ an increase needs to fill the bar to the right of the line — shared by all pop-ups so lengths compare across cities
         scaleDown = null,        // $ a decrease needs to fill the bar to the left of it (default: this city's own)
@@ -43,18 +43,18 @@
 <span class="when">{baseQuarter} → {latestQuarter}</span>
 
 <div class="rows">
-    <span class="lbl" class:on={measure === 'nominal'}>Nominal</span>
-    <span class="chg" class:on={measure === 'nominal'}>{pct(nominalPct)}</span>
-    <span class="usd" class:on={measure === 'nominal'}>{usd(baseRent)} → {usd(latestRent)}</span>
-    <span class="bar" aria-hidden="true">
-        <i class="fill" class:down={nominalShade.down} style="left: {nominalShade.left}%; width: {nominalShade.width}%"></i><i class="mid" style="left: {zero}%"></i>
-    </span>
-
     <span class="lbl" class:on={measure === 'real'}>After inflation</span>
     <span class="chg" class:on={measure === 'real'}>{pct(realPct)}</span>
     <span class="usd" class:on={measure === 'real'}>{usd(realBaseRent)} → {usd(latestRent)}</span>
     <span class="bar" aria-hidden="true">
         <i class="fill" class:down={realShade.down} style="left: {realShade.left}%; width: {realShade.width}%"></i><i class="mid" style="left: {zero}%"></i>
+    </span>
+
+    <span class="lbl" class:on={measure === 'nominal'}>Nominal</span>
+    <span class="chg" class:on={measure === 'nominal'}>{pct(nominalPct)}</span>
+    <span class="usd" class:on={measure === 'nominal'}>{usd(baseRent)} → {usd(latestRent)}</span>
+    <span class="bar" aria-hidden="true">
+        <i class="fill" class:down={nominalShade.down} style="left: {nominalShade.left}%; width: {nominalShade.width}%"></i><i class="mid" style="left: {zero}%"></i>
     </span>
 </div>
 
