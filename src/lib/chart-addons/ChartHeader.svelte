@@ -15,10 +15,12 @@
 </script>
 
 <header class="chart-header">
-    <div class="title-wrap">
-        <p class="chart-legend-title title">{title}</p>
-        {#if titleLongest}<p class="chart-legend-title title sizer" aria-hidden="true">{titleLongest}</p>{/if}
-    </div>
+    {#if title}
+        <div class="title-wrap">
+            <p class="chart-legend-title title">{title}</p>
+            {#if titleLongest}<p class="chart-legend-title title sizer" aria-hidden="true">{titleLongest}</p>{/if}
+        </div>
+    {/if}
     {#if hint}<p class="hint">{hint}</p>{/if}
     {#if controls || legend}
         <div class="row">
