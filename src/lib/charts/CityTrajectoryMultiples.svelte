@@ -118,7 +118,7 @@
             <div class="key" role="group" aria-label="Line colours: net change in asking rent">
                 {#each keyItems as k (k.label)}
                     <span class="key-item" class:apart={k.apart}>
-                        <svg width="26" height="6" aria-hidden="true"><line x1="1.5" x2="24.5" y1="3" y2="3" stroke={k.color} stroke-width={k.thin ? 1.8 : 3} stroke-linecap="round" /></svg>
+                        <svg width="26" height="6" aria-hidden="true"><line x1="1.5" x2="24.5" y1="3" y2="3" stroke={k.color} stroke-width={k.thin ? 2.2 : 3} stroke-linecap="round" /></svg>
                         <span class="key-label">{k.label}</span>
                     </span>
                 {/each}

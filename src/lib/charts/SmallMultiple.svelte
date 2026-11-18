@@ -101,7 +101,7 @@
                 {/if}
             {/each}
             {#each xTicks as t, k}
-                <text x={xScale(t.i)} y={innerH + 15} class="chart-axis-label tick" text-anchor={k === 0 ? 'start' : k === xTicks.length - 1 ? 'end' : 'middle'}>{t.label}</text>
+                <text x={xScale(t.i)} y={innerH + 11.5} class="chart-axis-label tick" text-anchor={k === 0 ? 'start' : k === xTicks.length - 1 ? 'end' : 'middle'}>{t.label}</text>
             {/each}
             <text x="0" y="-4" class="panel-title" class:large class:compact>{title}</text>
         {:else}
@@ -115,7 +115,7 @@
         {/if}
 
         {#if refPath}
-            <path d={refPath} fill="none" stroke={C_REF} stroke-width={featured ? 1.6 : 1.1} stroke-linecap="round" stroke-linejoin="round" />
+            <path d={refPath} fill="none" stroke={C_REF} stroke-width={featured ? 1.9 : 1.3} stroke-linecap="round" stroke-linejoin="round" />
         {/if}
         <path d={linePath} fill="none" stroke={C_LINE} stroke-width={featured ? (large ? 2.8 : compact ? 1.9 : 2.2) : active ? 1.8 : 1.4} stroke-linecap="round" stroke-linejoin="round" />
 

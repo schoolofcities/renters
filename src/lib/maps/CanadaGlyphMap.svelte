@@ -41,9 +41,8 @@
     const INSET_GAP         = 8;    // px — gap between neighbouring inset boxes
     const CAPTION_H         = 18;   // px — room under each inset box for its title
     const MIN_LABEL_MAIN    = 500;  // px — the national map shows city labels only when at least this wide
-    const KEY_SPACING       = 37;   // px — preferred distance between legend arrows (shrinks to fit the blank space on narrower screens)
-    const KEY_SPACING_MIN   = 31;   // px — still clears the class labels
-    const KEY_DECLINE_GAP   = 9;    // px — extra room after the decline arrow, whose label ("Decline") is wider than the class labels
+    const KEY_SPACING       = 32;   // px — distance between legend arrows, all equal (the decline's included); as close as the labels allow without touching
+    const KEY_SPACING_MIN   = 32;
     const KEY_TITLE_LINE    = 12;   // px — line height of the legend caption
 
     let containerWidth = $state(null);
@@ -64,7 +63,7 @@
     const classOfWith = (v, breaks) => (v < 0 ? 0 : breaks.filter(b => v >= b).length);   // 0 … breaks.length
     const classOf   = (v) => classOfWith(v, classBreaks);
     const lenFor    = (v) => maxLen * CLASS_LEN_FRAC[classOf(v)];
-    const strokeFor = (v) => (v < 0 ? CLASS_STROKE[1] : CLASS_STROKE[classOf(v)]) * (small ? 0.9 : 1);
+    const strokeFor = (v) => CLASS_STROKE[classOf(v)] * (small ? 0.9 : 1);   // a decline (class 0) is drawn exactly like the 0–10 arrow, just blue and pointing down
     const colorFor  = (v) => (v < 0 ? DECLINE_COLOR : CLASS_COLORS[classOf(v)]);
     // The longest an arrow can be in EITHER view, so the layout (headroom above each frame) is the same in both and nothing moves when the view is switched
     const layoutLen = (c) => maxLen * CLASS_LEN_FRAC[Math.max(classOfWith(c.pct_change, classBreaksNominal), classOfWith(c.real_pct, classBreaksReal))];
@@ -192,8 +191,10 @@
     //   • sits closer to another city's dot than to its own (which would read as that city's label).
     // If no spot within MAX_LABEL_DIST fits, the label is left off — hover / tap still names the city.
 
-    const SHAFT_CLEARANCE = 9;   // px along an arrow from its dot that stays off-limits to other cities' labels, even in pass 2
-    const MAX_LABEL_DIST = 24;   // px — farthest the nearest edge of a label may be from its dot
+    const SHAFT_CLEARANCE = 9;   // px along an arrow from its dot that stays off-limits to other cities' labels, even when crossings are tolerated
+    const MAX_LABEL_DIST = 34;   // px — farthest the nearest edge of a label may be from its dot
+    const LEADER_MIN = 8;        // px — a label further than this from its dot gets a thin leader line, so there is no doubt whose it is
+    const CLEAR_MARGIN = 2.5;    // px — in the first passes the label must be at least this much nearer its own dot than to any other dot
 
     function rectHitsCircle(r, cx, cy, rad) {
         const nx = Math.max(r[0], Math.min(cx, r[2])), ny = Math.max(r[1], Math.min(cy, r[3]));
@@ -213,13 +214,13 @@
             const text = entry.text ?? cities[g.i].city;
             const w = text.length * cw + 2;
 
-            // Every spot beside / below the dot, nearest first
+            // Every spot beside / below / above the dot, nearest first
             const spots = [];
-            for (const dy of [4, 15, -6, 26, -17]) {
+            for (const dy of [4, 15, -6, 26, -17, 37, -28, 48, -39]) {
                 spots.push({ anchor: 'start', x: g.x + 7, y: g.y + dy, x0: g.x + 7 });
                 spots.push({ anchor: 'end',   x: g.x - 7, y: g.y + dy, x0: g.x - 7 - w });
             }
-            for (const dy of [16, 28]) {
+            for (const dy of [16, 28, 40, 52]) {
                 spots.push({ anchor: 'middle', x: g.x,     y: g.y + dy, x0: g.x - w / 2 });
                 spots.push({ anchor: 'start',  x: g.x + 4, y: g.y + dy, x0: g.x + 4 });
                 spots.push({ anchor: 'end',    x: g.x - 4, y: g.y + dy, x0: g.x - 4 - w });
@@ -231,31 +232,59 @@
             }
             spots.sort((a, b) => a.d - b.d);
 
-            // Pass 1: spots that touch nothing. Pass 2 (major cities only): a spot may cross another city's arrow shaft — never its dot,
-            // never this city's own arrow — because the label's white halo keeps it readable and a missing major city reads worse than a crossing.
-            for (const pass of entry.major ? [1, 2] : [1]) {
-                let done = false;
+            // Tried in order: (1) touches nothing and is clearly nearest its own dot; (2) the same, with the margin waived;
+            // then, major cities only, (3)/(4) the same again but a spot may cross another city's arrow shaft — never its dot, never this
+            // city's own arrow — because the label's white halo keeps it readable and a missing major city reads worse than a crossing.
+            const passes = entry.major
+                ? [{ cross: false, margin: CLEAR_MARGIN }, { cross: false, margin: 0 }, { cross: true, margin: CLEAR_MARGIN }, { cross: true, margin: 0 },
+                   { cross: true, margin: null, maxD: 60 }]   // last resort for a major city: anywhere it fits, tied to its dot by a leader line
+                : [{ cross: false, margin: CLEAR_MARGIN }, { cross: false, margin: 0 }];
+            let done = false;
+            for (const pass of passes) {
                 for (const c of spots) {
-                    if (c.d > MAX_LABEL_DIST) break;
+                    if (c.d > (pass.maxD ?? MAX_LABEL_DIST)) break;
                     const r = c.r;
                     if (r[0] < bounds.x0 || r[2] > bounds.x1 || r[1] < bounds.y0 || r[3] > bounds.y1) continue;
                     if (placed.some(p => r[0] < p[2] && r[2] > p[0] && r[1] < p[3] && r[3] > p[1])) continue;
                     if (allSamples.some(({ s, owner, t }) => {
                         if (!rectHitsCircle(r, s[0], s[1], s[2])) return false;
                         if (owner === g.i) return t >= 6;                     // a glyph's own first few pixels (its base) don't count against its label
-                        return pass === 1 || t < SHAFT_CLEARANCE;             // pass 2 tolerates other arrows' shafts but not their dots
+                        return !pass.cross || t < SHAFT_CLEARANCE;
                     })) continue;
-                    // must read as THIS city's label: no other city's dot may be nearer to it than ours (ties go to whichever dot is nearer the label's centre)
                     const own = distToRect(r, g.x, g.y);
-                    const cx = (r[0] + r[2]) / 2, cy = (r[1] + r[3]) / 2;
-                    const ownC = Math.hypot(cx - g.x, cy - g.y);
-                    if (glyphs.some(o => {
-                        if (o.i === g.i) return false;
-                        const d = distToRect(r, o.x, o.y);
-                        return d < own - 0.5 || (Math.abs(d - own) <= 0.5 && Math.hypot(cx - o.x, cy - o.y) <= ownC);
-                    })) continue;
+                    const nx = Math.max(r[0], Math.min(g.x, r[2])), ny = Math.max(r[1], Math.min(g.y, r[3]));   // the point of the label nearest the dot
+                    if (pass.margin !== null) {
+                        if (own > LEADER_MIN) {
+                            // a leader line will tie this label to its dot, so it may sit further away — but the line must not run past another city's dot,
+                            // and no other dot may touch the label
+                            const segLen2 = (nx - g.x) ** 2 + (ny - g.y) ** 2 || 1;
+                            if (glyphs.some(o => {
+                                if (o.i === g.i) return false;
+                                if (distToRect(r, o.x, o.y) < 4) return true;
+                                const t = Math.max(0, Math.min(1, ((o.x - g.x) * (nx - g.x) + (o.y - g.y) * (ny - g.y)) / segLen2));
+                                return Math.hypot(o.x - (g.x + t * (nx - g.x)), o.y - (g.y + t * (ny - g.y))) < o.radius + 3;
+                            })) continue;
+                        } else {
+                            // right beside its dot: no other city's dot may be as near to the label as ours
+                            const cx = (r[0] + r[2]) / 2, cy = (r[1] + r[3]) / 2;
+                            const ownC = Math.hypot(cx - g.x, cy - g.y);
+                            if (glyphs.some(o => {
+                                if (o.i === g.i) return false;
+                                const d = distToRect(r, o.x, o.y);
+                                if (pass.margin > 0) return d < own + pass.margin;
+                                return d < own - 0.5 || (Math.abs(d - own) <= 0.5 && Math.hypot(cx - o.x, cy - o.y) <= ownC);
+                            })) continue;
+                        }
+                    }
                     placed.push(r);
-                    labels.push({ key: g.i, x: c.x, y: c.y, anchor: c.anchor, text });
+                    // far from its dot? a thin leader line makes the attribution explicit
+                    let lead = null;
+                    if (own > LEADER_MIN) {
+                        const len = Math.hypot(nx - g.x, ny - g.y) || 1;
+                        const gapStart = g.radius + 1.5;
+                        lead = { x1: g.x + (nx - g.x) / len * gapStart, y1: g.y + (ny - g.y) / len * gapStart, x2: nx - (nx - g.x) / len * 1.5, y2: ny - (ny - g.y) / len * 1.5 };
+                    }
+                    labels.push({ key: g.i, x: c.x, y: c.y, anchor: c.anchor, text, lead });
                     done = true;
                     break;
                 }
@@ -312,7 +341,7 @@
                 { x1: low[1][0], y1: low[1][1], x2: land(low[1][0] + LEADER_SPREAD), y2: b.box.y },
             ] : [];
             return {
-                ...fr, title: b.f.title, box: b.box, lines, north, ringMaxX: Math.max(...ring.map(p => p[0])),
+                ...fr, title: b.f.title, box: b.box, lines, north, ringMaxX: Math.max(...ring.map(p => p[0])), ringPts: ring,
                 ring: 'M' + ring.map(p => p.join(',')).join('L') + 'Z',
             };
         });
@@ -326,23 +355,36 @@
             ...classKeyValues.map((v, j) => ({ v, label: classLabels[j] })),
         ];
         const n = keyItems.length - 1;
-        const keyW = (j) => j * spacing + (j > 0 ? KEY_DECLINE_GAP : 0);    // x offset of item j
+        const keyW = (j) => j * spacing;    // x offset of legend slot j: every slot the same distance apart, the decline's included
         if (overlay && L.bcBox) {
-            // Right edge of the plot, over the Atlantic. Spacing shrinks on narrower screens so the legend stays clear of Quebec's outline.
-            const ringRight = Math.max(...insetFrames.filter(f => f.id !== 'bc').map(f => f.ringMaxX));
+            // Right edge of the plot, over the Atlantic. Spacing shrinks on narrower screens so the legend stays clear of Quebec's outline —
+            // measured where the legend actually is (the outline's lower part), not at its far corner higher up.
+            const keyTop = L.mainBottom - 20 - maxLen * CLASS_LEN_FRAC[0] - 8;   // the legend's first slot holds the shortest arrow, so only the outline's part below that matters
+            let ringRight = -Infinity;
+            for (const f of insetFrames.filter(f => f.id !== 'bc')) {
+                f.ringPts.forEach(([x1, y1], i) => {
+                    const [x2, y2] = f.ringPts[(i + 1) % f.ringPts.length];
+                    for (let t = 0; t <= 1; t += 0.05) if (y1 + (y2 - y1) * t >= keyTop) ringRight = Math.max(ringRight, x1 + (x2 - x1) * t);
+                });
+            }
+            if (!isFinite(ringRight)) ringRight = Math.max(...insetFrames.filter(f => f.id !== 'bc').map(f => f.ringMaxX));
             const rightEdge = width - PAD_X - 14;
-            spacing = Math.max(KEY_SPACING_MIN, Math.min(KEY_SPACING, (rightEdge - 16 - KEY_DECLINE_GAP - ringRight) / n));
+            spacing = Math.max(KEY_SPACING_MIN, Math.min(KEY_SPACING, (rightEdge - 14 - ringRight) / n));
             origin = { x: rightEdge - keyW(n), y: L.mainBottom - 20 };
         } else if (overlay) {
             origin = { x: PAD_X + 14, y: L.mainBottom - 22 };
         } else {
             origin = { x: PAD_X + 14, y: L.keyH - 30 - KEY_TITLE_LINE };
         }
-        // a downward arrow starts higher, so the whole arrow sits above the legend's baseline like the others
-        const key = keyItems.map((it, j) => ({
-            ...makeGlyph(origin.x + keyW(j), it.v < 0 ? origin.y - Math.abs(uy) * lenFor(it.v) : origin.y, it.v),
-            label: it.label,
-        }));
+        // Each arrow is centred on its slot (the labels sit under the slot centre); a downward arrow starts higher, so the whole arrow sits above the legend's baseline like the others
+        const key = keyItems.map((it, j) => {
+            const dir = it.v < 0 ? -1 : 1, len = lenFor(it.v);
+            const slotX = origin.x + keyW(j);
+            return {
+                ...makeGlyph(slotX - dir * ux * len / 2, it.v < 0 ? origin.y - Math.abs(uy) * len : origin.y, it.v),
+                label: it.label, lx: slotX - (it.v < 0 ? 5 : 0),   // "Decline" is the widest label: nudged left so it never runs into "0–10"
+            };
+        });
         const keyTitleX = overlay ? origin.x + keyW(n) + 18 : origin.x - 18;
         return { mainFrame, insetFrames, key, origin, keyTitleX };
     });
@@ -401,6 +443,7 @@
     {/each}
 
     {#each frame.labels as l (l.key)}
+        {#if l.lead}<line class="label-leader" x1={l.lead.x1} y1={l.lead.y1} x2={l.lead.x2} y2={l.lead.y2} />{/if}
         <text class="chart-axis-label city-label" x={l.x} y={l.y} text-anchor={l.anchor}>{l.text}</text>
     {/each}
 {/snippet}
@@ -434,7 +477,7 @@
         <g class="key">
             {#each drawn.key as g}
                 {@render shape(g)}
-                <text class="chart-axis-label key-label" x={g.x} y={drawn.origin.y + 14} text-anchor="middle">{g.label}</text>
+                <text class="chart-axis-label key-label" x={g.lx} y={drawn.origin.y + 14} text-anchor="middle">{g.label}</text>
             {/each}
             <text class="chart-axis-label key-label key-title" x={drawn.keyTitleX} y={drawn.origin.y + 28} text-anchor={overlay ? 'end' : 'start'}>
                 {#each keyTitle as line, i}<tspan x={drawn.keyTitleX} dy={i === 0 ? 0 : KEY_TITLE_LINE}>{line}</tspan>{/each}
@@ -529,6 +572,8 @@
     .north line { stroke: var(--brandGray60); stroke-width: 1.2; }
     .north polygon { fill: var(--brandGray60); }
     .north text { fill: var(--brandGray70); }
+
+    .label-leader { stroke: var(--brandGray60); stroke-width: 0.75; pointer-events: none; }
 
     /* Halo keeps labels legible over spikes and borders */
     .city-label {

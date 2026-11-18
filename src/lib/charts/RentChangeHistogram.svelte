@@ -63,11 +63,15 @@
     const fmtTick = (t) => (t === 0 ? '0%' : `${signed(t)}%`);
 
     // ─── hover / tap ───────────────────────────────────────────────────────────
-    let hoverYear = $state(null);        // year index highlighted (from a segment or a legend swatch)
+    let hoverYear = $state(null);        // year index highlighted while the pointer is over a segment or a legend swatch
+    let pinYear   = $state(null);        // year index kept highlighted by tapping / clicking its swatch (the only way on a touch screen)
+    let activeYear = $derived(hoverYear ?? pinYear);
     let tooltip   = $state(null);        // { x, y, bi, yi }
 
     function show(seg, x, y) { hoverYear = seg.yi; tooltip = { x, y, bi: seg.bi, yi: seg.yi }; }
     function hide() { hoverYear = null; tooltip = null; }
+    function clearAll() { hide(); pinYear = null; }               // a tap on empty space clears everything
+    function togglePin(i, e) { e.stopPropagation(); tooltip = null; hoverYear = null; pinYear = pinYear === i ? null : i; }
     function onEnter(seg, e) { if (e.pointerType === 'mouse') show(seg, e.clientX, e.clientY); }
     function onMove(seg, e) { if (e.pointerType === 'mouse' && tooltip) tooltip = { ...tooltip, x: e.clientX, y: e.clientY }; }
     function onLeave(e) { if (e.pointerType === 'mouse') hide(); }
@@ -92,22 +96,25 @@
         {#snippet legend()}
             <div class="key" role="group" aria-label="Year colours">
                 {#each meta.years as y, i (y)}
-                    <span
+                    <button
+                        type="button"
                         class="key-item"
-                        class:dim={hoverYear !== null && hoverYear !== i}
+                        class:dim={activeYear !== null && activeYear !== i}
+                        aria-pressed={pinYear === i}
+                        aria-label="Highlight {y}"
                         onpointerenter={(e) => { if (e.pointerType === 'mouse') hoverYear = i; }}
                         onpointerleave={(e) => { if (e.pointerType === 'mouse') hoverYear = null; }}
-                        role="presentation"
+                        onclick={(e) => togglePin(i, e)}
                     >
                         <span class="chip" style="background: {YEAR_COLORS[i]}"></span>
                         <span class="yr">{y}</span>
-                    </span>
+                    </button>
                 {/each}
             </div>
         {/snippet}
     </ChartHeader>
 
-    <div class="plot" bind:clientWidth={width} onclick={hide} role="presentation">
+    <div class="plot" bind:clientWidth={width} onclick={clearAll} role="presentation">
         {#if width > 0}
             <svg {width} {height} role="img"
                  aria-label="Stacked histogram of {meta.n_city_years} city-years: yearly change in average rent, {real ? 'after inflation' : 'nominal'}, one colour per year. Median {signed(meta.medians[measure], 1)}%; rent fell in {meta.declines[measure]} of them.">
@@ -126,7 +133,7 @@
                         <rect
                             x={s.x} y={s.y} width={s.w} height={s.h}
                             fill={YEAR_COLORS[s.yi]}
-                            opacity={hoverYear === null || hoverYear === s.yi ? 1 : DIM}
+                            opacity={activeYear === null || activeYear === s.yi ? 1 : DIM}
                             onpointerenter={(e) => onEnter(s, e)}
                             onpointermove={(e) => onMove(s, e)}
                             onpointerleave={onLeave}
@@ -169,15 +176,17 @@
         purpose-built apartments changed by that much since the previous October, in one-point bands.
     </p>
 
-    <table class="sr-only">
-        <caption>Number of cities by yearly change in average rent, {real ? 'after inflation' : 'nominal'}, by year</caption>
-        <thead><tr><th>Change</th>{#each meta.years as y}<th>{y}</th>{/each}</tr></thead>
-        <tbody>
-            {#each tableRows as r}
-                <tr><th>{r.range}</th>{#each r.counts as n}<td>{n}</td>{/each}</tr>
-            {/each}
-        </tbody>
-    </table>
+    <div class="sr-only">
+            <table>
+            <caption>Number of cities by yearly change in average rent, {real ? 'after inflation' : 'nominal'}, by year</caption>
+            <thead><tr><th>Change</th>{#each meta.years as y}<th>{y}</th>{/each}</tr></thead>
+            <tbody>
+                {#each tableRows as r}
+                    <tr><th>{r.range}</th>{#each r.counts as n}<td>{n}</td>{/each}</tr>
+                {/each}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <style>
@@ -212,9 +221,16 @@
         flex-direction: column;
         align-items: stretch;
         gap: 2px;
-        cursor: default;
+        margin: 0;
+        padding: 4px 0 2px;            /* a taller touch target than the swatch alone */
+        border: 0;
+        background: none;
+        font: inherit;
+        cursor: pointer;
+        touch-action: manipulation;
         transition: opacity 0.12s;
     }
+    .key-item:focus-visible { outline: 2px solid var(--brandGray80); outline-offset: 1px; }
     .key-item.dim { opacity: 0.35; }
     .key .chip { width: 100%; min-width: 30px; height: 10px; }
     .yr { font-size: 11px; line-height: 14px; color: var(--brandGray70); text-align: center; }

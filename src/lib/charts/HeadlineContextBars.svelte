@@ -119,6 +119,7 @@
 
 <div class="hc" bind:this={root}>
     <ChartHeader
+        title="A headline gives some context if it says the change is small, compares it with the past or a peak, or says rents are still high"
         hint="Hover or tap a line to read the headline."
     >
         {#snippet legend()}
@@ -139,14 +140,17 @@
 
                 <div class="bar-wrap">
                     {#if width > 0}
-                        <svg
-                            {width} height={svgH}
+                        <!-- a custom keyboard widget (arrow keys step through the headlines), so it takes focus and key events deliberately -->
+                        <!-- svelte-ignore a11y_no_noninteractive_tabindex, a11y_no_noninteractive_element_interactions -->
+                        <div
+                            class="bar-focus"
                             role="application"
                             tabindex="0"
                             aria-label="{g.label}: {g.n} headlines, one line each; {g.n_context} have some context. Use the left and right arrow keys to read them one by one."
                             onkeydown={(e) => onKey(ri, e)}
                             onblur={onBlur}
                         >
+                        <svg {width} height={svgH} aria-hidden="true">
                             {#each g.headlines as h, i (i)}
                                 {@const isSel = sel && sel.row === ri && sel.idx === i}
                                 {@const dim = sel && sel.row === ri && !isSel}
@@ -169,6 +173,7 @@
                                 onclick={(e) => onClick(ri, e)}
                             />
                         </svg>
+                        </div>
 
                         {#if sel && sel.row === ri}
                             {@const h = g.headlines[sel.idx]}
@@ -201,8 +206,8 @@
     <p class="sr-only" aria-live="polite">{announce}</p>
 
     <p class="chart-source-note">
-        Source: headlines containing “rent” from {meta.n_outlets} Canadian news outlets, {meta.date_range[0].slice(0, 4)}–{meta.date_range[1].slice(0, 4)} (Media Cloud), classified by a language model. “Some context” means the headline says the change is
-        small, compares it with the past or a peak, or says rents are still high or unaffordable; a figure alone does not count. The rising bar is a random sample.
+        Source: headlines containing “rent” from {meta.n_outlets} Canadian news outlets, {meta.date_range[0].slice(0, 4)}–{meta.date_range[1].slice(0, 4)} (Media Cloud), classified by a language model. A figure alone does not count as context.
+        The rising bar is a random sample.
     </p>
 </div>
 
@@ -231,8 +236,8 @@
 
     .bar-wrap { position: relative; }
     svg { display: block; overflow: visible; touch-action: pan-y; cursor: pointer; }
-    svg:focus { outline: none; }
-    svg:focus-visible { outline: 2px solid var(--brandGray80); outline-offset: 2px; }
+    .bar-focus:focus { outline: none; }
+    .bar-focus:focus-visible { outline: 2px solid var(--brandGray80); outline-offset: 2px; }
     .hit { touch-action: pan-y; }
 
     /* year/colour key */
