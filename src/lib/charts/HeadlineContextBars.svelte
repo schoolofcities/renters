@@ -61,6 +61,7 @@
     const fmtDate = (iso) => { const [y, m, d] = iso.split('-').map(Number); return `${MONTHS[m - 1]} ${d}, ${y}`; };
     const directionTag = (g) => g.label;                     // "Rents falling" / "Rents rising"
     const pct = (v) => `${Math.round(v)}%`;
+    const listOf = (names) => (names.length > 1 ? `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}` : names.join(''));
 
     // ─── hover / tap / keyboard ────────────────────────────────────────────────
     // sel = { row, idx, pinned }: the tick whose card is open. A pinned card stays open when the pointer leaves (click, tap, or keyboard).
@@ -135,15 +136,14 @@
         title="A headline gives some context if it says the change is small, compares it with the past or a peak, or says rents are still high"
         hint="Hover or tap a line to read the headline."
     >
-        {#snippet legend()}
-            <div class="key" role="group" aria-label="Colours">
-                <span class="key-item"><span class="chip" style="background: {COLOR_CONTEXT}"></span>Some context</span>
-                <span class="key-item"><span class="chip" style="background: {COLOR_NONE}"></span>Little context</span>
-            </div>
-        {/snippet}
     </ChartHeader>
 
     <div class="rows" bind:clientWidth={width}>
+        <!-- on the first row's title line (right-aligned); on a narrow screen there is no room beside the title, so it sits just above the rows -->
+        <div class="key" class:inline={compact} role="group" aria-label="Colours">
+            <span class="key-item"><span class="chip" style="background: {COLOR_CONTEXT}"></span>Some context</span>
+            <span class="key-item"><span class="chip" style="background: {COLOR_NONE}"></span>Little context</span>
+        </div>
         {#each groups as g, ri (g.id)}
             <section class="row" aria-label="{g.label}: {g.n_context} of {g.n} headlines have some context">
                 <p class="row-title"><span class="dir">{g.label}</span><span class="muted">{g.n} headlines</span></p>
@@ -218,7 +218,7 @@
     <p class="sr-only" aria-live="polite">{announce}</p>
 
     <p class="chart-source-note">
-        Source: headlines containing “rent” from {meta.n_outlets} Canadian news outlets, {meta.date_range[0].slice(0, 4)}–{meta.date_range[1].slice(0, 4)} (Media Cloud), classified by a language model. A figure alone does not count as context.
+        Source: headlines containing “rent” from {meta.n_outlets} Canadian news outlets, mostly {listOf(meta.top_outlets)} (not every outlet in the country), {meta.date_range[0].slice(0, 4)}–{meta.date_range[1].slice(0, 4)} (Media Cloud), classified by a language model. A figure alone does not count as context.
         Comparisons with an earlier level are coded as “still above” it, since after inflation rents are higher than in 2019 nearly everywhere; Toronto is the one city where they are lower.
         The rising bar is a random sample.
     </p>
@@ -230,9 +230,9 @@
         margin: 1rem 0 1.5rem;
     }
 
-    .rows { width: 100%; }
+    .rows { width: 100%; position: relative; }
     .row { margin-top: 10px; }
-    .row:first-child { margin-top: 0; }
+    .row:first-of-type { margin-top: 0; }
 
     .row p { margin: 0; padding: 0; font-family: OpenSans, sans-serif; line-height: 20px; font-size: 14px; color: var(--brandGray80); text-align: left; }
     .row-stat { display: flex; align-items: center; gap: 6px; margin-top: 1px; }
@@ -248,7 +248,8 @@
     .hit { touch-action: pan-y; }
 
     /* year/colour key */
-    .key { display: inline-flex; gap: 14px; flex-wrap: wrap; }
+    .key { position: absolute; top: 0; right: 0; height: 20px; display: flex; align-items: center; gap: 14px; }
+    .key.inline { position: static; height: auto; margin-bottom: 8px; }
     .key-item { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--brandGray70); }
     .chip { display: inline-block; width: 10px; height: 10px; flex: none; }
 

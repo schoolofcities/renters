@@ -25,8 +25,8 @@
     let scaleDown = $derived(Math.ceil(Math.max(...deltas.map(d => -d), 0) / 50) * 50);
     let legendBase  = $derived(`Net change in ${meta.bedroom} asking rent, ${meta.baseline_quarter} to ${meta.latest_quarter}`);
     let legendTitle = $derived(`${legendBase}${real ? ', after inflation' : ', before inflation'}`);
-    // legend caption, split over two lines after inflation
-    let keyTitle = $derived(real ? ['Net change in asking rent,', 'adjusted for inflation, %'] : ['Net change in asking rent, %']);
+    // legend caption: two lines in both views, so the legend never changes shape
+    let keyTitle = $derived(['Net change in asking rent,', real ? 'after inflation, %' : 'before inflation, %']);
 </script>
 
 <div class="net-change-map">

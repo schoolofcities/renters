@@ -20,8 +20,8 @@
 </script>
 
 <SeoHead
-	title="Falling Rents in Canada's Cities"
-	description="Asking rents have started to fall in many Canadian cities, but even after inflation they remain above their 2019 levels in almost every one."
+	title="Are Rents Really Falling in Canada?"
+	description="In virtually all cities across the country, asking rents remain well above their 2019 amounts."
 	path="/falling-rents"
 />
 
@@ -32,8 +32,8 @@
 	<Logo logoType="Blue" backgroundColor="var(--brandWhite)" />
 
 	<TitleStandard
-		title="Falling Rents in Canada's Cities"
-		subtitle="How much of the run-up has actually been reversed?"
+		title="Are Rents Really Falling in Canada?"
+		subtitle="In virtually all cities across the country, asking rents remain well above their 2019 amounts."
 	/>
 
 	<div class="text">
