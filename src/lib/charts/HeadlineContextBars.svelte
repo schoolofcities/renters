@@ -27,11 +27,24 @@
     const padY = 6;                                          // room above and below the ticks for the selected tick to stand taller
     let svgH = $derived(barH + padY * 2);
     let maxN = $derived(Math.max(...groups.map((g) => g.n)));
-    let step = $derived(Math.max(1, (width - SEP) / maxN));  // one tick width for both bars, so the two bar lengths compare directly
-    let gap = $derived(Math.min(2, Math.max(0.7, step * 0.3)));
 
-    const sepOf = (g) => (g.n_context > 0 && g.n_context < g.n ? SEP : 0);
-    const xOf = (g, i) => i * step + (i >= g.n_context ? sepOf(g) : 0);
+    // Every tick, gap and separator is a whole number of DEVICE pixels, so all the lines come out exactly the same width and the same distance apart
+    // (fractional widths made some lines look thicker than others, most visibly in Firefox). One tick width for both bars, so the two lengths compare directly.
+    let dpr = $state(1);
+    $effect(() => {
+        const update = () => { dpr = window.devicePixelRatio || 1; };
+        update();
+        window.addEventListener('resize', update);
+        return () => window.removeEventListener('resize', update);
+    });
+    let sepD  = $derived(Math.round(SEP * dpr));
+    let stepD = $derived(Math.max(2, Math.floor((width * dpr - sepD) / maxN)));      // device px per headline
+    let gapD  = $derived(Math.min(2, Math.max(1, Math.round(stepD * 0.22))));        // device px of white between lines
+    let step  = $derived(stepD / dpr);
+    let tickW = $derived((stepD - gapD) / dpr);
+
+    const sepOf = (g) => (g.n_context > 0 && g.n_context < g.n ? sepD / dpr : 0);
+    const xOf = (g, i) => (i * stepD + (i >= g.n_context && sepOf(g) > 0 ? sepD : 0)) / dpr;
 
     // x (px from the left of the bar) -> index of the tick under it, snapping across the gaps so the pointer never falls between two ticks
     function indexAt(g, x) {
@@ -133,10 +146,9 @@
     <div class="rows" bind:clientWidth={width}>
         {#each groups as g, ri (g.id)}
             <section class="row" aria-label="{g.label}: {g.n_context} of {g.n} headlines have some context">
-                <div class="row-head">
-                    <p class="row-title"><span class="dir">{g.label}</span><span class="muted">{g.n} headlines</span></p>
-                    <p class="row-stat"><span class="pct">{pct(g.share)}</span> have some context<span class="muted">({g.n_context} of {g.n})</span></p>
-                </div>
+                <p class="row-title"><span class="dir">{g.label}</span><span class="muted">{g.n} headlines</span></p>
+                <!-- the red section is the left end of the bar, so its figure sits straight above it -->
+                <p class="row-stat"><span class="chip" style="background: {COLOR_CONTEXT}"></span><span class="pct">{pct(g.share)}</span> have some context<span class="muted">({g.n_context} of {g.n})</span></p>
 
                 <div class="bar-wrap">
                     {#if width > 0}
@@ -150,13 +162,13 @@
                             onkeydown={(e) => onKey(ri, e)}
                             onblur={onBlur}
                         >
-                        <svg {width} height={svgH} aria-hidden="true">
+                        <svg {width} height={svgH} aria-hidden="true" shape-rendering="crispEdges">
                             {#each g.headlines as h, i (i)}
                                 {@const isSel = sel && sel.row === ri && sel.idx === i}
                                 {@const dim = sel && sel.row === ri && !isSel}
                                 <rect
-                                    x={xOf(g, i) + gap / 2} y={isSel ? padY - 5 : padY}
-                                    width={Math.max(0.8, step - gap)} height={isSel ? barH + 10 : barH}
+                                    x={xOf(g, i)} y={isSel ? padY - 5 : padY}
+                                    width={tickW} height={isSel ? barH + 10 : barH}
                                     fill={h.c ? COLOR_CONTEXT : COLOR_NONE}
                                     opacity={dim ? DIM : 1}
                                 />
@@ -207,6 +219,7 @@
 
     <p class="chart-source-note">
         Source: headlines containing “rent” from {meta.n_outlets} Canadian news outlets, {meta.date_range[0].slice(0, 4)}–{meta.date_range[1].slice(0, 4)} (Media Cloud), classified by a language model. A figure alone does not count as context.
+        Comparisons with an earlier level are coded as “still above” it, since after inflation rents are higher than in 2019 nearly everywhere; Toronto is the one city where they are lower.
         The rising bar is a random sample.
     </p>
 </div>
@@ -221,18 +234,12 @@
     .row { margin-top: 10px; }
     .row:first-child { margin-top: 0; }
 
-    .row-head {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 0 16px;
-    }
-    .row-head p { margin: 0; padding: 0; font-family: OpenSans, sans-serif; line-height: 20px; font-size: 14px; color: var(--brandGray80); }
+    .row p { margin: 0; padding: 0; font-family: OpenSans, sans-serif; line-height: 20px; font-size: 14px; color: var(--brandGray80); text-align: left; }
+    .row-stat { display: flex; align-items: center; gap: 6px; margin-top: 1px; }
     .dir { font-family: OpenSansBold, sans-serif; font-weight: normal; font-size: 15px; margin-right: 8px; color: var(--brandGray90); }
-    .pct { font-family: OpenSansBold, sans-serif; font-weight: normal; font-size: 15px; color: var(--brandGray90); }
+    .pct { font-family: OpenSansBold, sans-serif; font-weight: normal; font-size: 15px; color: var(--brandGray90); margin-right: -2px; }
     .muted { font-size: 12.5px; color: var(--brandGray60); }
-    .row-stat .muted { margin-left: 6px; }
+    .row-stat .muted { margin-left: 2px; }
 
     .bar-wrap { position: relative; }
     svg { display: block; overflow: visible; touch-action: pan-y; cursor: pointer; }

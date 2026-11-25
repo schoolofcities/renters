@@ -17,7 +17,7 @@
     // ─── nominal / after inflation ─────────────────────────────────────────────
     const MEASURES = [
         { label: 'After inflation', value: 'real' },
-        { label: 'Nominal', value: 'nominal' },
+        { label: 'Before inflation', value: 'nominal' },
     ];
     let measure = $state('real');
     let real = $derived(measure === 'real');
@@ -56,27 +56,28 @@
     let active  = $state(null);   // city name
     let tooltip = $state(null);   // { x, y, rec }
 
-    function activate(rec, x, y) {
+    // The pop-up hangs off the whole panel (above it, or below if there is no room above) rather than off the pointer, so it never covers the graph it describes.
+    function activate(rec, el) {
+        const r = el.getBoundingClientRect();
         active = rec.city;
-        tooltip = { x, y, rec };
+        tooltip = { x: r.left + r.width / 2, y: r.top, yBelow: r.bottom, rec };
     }
     function deactivate() {
         active = null;
         tooltip = null;
     }
     function onEnter(rec, e) {
-        if (e.pointerType === 'mouse') activate(rec, e.clientX, e.clientY);
+        if (e.pointerType === 'mouse') activate(rec, e.currentTarget);
     }
     function onLeave(e) {
         if (e.pointerType === 'mouse') deactivate();
     }
     function onTap(rec, e) {
         e.stopPropagation();
-        activate(rec, e.clientX, e.clientY);
+        activate(rec, e.currentTarget);
     }
     function onFocus(rec, e) {
-        const r = e.currentTarget.getBoundingClientRect();
-        activate(rec, r.left + r.width / 2, r.top);
+        activate(rec, e.currentTarget);
     }
 
     const pct = (v) => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(1) + '%';
@@ -107,7 +108,7 @@
 
 <div class="trajectories">
     <ChartHeader
-        title="Net change in {meta.bedroom} asking rent since {meta.baseline_quarter}{real ? ', after inflation' : ', nominal'}"
+        title="Net change in {meta.bedroom} asking rent since {meta.baseline_quarter}{real ? ', after inflation' : ', before inflation'}"
         titleLongest="Net change in {meta.bedroom} asking rent since {meta.baseline_quarter}, after inflation"
         hint="Hover or tap any chart for details."
     >
@@ -155,6 +156,7 @@
                         color={colorOf(canada)}
                         yLabels
                         xTicks={endTicks}
+                        yearTicks={meta.year_ticks}
                     />
                 </div>
 
@@ -163,7 +165,7 @@
                         class="cell"
                         role="button"
                         tabindex="0"
-                        aria-label="{rec.city}: {pct(latestOf(rec))} since {meta.baseline_quarter}"
+                        aria-label="{rec.city}, {rec.prov}: {pct(latestOf(rec))} since {meta.baseline_quarter}"
                         onpointerenter={(e) => onEnter(rec, e)}
                         onpointerleave={onLeave}
                         onclick={(e) => onTap(rec, e)}
@@ -184,12 +186,13 @@
                             color={colorOf(rec)}
                             yLabels={!compactFeatured && i % 2 === 0}
                             xTicks={compactFeatured ? [] : endTicks}
+                            yearTicks={meta.year_ticks}
                         />
                     </div>
                 {/each}
             </div>
 
-            <!-- every other city, A–Z -->
+            <!-- every other city, in the order the notebook sets: region by region (BC, Prairies, Ontario, Quebec, Atlantic), west to east within each -->
             <div class="tiny-grid" class:compact={compactTiny} style="grid-template-columns: repeat({tinyCols}, {tinyW}px); gap: {compactTiny ? 7 : 10}px {TINY_GAP}px;">
                 {#each others as rec (rec.city)}
                     <div
@@ -197,7 +200,7 @@
                         class:active={active === rec.city}
                         role="button"
                         tabindex="0"
-                        aria-label="{rec.city}: {pct(latestOf(rec))} since {meta.baseline_quarter}"
+                        aria-label="{rec.city}, {rec.prov}: {pct(latestOf(rec))} since {meta.baseline_quarter}"
                         onpointerenter={(e) => onEnter(rec, e)}
                         onpointerleave={onLeave}
                         onclick={(e) => onTap(rec, e)}
@@ -218,6 +221,7 @@
                             label={rec.short}
                             labelSize={tinyLabelSize}
                             active={active === rec.city}
+                            yearTicks={meta.year_ticks}
                         />
                     </div>
                 {/each}
@@ -227,7 +231,7 @@
 
     {#if tooltip}
         {@const rec = tooltip.rec}
-        <MapTooltip x={tooltip.x} y={tooltip.y} title={rec.city} width={276} ondismiss={deactivate}>
+        <MapTooltip x={tooltip.x} y={tooltip.y} yBelow={tooltip.yBelow} title={rec.prov ? `${rec.city}, ${rec.prov}` : rec.city} width={276} ondismiss={deactivate}>
             <RentTooltipBody
                 nominalPct={rec.latest}
                 realPct={rec.real_pct}
@@ -247,7 +251,8 @@
 
     <p class="chart-source-note">
         Source: Statistics Canada, Table 46-10-0092-01 and consumer price indexes. Each line is a city's net change in {meta.bedroom} asking rent from its own {meta.baseline_quarter} level,
-        in {meta.real_dollar_year} dollars after inflation; colours match the map's arrows; grey is Canada.
+        in {meta.real_dollar_year} dollars after inflation; colours match the map's arrows; ticks mark each year. Grey is Canada: Statistics Canada's own series for all
+        census metropolitan areas combined, not an average of the cities shown.
     </p>
 </div>
 

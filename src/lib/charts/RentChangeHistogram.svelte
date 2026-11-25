@@ -17,7 +17,7 @@
     // ─── nominal / after inflation ─────────────────────────────────────────────
     const MEASURES = [
         { label: 'After inflation', value: 'real' },
-        { label: 'Nominal', value: 'nominal' },
+        { label: 'Before inflation', value: 'nominal' },
     ];
     let measure = $state('real');
     let real = $derived(measure === 'real');
@@ -86,7 +86,7 @@
 
 <div class="histogram">
     <ChartHeader
-        title="Yearly change in average rent paid{real ? ', after inflation' : ', nominal'}"
+        title="Yearly change in average rent paid{real ? ', after inflation' : ', before inflation'}"
         titleLongest="Yearly change in average rent paid, after inflation"
         hint="Hover or tap a bar for the cities."
     >
@@ -117,7 +117,7 @@
     <div class="plot" bind:clientWidth={width} onclick={clearAll} role="presentation">
         {#if width > 0}
             <svg {width} {height} role="img"
-                 aria-label="Stacked histogram of {meta.n_city_years} city-years: yearly change in average rent, {real ? 'after inflation' : 'nominal'}, one colour per year. Median {signed(meta.medians[measure], 1)}%; rent fell in {meta.declines[measure]} of them.">
+                 aria-label="Stacked histogram of {meta.n_city_years} city-years: yearly change in average rent, {real ? 'after inflation' : 'before inflation'}, one colour per year. Median {signed(meta.medians[measure], 1)}%; rent fell in {meta.declines[measure]} of them.">
                 <g transform="translate({margin.left},{margin.top})">
                     <!-- the "rent falls" side, softly shaded -->
                     <rect x={xScale(xLo)} y="0" width={Math.max(0, xScale(0) - xScale(xLo))} height={innerH} class="falls-bg" />
@@ -178,7 +178,7 @@
 
     <div class="sr-only">
             <table>
-            <caption>Number of cities by yearly change in average rent, {real ? 'after inflation' : 'nominal'}, by year</caption>
+            <caption>Number of cities by yearly change in average rent, {real ? 'after inflation' : 'before inflation'}, by year</caption>
             <thead><tr><th>Change</th>{#each meta.years as y}<th>{y}</th>{/each}</tr></thead>
             <tbody>
                 {#each tableRows as r}

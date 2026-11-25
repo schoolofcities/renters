@@ -15,7 +15,7 @@
         ariaLabel = 'Map of net change in asking rents by city',
         baseQuarter = '',    // pop-up: "Q1 2019"
         latestQuarter = '',  // pop-up: "Q1 2026"
-        realYear = 2025,     // pop-up: the dollars after-inflation rents are expressed in
+        realYear = 2026,     // pop-up: the dollars after-inflation rents are expressed in
         scaleUp = null,      // pop-up: $ that fills the dollar bar to the right of its line (shared across the page's pop-ups)
         scaleDown = null,    // pop-up: $ that fills it to the left
     } = $props();
@@ -519,7 +519,7 @@
         <MapTooltip
             x={tooltip.clientX}
             y={tooltip.clientY}
-            title={c.city}
+            title={`${c.city}, ${c.prov}`}
             width={276}
             ondismiss={() => (tooltip = null)}
         >

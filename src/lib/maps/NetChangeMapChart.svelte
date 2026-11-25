@@ -10,10 +10,10 @@
 
     let { meta, cities, frames } = $derived(data);
 
-    // After inflation (starting rents restated in latest-CPI dollars) is the default view; nominal = rents as advertised
+    // After inflation (starting rents restated in latest-CPI dollars) is the default view; before inflation = rents as advertised
     const MEASURES = [
         { label: 'After inflation', value: 'real' },
-        { label: 'Nominal', value: 'nominal' },
+        { label: 'Before inflation', value: 'nominal' },
     ];
     let measure = $state('real');
 
@@ -24,7 +24,7 @@
     let scaleUp   = $derived(Math.ceil(Math.max(...deltas, 0) / 50) * 50);
     let scaleDown = $derived(Math.ceil(Math.max(...deltas.map(d => -d), 0) / 50) * 50);
     let legendBase  = $derived(`Net change in ${meta.bedroom} asking rent, ${meta.baseline_quarter} to ${meta.latest_quarter}`);
-    let legendTitle = $derived(`${legendBase}${real ? ', after inflation' : ', nominal'}`);
+    let legendTitle = $derived(`${legendBase}${real ? ', after inflation' : ', before inflation'}`);
     // legend caption, split over two lines after inflation
     let keyTitle = $derived(real ? ['Net change in asking rent,', 'adjusted for inflation, %'] : ['Net change in asking rent, %']);
 </script>
