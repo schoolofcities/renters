@@ -10,12 +10,12 @@
 	import ChartLabel from '$lib/chart-addons/ChartLabel.svelte';
 	import NetChangeMapChart from '$lib/maps/NetChangeMapChart.svelte';
 	import CityTrajectoryMultiples from '$lib/charts/CityTrajectoryMultiples.svelte';
-	import RentChangeHistogram from '$lib/charts/RentChangeHistogram.svelte';
+	import AskingVsPaidDumbbell from '$lib/charts/AskingVsPaidDumbbell.svelte';
 	import HeadlineContextBars from '$lib/charts/HeadlineContextBars.svelte';
 
 	import vis1Data from '$data/falling-rents/vis1_net_change_map.json';
 	import vis2Data from '$data/falling-rents/vis2_city_trajectories.json';
-	import vis3Data from '$data/falling-rents/vis3_rent_change_histogram.json';
+	import vis3Data from '$data/falling-rents/vis3_asking_vs_paid_change.json';
 	import vis4Data from '$data/falling-rents/vis4_headline_context.json';
 </script>
 
@@ -77,8 +77,8 @@
 			That distinction helps explain how asking rents can fall without tenants seeing their own rent fall. CMHC’s latest data show that rents charged to new tenants have declined in several major markets, while average rents across all occupied units have continued to rise. Statistics Canada now makes the same conceptual distinction between <a href="https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&amp;SDDS=5427&amp;wbdisable=true" target="_blank">asking rent and paid rent</a>. In practice, accessing a lower market rent may therefore require moving – potentially bringing moving costs, a change in location or housing quality, and, in some provinces, the loss of an existing rent-regulated tenancy.
 		</p>
 
-		<ChartLabel text="After inflation, average rents in occupied apartments fell in 50 of 280 city-years – for the most part, in 2021 and 2022" />
-		<RentChangeHistogram data={vis3Data} />
+		<ChartLabel text="Despite a decline in asking rents since late 2023, primary-market tenants are still largely seeing rising rents" />
+		<AskingVsPaidDumbbell data={vis3Data} />
 
 		<p>
 			Where, then, does the broader perception of falling rents come from? There is little doubt that asking rents have fallen in many cities. The issue is one of scale: those declines are generally modest relative to the preceding increase, and almost every city in our analysis remains more expensive than it was in 2019 after accounting for inflation.
@@ -115,7 +115,7 @@
 				Arrows on the map fall into four size classes, and each small-multiple line takes the colour of its city's arrow; blue marks a decline. Insets enlarge crowded areas, and labels go to the largest cities and a few notable cases.
 			</p>
 			<p>
-				The histogram uses the <a href="https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/housing-data/data-tables/rental-market" target="_blank">CMHC Rental Market Survey</a>, which each October records the average rent in occupied purpose-built apartments. For 40 cities and each year from 2019 to 2025, we take the percentage change in that average since the previous October and count the 280 city-years in one-point bands; the after-inflation view subtracts the change in the province's consumer price index between the same two Octobers. Windsor and St. Catharines–Niagara are left out because their data cannot be used. A change in the average can also reflect new buildings entering the survey.
+				The asking-versus-paid chart compares how much two measures have changed. Asking rents are the Statistics Canada series from the earlier charts, unchanged. Rents paid come from the <a href="https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/housing-data/data-tables/rental-market" target="_blank">CMHC Rental Market Survey</a>, which each October records the average rent in occupied purpose-built rental apartments; for Canada we average the 40 metros with a complete 2018 to 2025 record, weighted by their number of rental units. "Since 2019" runs from the first quarter of 2019 (for rents paid, estimated from the October 2018 and 2019 surveys, because the survey is not taken in the first quarter) to the first quarter of 2026 for asking rents and October 2025 for rents paid. "Since late 2023" starts from the fourth quarter of 2023, when asking rents peaked nationally (October for rents paid). The two measures cover different units, two-bedroom listings against all occupied apartments, so only changes are compared, never dollar levels, and a change in the CMHC average can also reflect new buildings entering the survey. After inflation, asking rents are deflated by each quarter's provincial consumer price index and rents paid by the October index. The counts in the text use the same data: a rent has fallen when it is lower in the fourth quarter (asking) or October (paid) than a year earlier, for those 40 metros from 2020 to 2025.
 			</p>
 			<p>
 				The headlines are those containing the word "rent" from Canadian news outlets between January 2019 and March 2026, collected through Media Cloud. A language model classified whether each reports a change in residential market rents and whether rents are rising or falling; the 149 falling headlines were re-read in a second, blind pass. A headline gives some context if it says the change is small or slowing, compares it with an earlier year or a peak, or says rents are still high or unaffordable. Only the headline is read, so an article may say more. The rising bar is a random sample of 143 of the 401 rising headlines, and its labels were not re-checked.

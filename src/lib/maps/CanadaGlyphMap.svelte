@@ -20,7 +20,7 @@
         scaleDown = null,    // pop-up: $ that fills it to the left
     } = $props();
 
-    // Four size classes: arrows get longer, thicker and darker with the class, stepping along a short slice of the histogram's spectrum (see constants.js).
+    // Four size classes: arrows get longer, thicker and darker with the class, stepping along an orange-to-plum spectrum (see constants.js).
     const CLASS_COLORS      = FALLING_RENT_CLASS_COLORS;
     const CLASS_LEN_FRAC    = [0.36, 0.58, 0.80, 1];    // share of the longest arrow length
     const CLASS_STROKE      = [1.5, 2.1, 2.7, 3.3];     // px

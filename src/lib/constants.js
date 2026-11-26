@@ -65,7 +65,11 @@ export const MAP_STYLE_OPTIONS = [
 ];
 
 // ── Falling-rents page: colours shared by the map and the small multiples ────────────────────────
-// The map's four arrow size classes take a short slice of the spectrum the histogram uses for its years (orange → red → crimson → plum);
+// The map's four arrow size classes step through an orange → red → crimson → plum spectrum;
 // each small-multiple line takes the colour of its city's arrow. A decline is always blue.
 export const FALLING_RENT_CLASS_COLORS  = ['#f16b00', '#d5393d', '#a01d60', '#6a1966'];
 export const FALLING_RENT_DECLINE_COLOR = '#3a7bab';
+
+// ── Falling-rents page: the two lines of the asking-vs-paid chart (the crimson of the map's second class, the plum of its darkest) ──
+export const ASKING_RENT_COLOR = '#d5393d';
+export const PAID_RENT_COLOR   = '#6a1966';
