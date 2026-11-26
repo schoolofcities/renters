@@ -22,29 +22,21 @@
     // ─── layout ────────────────────────────────────────────────────────────────
     let width = $state(0);
     let compact = $derived(width < 520);
-    const SEP = 8;                                           // extra air between the context and no-context parts of a bar
+    const SEP = 5;                                           // extra air between the context and no-context parts of a bar
     let barH = $derived(compact ? 30 : 38);
     const padY = 6;                                          // room above and below the ticks for the selected tick to stand taller
     let svgH = $derived(barH + padY * 2);
     let maxN = $derived(Math.max(...groups.map((g) => g.n)));
 
-    // Every tick, gap and separator is a whole number of DEVICE pixels, so all the lines come out exactly the same width and the same distance apart
-    // (fractional widths made some lines look thicker than others, most visibly in Firefox). One tick width for both bars, so the two lengths compare directly.
-    let dpr = $state(1);
-    $effect(() => {
-        const update = () => { dpr = window.devicePixelRatio || 1; };
-        update();
-        window.addEventListener('resize', update);
-        return () => window.removeEventListener('resize', update);
-    });
-    let sepD  = $derived(Math.round(SEP * dpr));
-    let stepD = $derived(Math.max(2, Math.floor((width * dpr - sepD) / maxN)));      // device px per headline
-    let gapD  = $derived(Math.min(2, Math.max(1, Math.round(stepD * 0.22))));        // device px of white between lines
-    let step  = $derived(stepD / dpr);
-    let tickW = $derived((stepD - gapD) / dpr);
+    // Every headline is one line of the same width, exactly the same distance from the next, in both bars; the longest bar (rising) runs the full width of the graphic.
+    // The spacing is exact rather than snapped to whole device pixels: snapping a non-whole step makes lines bunch into visible groups (e.g. of four).
+    // The lines are drawn anti-aliased (no crisp edges) so that they read as an even, regular texture on any screen.
+    const DUTY = 0.62;                                       // share of each step that is line (the rest is white)
+    let tickW = $derived(Math.max(0.5, ((width - SEP) / maxN) * DUTY));                           // css px per line
+    let step  = $derived(maxN > 1 ? (width - SEP - tickW) / (maxN - 1) : tickW / DUTY);            // css px from one line to the next, so the last line ends at the right edge
 
-    const sepOf = (g) => (g.n_context > 0 && g.n_context < g.n ? sepD / dpr : 0);
-    const xOf = (g, i) => (i * stepD + (i >= g.n_context && sepOf(g) > 0 ? sepD : 0)) / dpr;
+    const sepOf = (g) => (g.n_context > 0 && g.n_context < g.n ? SEP : 0);
+    const xOf = (g, i) => i * step + (i >= g.n_context && sepOf(g) > 0 ? SEP : 0);
 
     // x (px from the left of the bar) -> index of the tick under it, snapping across the gaps so the pointer never falls between two ticks
     function indexAt(g, x) {
@@ -133,7 +125,7 @@
 
 <div class="hc" bind:this={root}>
     <ChartHeader
-        title="A headline gives some context if it says the change is small, compares it with the past or a peak, or says rents are still high"
+        title="A headline gives some context if it says the change is small or slowing, that rents are still high or above an earlier level, or that the trend differs elsewhere"
         hint="Hover or tap a line to read the headline."
     >
     </ChartHeader>
@@ -162,7 +154,7 @@
                             onkeydown={(e) => onKey(ri, e)}
                             onblur={onBlur}
                         >
-                        <svg {width} height={svgH} aria-hidden="true" shape-rendering="crispEdges">
+                        <svg {width} height={svgH} aria-hidden="true">
                             {#each g.headlines as h, i (i)}
                                 {@const isSel = sel && sel.row === ri && sel.idx === i}
                                 {@const dim = sel && sel.row === ri && !isSel}
@@ -203,7 +195,7 @@
                                 </div>
                                 <p class="c-title">{h.t}</p>
                                 <p class="c-sub">{h.o} · {fmtDate(h.d)}</p>
-                                {#if h.c && h.f.length}
+                                {#if h.f.length}
                                     <p class="c-why">{h.f.map((f) => meta.flag_labels[f]).join(' · ')}</p>
                                 {/if}
                                 <a class="c-link" href={h.u} target="_blank" rel="noopener noreferrer">Read the article ↗</a>
@@ -218,9 +210,8 @@
     <p class="sr-only" aria-live="polite">{announce}</p>
 
     <p class="chart-source-note">
-        Source: headlines containing “rent” from {meta.n_outlets} Canadian news outlets, mostly {listOf(meta.top_outlets)} (not every outlet in the country), {meta.date_range[0].slice(0, 4)}–{meta.date_range[1].slice(0, 4)} (Media Cloud), classified by a language model. A figure alone does not count as context.
+        Source: headlines containing “rent” or “rents” from {meta.n_outlets} Canadian news outlets, mostly {listOf(meta.top_outlets)} (not every outlet in the country), {meta.date_range[0].slice(0, 4)}–{meta.date_range[1].slice(0, 4)} (Media Cloud), coded by two independent passes of a language model. A figure alone, a record high, or a streak does not count as context.
         Comparisons with an earlier level are coded as “still above” it, since after inflation rents are higher than in 2019 nearly everywhere; Toronto is the one city where they are lower.
-        The rising bar is a random sample.
     </p>
 </div>
 
